@@ -3,126 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>害虫駆除LP再現</title>
     <style>
-        /* 全体のリセット */
-        body { margin: 0; font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; }
+        /* 全体の基本設定 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color: #1a1a1a; /* 背景の暗いグレー */
+            color: #fff;
+            display: flex;
+            justify-content: center;
+        }
 
-        .header-container {
+        .wrapper {
+            width: 100%;
+            max-width: 480px; /* スマホサイズに最適化 */
+            position: relative;
+            background: radial-gradient(circle at center, #444 0%, #1a1a1a 100%);
+            padding-bottom: 150px; /* フッター分の余白 */
+        }
+
+        /* ヘッダー部分 */
+        .header-section {
+            text-align: center;
+            padding: 40px 20px 20px;
+        }
+
+        .header-section h2 {
+            font-size: 1.6rem;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .highlight-yellow {
+            color: #ffeb3b;
+            font-size: 1.8rem;
+        }
+
+        .header-subtext {
+            font-size: 1.1rem;
+            margin-top: 15px;
+            line-height: 1.6;
+            font-weight: bold;
+        }
+
+        /* チェックリストの外枠 */
+        .content-box {
+            background-color: #f0f0f0;
+            margin: 0 15px;
+            padding: 25px 15px;
+            border-radius: 4px;
+            color: #333;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 42px;
+            margin-bottom: 18px;
+            font-size: 1.05rem;
+            font-weight: 800;
+            line-height: 1.4;
+        }
+
+        .checklist li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 赤いチェックアイコン */
+        .check-mark {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 28px;
+            height: 28px;
+            background-color: #c00000;
+            color: white;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px;
-            background: #fff;
-            border-bottom: 2px solid #f0f0f0;
-            max-width: 1200px;
-            margin: 0 auto;
+            justify-content: center;
+            border-radius: 3px;
+            font-size: 18px;
         }
 
-        .logo-section {
-            display: flex;
-            flex-direction: column;
+        /* 強調文字（赤） */
+        .text-red {
+            color: #d32f2f;
         }
 
-        /* キャッチコピー（変更なし） */
-        .catch-copy {
-            background: #FFD700;
-            color: #000;
+        /* フッターCTAエリア */
+        .cta-container {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 480px;
+            z-index: 1000;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* 24時間対応バー */
+        .info-bar {
+            background-color: #002e63;
+            color: white;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 0.9rem;
             font-weight: bold;
-            font-size: 13px;
-            padding: 2px 12px;
-            border-radius: 4px;
-            display: inline-block;
-            width: fit-content;
-            margin-bottom: 4px;
-            position: relative;
-        }
-        .catch-copy::after {
-            content: "";
-            position: absolute;
-            bottom: -5px;
-            left: 15px;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-top: 5px solid #FFD700;
         }
 
-        /* ★タイトルデザインの変更箇所★ */
-        .main-title {
-            font-size: 32px; /* 少し大きく */
-            font-weight: 900;
-            color: #d70000; /* 深みのある赤 */
-            margin: 0;
-            font-style: italic; /* 斜体でスピード感 */
-            letter-spacing: -1px;
-            /* 文字の縁取りと影で立体感を出す */
-            text-shadow: 
-                1px 1px 0 #fff, 
-                2px 2px 0 #fff, 
-                3px 3px 0 #ccc; 
-            line-height: 1.1;
-            display: flex;
-            align-items: baseline;
-        }
-        
-        /* 「119」だけさらに強調する場合 */
-        .main-title span {
-            font-size: 38px;
-            color: #000; /* 119だけ黒にして引き締める */
-            margin-left: 4px;
-            -webkit-text-stroke: 1px #000;
+        .yellow-badge {
+            background-color: #ffcc00;
+            color: #000;
+            padding: 2px 6px;
+            border-radius: 2px;
+            margin-left: 8px;
         }
 
-        /* 右側：ボタンエリア（変更なし） */
-        .contact-buttons {
+        /* メインアクションボタンエリア */
+        .action-area {
+            background-color: #e65100; /* オレンジ背景 */
+            padding: 12px 10px;
             display: flex;
-            gap: 10px;
+            align-items: center;
+            justify-content: space-around;
         }
-        .btn {
+
+        /* 円形割引バッジ */
+        .discount-circle {
+            background-color: #ffeb3b;
+            color: #d32f2f;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            border: 2px dashed #d32f2f;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 75px;
-            height: 75px;
-            border-radius: 10px;
-            text-decoration: none;
-            color: #fff;
-            font-size: 13px;
             font-weight: bold;
+            line-height: 1.2;
+            font-size: 0.65rem;
         }
-        .btn-tel { background-color: #FF8C00; }
-        .btn-mail { background-color: #228b22; }
-        .btn i { font-size: 28px; margin-bottom: 2px; }
 
-        @media (max-width: 600px) {
-            .main-title { font-size: 22px; }
-            .main-title span { font-size: 26px; }
-            .btn { width: 65px; height: 65px; font-size: 11px; }
+        .discount-circle span {
+            font-size: 1.3rem;
+        }
+
+        .discount-circle small {
+            font-size: 0.6rem;
+        }
+
+        /* テキストとボタン */
+        .button-group {
+            flex: 1;
+            text-align: center;
+            margin-left: 10px;
+        }
+
+        .button-group p {
+            margin: 0 0 8px 0;
+            font-size: 0.75rem;
+            color: #fff;
+            line-height: 1.3;
+        }
+
+        .tel-btn {
+            display: block;
+            background-color: #fff;
+            color: #e65100;
+            text-decoration: none;
+            padding: 12px 0;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 900;
+            box-shadow: 0 4px 0 #bf360c;
+        }
+
+        /* 下向き矢印のデザイン */
+        .arrow-down {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 15px solid #ffcc00;
+            margin: 20px auto;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-<header class="header-container">
-    <div class="logo-section">
-        <div class="catch-copy">関西全域対応！！</div>
-        <h1 class="main-title">
-            害獣トラブル<span>119</span>
-        </h1>
-    </div>
+    <div class="wrapper">
+        <div class="header-section">
+            <h2>こんな<span class="highlight-yellow">症状</span>、出ていませんか？</h2>
+            <p class="header-subtext">一つでもチェックが付く方は、<br>今すぐご相談ください</p>
+        </div>
 
-    <div class="contact-buttons">
-        <a href="tel:0120-000-000" class="btn btn-tel">
-            <i class="fas fa-phone-alt"></i>
-            <span>電話</span>
-        </a>
-        <a href="#contact" class="btn btn-mail">
-            <i class="fas fa-envelope"></i>
-            <span>メール</span>
-        </a>
+        <div class="content-box">
+            <ul class="checklist">
+                <li><div class="check-mark">✔</div> <span class="text-red">ゴキブリ</span>が出た...</li>
+                <li><div class="check-mark">✔</div> 市販の駆除グッズを使っても<span class="text-red">なかなか減らない...</span></li>
+                <li><div class="check-mark">✔</div> 一度駆除したのに、<span class="text-red">また出た...</span></li>
+                <li><div class="check-mark">✔</div> 夏になる前に<span class="text-red">なんとかしたい...</span></li>
+                <li><div class="check-mark">✔</div> 店舗なので、<span class="text-red">定期的な駆除と対策</span>をお願いしたい</li>
+                <li><div class="check-mark">✔</div> 駆除後の<span class="text-red">予防方法</span>も教えてほしい...</li>
+                <li><div class="check-mark">✔</div> 他で見積りしたけど、<span class="text-red">費用が高くて</span>頼めない...</li>
+                <li><div class="check-mark">✔</div> <span class="text-red">どのような対策をするのか</span>話だけでも聞いてみたい...</li>
+            </ul>
+        </div>
+
+        <div class="arrow-down"></div>
+
+        <div class="cta-container">
+            <div class="info-bar">
+                24時間対応いたします！ <span class="yellow-badge">出張費/見積り0円</span>
+            </div>
+            <div class="action-area">
+                <div class="discount-circle">
+                    「HP見た」で<br>
+                    <span>20%<small>OFF</small></span>
+                    Web割
+                </div>
+                <div class="button-group">
+                    <p>お電話のみで解決サポートできる場合もございます。<br>まずはお気軽にご相談ください！</p>
+                    <a href="tel:0120-000-000" class="tel-btn">電話でお問い合わせ</a>
+                </div>
+            </div>
+        </div>
     </div>
-</header>
 
 </body>
 </html>
