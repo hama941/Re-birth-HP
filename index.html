@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .banner-container {
+            background-color: #fdd81d; /* 背景の黄色 */
+            padding: 40px 20px;
+            text-align: center;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            font-weight: bold;
+            line-height: 1.5;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .text-top {
+            font-size: 24px;
+            color: #000;
+            margin-bottom: 5px;
+        }
+
+        .text-accent {
+            font-size: 32px;
+            color: #b32014; /* 赤色の文字 */
+            margin-bottom: 5px;
+        }
+
+        .text-middle {
+            font-size: 24px;
+            color: #000;
+            margin-bottom: 30px;
+        }
+
+        .text-large {
+            font-size: 48px;
+            color: #000;
+            font-style: italic; /* 斜体 */
+            line-height: 1.2;
+            /* 白い光彩（text-shadowを複数重ねて表現） */
+            text-shadow: 
+                0 0 10px #fff,
+                0 0 20px #fff,
+                0 0 30px #fff;
+        }
+
+        /* スマホ向けの調整 */
+        @media (max-width: 600px) {
+            .text-top, .text-middle { font-size: 18px; }
+            .text-accent { font-size: 22px; }
+            .text-large { font-size: 34px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="banner-container">
+    <div class="text-top">放っておくと</div>
+    <div class="text-accent">被害が拡大するかもしれません</div>
+    <div class="text-middle">自分でなんとかしようとせず、</div>
+    
+    <div class="text-large">
+        私たちに<br>
+        ご相談ください！
+    </div>
+</div>
+
+</body>
+</html>
