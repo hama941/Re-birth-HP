@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* 全体の背景：画像のような「黒いモヤ」がかかったダークグレー */
+        /* 全体の背景：シルエットが見えやすいように少し明るいグレーのグラデーション */
         body {
-            background-color: #222; 
-            background: radial-gradient(circle, #333 0%, #111 100%);
+            background: radial-gradient(circle, #444 0%, #222 100%);
             margin: 0;
             padding: 40px 10px;
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
@@ -15,45 +14,56 @@
             justify-content: center;
             min-height: 100vh;
             position: relative;
-            overflow-x: hidden;
+            overflow: hidden; /* 巨大なシルエットがはみ出すので隠す */
         }
 
-        /* --- ゴキブリのシルエット（見えるように色を調整） --- */
-        .bg-insect {
+        /* --- 巨大なゴキブリのシルエット（SVG） --- */
+        .giant-bug {
             position: fixed;
-            /* シルエットを背景より少し明るい/または暗い色にして見えるようにする */
-            fill: rgba(0, 0, 0, 0.8); 
-            stroke: rgba(255, 255, 255, 0.05); /* 輪郭をわずかに光らせて存在感を出す */
             z-index: 0;
+            fill: #000; /* 真っ黒な影 */
+            opacity: 0.9; /* かなり濃く表示 */
             pointer-events: none;
         }
-        .bug-1 { top: 5%; left: -5%; width: 280px; transform: rotate(140deg); }
-        .bug-2 { bottom: 10%; right: -10%; width: 350px; transform: rotate(-30deg); }
-        .bug-3 { top: 40%; left: 50%; width: 450px; transform: translate(-50%, -50%) rotate(15deg); opacity: 0.6; }
 
-        /* --- コンテナ --- */
-        .wrapper {
+        /* 画面中央にドカンと配置 */
+        .bug-center {
+            top: 50%;
+            left: 50%;
+            width: 800px; /* 超巨大 */
+            height: auto;
+            transform: translate(-50%, -50%) rotate(25deg);
+        }
+
+        /* 端から這い出る影 */
+        .bug-corner {
+            bottom: -50px;
+            right: -50px;
+            width: 400px;
+            transform: rotate(-15deg);
+        }
+
+        /* --- チェックリストコンテナ --- */
+        .checklist-container {
+            position: relative;
             max-width: 500px;
             width: 100%;
-            z-index: 10;
+            /* 背景を適度に透過させて、後ろの巨大な影を見せる */
+            background-color: rgba(235, 235, 235, 0.85);
+            border: 4px solid #000;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            z-index: 10; /* 最前面 */
         }
 
         .header-title {
-            color: #fff;
             text-align: center;
             font-size: 1.4rem;
             font-weight: 900;
             line-height: 1.4;
             margin-bottom: 25px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        /* リストの箱（画像通りの色味） */
-        .checklist-box {
-            background-color: rgba(230, 230, 230, 0.92); /* ライトグレー + わずかな透過 */
-            border: 3px solid #000;
-            padding: 35px 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+            color: #000;
         }
 
         .checklist {
@@ -65,15 +75,15 @@
         .checklist-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 20px;
-            font-size: 1.15rem;
-            font-weight: 900;
+            margin-bottom: 18px;
+            font-size: 1.1rem;
+            font-weight: 800;
             color: #000;
             line-height: 1.4;
         }
 
-        /* 赤枠チェックボックス */
-        .check-icon {
+        /* 赤枠のチェックボックス */
+        .check-box {
             flex-shrink: 0;
             width: 26px;
             height: 26px;
@@ -84,61 +94,63 @@
             margin-top: 2px;
         }
 
-        .check-icon::after {
+        .check-box::after {
             content: '';
             position: absolute;
             left: 5px;
-            top: 2px;
-            width: 10px;
-            height: 10px;
-            border-left: 4px solid #cc0000;
-            border-bottom: 4px solid #cc0000;
+            top: 1px;
+            width: 11px;
+            height: 11px;
+            border-left: 4px solid #d00;
+            border-bottom: 4px solid #d00;
             transform: rotate(-45deg);
         }
 
         .red {
-            color: #cc0000;
+            color: #d00;
         }
 
         @media (max-width: 480px) {
-            .header-title { font-size: 1.2rem; }
-            .checklist-item { font-size: 1rem; }
+            .bug-center { width: 400px; }
+            .checklist-item { font-size: 0.95rem; }
         }
     </style>
 </head>
 <body>
 
-<svg class="bg-insect bug-1" viewBox="0 0 100 100">
-    <path d="M50 20 C40 20 35 35 35 45 C35 55 20 60 10 60 L10 65 C20 65 35 70 35 80 C35 90 40 95 50 95 C60 95 65 90 65 80 C65 70 80 65 90 65 L90 60 C80 60 65 55 65 45 C65 35 60 20 50 20 Z"/>
-    <path d="M45 15 Q40 5 30 5 M55 15 Q60 5 70 5" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-</svg>
-<svg class="bg-insect bug-2" viewBox="0 0 100 100">
-    <path d="M50 20 C40 20 35 35 35 45 C35 55 20 60 10 60 L10 65 C20 65 35 70 35 80 C35 90 40 95 50 95 C60 95 65 90 65 80 C65 70 80 65 90 65 L90 60 C80 60 65 55 65 45 C65 35 60 20 50 20 Z"/>
-</svg>
-<svg class="bg-insect bug-3" viewBox="0 0 100 100">
-    <path d="M50 20 C40 20 35 35 35 45 C35 55 20 60 10 60 L10 65 C20 65 35 70 35 80 C35 90 40 95 50 95 C60 95 65 90 65 80 C65 70 80 65 90 65 L90 60 C80 60 65 55 65 45 C65 35 60 20 50 20 Z"/>
+<svg class="giant-bug bug-center" viewBox="0 0 200 200">
+    <path d="M100,60 Q80,10 40,5 M100,60 Q120,10 160,5" fill="none" stroke="black" stroke-width="2" opacity="0.8"/>
+    <ellipse cx="100" cy="110" rx="35" ry="55" />
+    <ellipse cx="100" cy="65" rx="20" ry="15" />
+    <path d="M75,80 L40,60 M70,110 L30,110 M75,140 L40,165" stroke="black" stroke-width="5" stroke-linecap="round"/>
+    <path d="M125,80 L160,60 M130,110 L170,110 M125,140 L160,165" stroke="black" stroke-width="5" stroke-linecap="round"/>
 </svg>
 
-<div class="wrapper">
+<svg class="giant-bug bug-corner" viewBox="0 0 200 200">
+    <ellipse cx="100" cy="110" rx="35" ry="55" />
+    <ellipse cx="100" cy="65" rx="20" ry="15" />
+    <path d="M75,80 L40,60 M70,110 L30,110 M75,140 L40,165" stroke="black" stroke-width="5"/>
+    <path d="M125,80 L160,60 M130,110 L170,110 M125,140 L160,165" stroke="black" stroke-width="5"/>
+</svg>
+
+<div class="checklist-container">
     <div class="header-title">
         一つでもチェックが付く方は、<br>
         今すぐご相談ください！
     </div>
 
-    <div class="checklist-box">
-        <ul class="checklist">
-            <li class="checklist-item"><span class="check-icon"></span><span>近所を<span class="red">ハチが飛んでて</span>、刺されそうで怖い…</span></li>
-            <li class="checklist-item"><span class="check-icon"></span><span>急に<span class="red">ゴキブリが現れた！</span>今すぐ駆除してほしい…</span></li>
-            <li class="checklist-item"><span class="check-icon"></span><span><span class="red">市販の殺虫剤</span>で駆除したけど、また出てきた…</span></li>
-            <li class="checklist-item"><span class="check-icon"></span><span>庭でムシが大量発生した…<span class="red">隣の家まで被害が…</span></span></li>
-            <li class="checklist-item"><span class="check-icon"></span><span><span class="red">大きなハチの巣</span>があって、何とかしてほしい…</span></li>
-            <li class="checklist-item"><span class="check-icon"></span><span><span class="red">毎年ムシが出る</span>ので、もう出ないようにしてほしい…</span></li>
-            <li class="checklist-item"><span class="check-icon"></span><span><span class="red">床がギシギシ音がする…シロアリ</span>かもしれない…</span></li>
-            <li class="checklist-item"><span class="check-icon"></span><span>駆除後の<span class="red">予防方法</span>も教えてほしい…</span></li>
-            <li class="checklist-item"><span class="check-icon"></span><span>他で見積りしたけど、<span class="red">費用が高くて</span>頼めない…</span></li>
-            <li class="checklist-item"><span class="check-icon"></span><span><span class="red">どのような対策をするのか</span>話だけでも聞いてみたい…</span></li>
-        </ul>
-    </div>
+    <ul class="checklist">
+        <li class="checklist-item"><div class="check-box"></div><span>近所を<span class="red">ハチが飛んでて</span>、刺されそうで怖い…</span></li>
+        <li class="checklist-item"><div class="check-box"></div><span>急に<span class="red">ゴキブリが現れた！</span>今すぐ駆除してほしい…</span></li>
+        <li class="checklist-item"><div class="check-box"></div><span><span class="red">市販の殺虫剤</span>で駆除したけど、また出てきた…</span></li>
+        <li class="checklist-item"><div class="check-box"></div><span>庭でムシが大量発生した…<span class="red">隣の家まで被害が…</span></span></li>
+        <li class="checklist-item"><div class="check-box"></div><span><span class="red">大きなハチの巣</span>があって、何とかしてほしい…</span></li>
+        <li class="checklist-item"><div class="check-box"></div><span><span class="red">毎年ムシが出る</span>ので、もう出ないようにしてほしい…</span></li>
+        <li class="checklist-item"><div class="check-box"></div><span><span class="red">床がギシギシ音がする…シロアリ</span>かもしれない…</span></li>
+        <li class="checklist-item"><div class="check-box"></div><span>駆除後の<span class="red">予防方法</span>も教えてほしい…</span></li>
+        <li class="checklist-item"><div class="check-box"></div><span>他で見積りしたけど、<span class="red">費用が高くて</span>頼めない…</span></li>
+        <li class="checklist-item"><div class="check-box"></div><span><span class="red">どのような対策をするのか</span>話だけでも聞いてみたい…</span></li>
+    </ul>
 </div>
 
 </body>
