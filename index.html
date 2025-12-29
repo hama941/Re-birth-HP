@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>害虫駆除LP再現（背景強化版）</title>
+    <title>害虫駆除LP再現（シルエット背景版）</title>
     <style>
-        /* 全体の設定 */
         body {
             margin: 0;
             padding: 0;
@@ -20,40 +19,45 @@
             max-width: 480px;
             background-color: #1a1a1a;
             position: relative;
-            overflow: hidden;
+            overflow: hidden; /* シルエットがはみ出さないように */
             padding-bottom: 160px;
         }
 
-        /* 背景のもやっとした影の再現 */
-        .wrapper::before {
-            content: "";
+        /* 背景のゴキブリシルエットをCSSで作成 */
+        .wrapper::after {
+            content: "🪳"; /* 絵文字をベースに加工、またはシルエットの代わり */
             position: absolute;
-            top: -100px;
-            left: -100px;
+            top: 5%;
+            left: -10%;
+            font-size: 400px;
+            color: rgba(0, 0, 0, 0.6); /* かなり暗くして背景に溶け込ませる */
+            transform: rotate(-20deg);
+            filter: blur(8px); /* ぼかして不気味さを演出 */
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* 別のシルエット層（より大きな影） */
+        .bg-shadow {
+            position: absolute;
+            top: 20%;
+            right: -20%;
             width: 300px;
             height: 300px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0) 70%);
-            filter: blur(50px);
+            background: radial-gradient(circle, rgba(0,0,0,0.8) 0%, rgba(26,26,26,0) 70%);
             z-index: 1;
         }
 
-        /* 右上の女性（仮のプレースホルダー） */
-        .person-img {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 180px;
-            z-index: 2;
-            filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+        /* コンテンツ全体をシルエットより上に配置 */
+        .header-section, .content-box, .arrow-down {
+            position: relative;
+            z-index: 10;
         }
 
-        /* ヘッダー */
         .header-section {
-            position: relative;
-            z-index: 3;
             padding: 40px 20px 10px;
-            text-align: left; /* 画像に合わせて左寄せ */
-            width: 70%; /* 文字が女性に重ならないように制限 */
+            text-align: left;
+            width: 70%;
         }
 
         .header-section h2 {
@@ -61,31 +65,29 @@
             margin: 0;
             color: #fff;
             line-height: 1.4;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
 
         .highlight-yellow {
             color: #ffcc00;
             font-size: 1.8rem;
-            display: inline-block;
-            margin: 0 5px;
         }
 
         .header-subtext {
             font-size: 1rem;
             margin-top: 10px;
             font-weight: bold;
-            line-height: 1.5;
+            color: #fff;
         }
 
         /* チェックリスト */
         .content-box {
-            position: relative;
-            z-index: 3;
-            background-color: #d6d6d6; /* 少し暗めのグレー */
+            background-color: #e0e0e0;
             margin: 10px 15px;
             padding: 20px 15px;
-            border: 3px solid #000; /* 黒い縁取り */
+            border: 2px solid #333;
             color: #000;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
         }
 
         .checklist {
@@ -100,7 +102,6 @@
             margin-bottom: 15px;
             font-size: 1.05rem;
             font-weight: 900;
-            letter-spacing: -0.5px;
         }
 
         .check-mark {
@@ -114,27 +115,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid #000;
-            box-sizing: border-box;
+            border: 1px solid #000;
         }
 
-        .text-red {
-            color: #cc0000;
-        }
+        .text-red { color: #cc0000; }
 
-        /* 下向き矢印 */
         .arrow-down {
-            width: 0;
-            height: 0;
+            width: 0; height: 0;
             border-left: 20px solid transparent;
             border-right: 20px solid transparent;
             border-top: 20px solid #ffcc00;
             margin: 20px auto;
-            position: relative;
-            z-index: 3;
         }
 
-        /* 固定フッターCTA */
+        /* 固定フッター */
         .cta-container {
             position: fixed;
             bottom: 0;
@@ -149,7 +143,6 @@
             text-align: center;
             padding: 5px 0;
             font-weight: bold;
-            font-size: 0.9rem;
         }
 
         .yellow-badge {
@@ -167,10 +160,10 @@
         }
 
         .discount-circle {
-            background-color: #ffeb3b;
+            background-color: #ffcc00;
             color: #d32f2f;
-            width: 85px;
-            height: 85px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             border: 2px dashed #d32f2f;
             display: flex;
@@ -184,36 +177,25 @@
 
         .discount-circle span { font-size: 1.5rem; }
 
-        .button-group {
-            flex: 1;
-            text-align: center;
-            margin-left: 10px;
-        }
-
-        .button-group p {
-            margin: 0 0 5px 0;
-            font-size: 0.7rem;
-            color: #fff;
-            font-weight: bold;
-        }
-
         .tel-btn {
-            display: block;
+            flex: 1;
+            margin-left: 10px;
             background-color: #fff;
-            color: #333;
+            color: #e64a19;
             text-decoration: none;
             padding: 12px 0;
             border-radius: 5px;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 900;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+            text-align: center;
+            box-shadow: 0 4px 0 #bf360c;
         }
     </style>
 </head>
 <body>
 
     <div class="wrapper">
-        <img src="https://via.placeholder.com/300x400/000000/000000?text=+" alt="" class="person-img">
+        <div class="bg-shadow"></div>
 
         <div class="header-section">
             <h2>こんな<span class="highlight-yellow">症状</span>、<br>出ていませんか？</h2>
@@ -245,10 +227,7 @@
                     <span>20%OFF</span>
                     Web割
                 </div>
-                <div class="button-group">
-                    <p>お電話のみで解決サポートできる場合もございます。<br>まずは気軽にご相談ください！</p>
-                    <a href="tel:0120-000-000" class="tel-btn">電話でお問い合わせ</a>
-                </div>
+                <a href="tel:0120-000-000" class="tel-btn">電話でお問い合わせ</a>
             </div>
         </div>
     </div>
