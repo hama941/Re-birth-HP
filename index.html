@@ -3,234 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>害虫駆除LP再現（シルエット背景版）</title>
     <style>
+        /* 全体の背景設定（少しダークなグラデーション） */
         body {
+            background: linear-gradient(135deg, #333 0%, #000 100%);
             margin: 0;
-            padding: 0;
+            padding: 20px;
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            background-color: #000;
             display: flex;
             justify-content: center;
         }
 
-        .wrapper {
+        /* コンテナの外枠 */
+        .checklist-container {
+            max-width: 500px;
             width: 100%;
-            max-width: 480px;
-            background-color: #1a1a1a;
-            position: relative;
-            overflow: hidden; /* シルエットがはみ出さないように */
-            padding-bottom: 160px;
+            background-color: #e0e0e0; /* 画像のような薄いグレー */
+            border: 2px solid #000;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* 背景のゴキブリシルエットをCSSで作成 */
-        .wrapper::after {
-            content: "🪳"; /* 絵文字をベースに加工、またはシルエットの代わり */
-            position: absolute;
-            top: 5%;
-            left: -10%;
-            font-size: 400px;
-            color: rgba(0, 0, 0, 0.6); /* かなり暗くして背景に溶け込ませる */
-            transform: rotate(-20deg);
-            filter: blur(8px); /* ぼかして不気味さを演出 */
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* 別のシルエット層（より大きな影） */
-        .bg-shadow {
-            position: absolute;
-            top: 20%;
-            right: -20%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(0,0,0,0.8) 0%, rgba(26,26,26,0) 70%);
-            z-index: 1;
-        }
-
-        /* コンテンツ全体をシルエットより上に配置 */
-        .header-section, .content-box, .arrow-down {
-            position: relative;
-            z-index: 10;
-        }
-
-        .header-section {
-            padding: 40px 20px 10px;
-            text-align: left;
-            width: 70%;
-        }
-
-        .header-section h2 {
-            font-size: 1.4rem;
-            margin: 0;
-            color: #fff;
-            line-height: 1.4;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-        }
-
-        .highlight-yellow {
-            color: #ffcc00;
-            font-size: 1.8rem;
-        }
-
-        .header-subtext {
-            font-size: 1rem;
-            margin-top: 10px;
+        /* ヘッダータイトル */
+        .checklist-header {
+            text-align: center;
+            font-size: 1.2rem;
             font-weight: bold;
-            color: #fff;
-        }
-
-        /* チェックリスト */
-        .content-box {
-            background-color: #e0e0e0;
-            margin: 10px 15px;
-            padding: 20px 15px;
-            border: 2px solid #333;
+            line-height: 1.5;
+            margin-bottom: 25px;
             color: #000;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
         }
 
+        /* チェックリスト全体 */
         .checklist {
             list-style: none;
             padding: 0;
             margin: 0;
         }
 
-        .checklist li {
-            position: relative;
-            padding-left: 45px;
-            margin-bottom: 15px;
-            font-size: 1.05rem;
-            font-weight: 900;
-        }
-
-        .check-mark {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 30px;
-            height: 30px;
-            background-color: #b00000;
-            color: #fff;
+        /* リスト項目 */
+        .checklist-item {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #000;
-        }
-
-        .text-red { color: #cc0000; }
-
-        .arrow-down {
-            width: 0; height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-top: 20px solid #ffcc00;
-            margin: 20px auto;
-        }
-
-        /* 固定フッター */
-        .cta-container {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            max-width: 480px;
-            z-index: 1000;
-        }
-
-        .info-bar {
-            background-color: #001a4d;
-            color: #fff;
-            text-align: center;
-            padding: 5px 0;
+            align-items: flex-start;
+            margin-bottom: 18px;
+            font-size: 1.1rem;
             font-weight: bold;
+            line-height: 1.4;
+            color: #333;
         }
 
-        .yellow-badge {
-            background-color: #ffcc00;
-            color: #000;
-            padding: 2px 8px;
-            margin-left: 10px;
-        }
-
-        .action-area {
-            background-color: #e64a19;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .discount-circle {
-            background-color: #ffcc00;
-            color: #d32f2f;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 2px dashed #d32f2f;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 0.7rem;
+        /* カスタムチェックボックス（画像に近い赤枠のチェック） */
+        .check-icon {
             flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #000;
+            background-color: #fff;
+            margin-right: 12px;
+            position: relative;
+            margin-top: 2px;
         }
 
-        .discount-circle span { font-size: 1.5rem; }
+        /* チェックマークの描画 */
+        .check-icon::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            width: 12px;
+            height: 12px;
+            /* 画像のような赤いV字マーク */
+            border-left: 4px solid #c00;
+            border-bottom: 4px solid #c00;
+            transform: rotate(-45deg);
+        }
 
-        .tel-btn {
-            flex: 1;
-            margin-left: 10px;
-            background-color: #fff;
-            color: #e64a19;
-            text-decoration: none;
-            padding: 12px 0;
-            border-radius: 5px;
-            font-size: 1.3rem;
-            font-weight: 900;
-            text-align: center;
-            box-shadow: 0 4px 0 #bf360c;
+        /* 赤文字強調 */
+        .highlight-red {
+            color: #c00;
+        }
+
+        /* レスポンシブ調整 */
+        @media (max-width: 480px) {
+            .checklist-item {
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="wrapper">
-        <div class="bg-shadow"></div>
-
-        <div class="header-section">
-            <h2>こんな<span class="highlight-yellow">症状</span>、<br>出ていませんか？</h2>
-            <p class="header-subtext">一つでもチェックが付く方は、<br>今すぐご相談ください</p>
-        </div>
-
-        <div class="content-box">
-            <ul class="checklist">
-                <li><div class="check-mark">✔</div> <span class="text-red">ゴキブリ</span>が出た...</li>
-                <li><div class="check-mark">✔</div> 市販の駆除グッズを使っても<span class="text-red">なかなか減らない...</span></li>
-                <li><div class="check-mark">✔</div> 一度駆除したのに、<span class="text-red">また出た...</span></li>
-                <li><div class="check-mark">✔</div> 夏になる前に<span class="text-red">なんとかしたい...</span></li>
-                <li><div class="check-mark">✔</div> 店舗なので、<span class="text-red">定期的な駆除と対策</span>をお願いしたい</li>
-                <li><div class="check-mark">✔</div> 駆除後の<span class="text-red">予防方法</span>も教えてほしい...</li>
-                <li><div class="check-mark">✔</div> 他で見積りしたけど、<span class="text-red">費用が高くて</span>頼めない...</li>
-                <li><div class="check-mark">✔</div> <span class="text-red">どのような対策をするのか</span>話だけでも聞いてみたい...</li>
-            </ul>
-        </div>
-
-        <div class="arrow-down"></div>
-
-        <div class="cta-container">
-            <div class="info-bar">
-                24時間対応いたします！ <span class="yellow-badge">出張費/見積り0円</span>
-            </div>
-            <div class="action-area">
-                <div class="discount-circle">
-                    「HP見た」で<br>
-                    <span>20%OFF</span>
-                    Web割
-                </div>
-                <a href="tel:0120-000-000" class="tel-btn">電話でお問い合わせ</a>
-            </div>
-        </div>
+<div class="checklist-container">
+    <div class="checklist-header">
+        一つでもチェックが付く方は、<br>
+        今すぐご相談ください！
     </div>
+
+    <ul class="checklist">
+        <li class="checklist-item">
+            <span class="check-icon"></span>
+            <span>近所を<span class="highlight-red">ハチが飛んでて</span>、刺されそうで怖い…</span>
+        </li>
+        <li class="checklist-item">
+            <span class="check-icon"></span>
+            <span>急に<span class="highlight-red">ゴキブリが現れた！</span>今すぐ駆除してほしい…</span>
+        </li>
+        <li class="checklist-item">
+            <span class="check-icon"></span>
+            <span><span class="highlight-red">市販の殺虫剤</span>で駆除したけど、また出てきた…</span>
+        </li>
+        <li class="checklist-item">
+            <span class="check-icon"></span>
+            <span>庭でムシが大量発生した…<span class="highlight-red">隣の家まで被害が…</span></span>
+        </li>
+        <li class="checklist-item">
+            <span class="check-icon"></span>
+            <span><span class="highlight-red">大きなハチの巣</span>があって、何とかしてほしい…</span>
+        </li>
+        <li class="checklist-item">
+            <span class="check-icon"></span>
+            <span><span class="highlight-red">毎年ムシが出る</span>ので、もう出ないようにしてほしい…</span>
+        </li>
+        <li class="checklist-item">
+            <span class="check-icon"></span>
+            <span><span class="highlight-red">床がギシギシ音がする…シロアリ</span>かもしれない…</span>
+        </li>
+        <li class="checklist-item">
+            <span class="check-icon"></span>
+            <span>駆除後の<span class="highlight-red">予防方法</span>も教えてほしい…</span>
+        </li>
+        <li class="checklist-item">
+            <span class="check-icon"></span>
+            <span>他で見積りしたけど、<span class="highlight-red">費用が高くて</span>頼めない…</span>
+        </li>
+        <li class="checklist-item">
+            <span class="check-icon"></span>
+            <span><span class="highlight-red">どのような対策をするのか</span>話だけでも聞いてみたい…</span>
+        </li>
+    </ul>
+</div>
 
 </body>
 </html>
