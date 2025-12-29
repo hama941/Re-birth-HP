@@ -2,68 +2,120 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        .banner-container {
-            background-color: #fdd81d; /* 背景の黄色 */
-            padding: 40px 20px;
-            text-align: center;
-            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            font-weight: bold;
-            line-height: 1.5;
-            max-width: 800px;
+        /* 全体のリセットとフォント設定 */
+        body { margin: 0; font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .text-top {
-            font-size: 24px;
+        /* 左側：タイトルとキャッチコピー */
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .catch-copy {
+            background: #FFD700; /* 黄色 */
             color: #000;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 2px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            width: fit-content;
             margin-bottom: 5px;
+            position: relative;
         }
 
-        .text-accent {
-            font-size: 32px;
-            color: #b32014; /* 赤色の文字 */
-            margin-bottom: 5px;
+        /* 吹き出しの三角部分 */
+        .catch-copy::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 20px;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #FFD700;
         }
 
-        .text-middle {
+        .main-title {
             font-size: 24px;
-            color: #000;
-            margin-bottom: 30px;
+            font-weight: 900;
+            color: #C00; /* 赤色 */
+            margin: 0;
+            font-style: italic;
+            letter-spacing: -1px;
         }
 
-        .text-large {
-            font-size: 48px;
-            color: #000;
-            font-style: italic; /* 斜体 */
-            line-height: 1.2;
-            /* 白い光彩（text-shadowを複数重ねて表現） */
-            text-shadow: 
-                0 0 10px #fff,
-                0 0 20px #fff,
-                0 0 30px #fff;
+        /* 右側：ボタンエリア */
+        .contact-buttons {
+            display: flex;
+            gap: 10px;
         }
 
-        /* スマホ向けの調整 */
+        .btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+
+        .btn:hover { opacity: 0.8; }
+
+        .btn-tel { background-color: #F80; } /* オレンジ */
+        .btn-mail { background-color: #28a745; } /* グリーン */
+
+        .btn i {
+            font-size: 24px;
+            margin-bottom: 3px;
+        }
+
+        /* スマホ対応（画面が狭い時） */
         @media (max-width: 600px) {
-            .text-top, .text-middle { font-size: 18px; }
-            .text-accent { font-size: 22px; }
-            .text-large { font-size: 34px; }
+            .main-title { font-size: 18px; }
+            .btn { width: 60px; height: 60px; font-size: 10px; }
+            .catch-copy { font-size: 10px; }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-<div class="banner-container">
-    <div class="text-top">放っておくと</div>
-    <div class="text-accent">被害が拡大するかもしれません</div>
-    <div class="text-middle">自分でなんとかしようとせず、</div>
-    
-    <div class="text-large">
-        私たちに<br>
-        ご相談ください！
+<header class="header-container">
+    <div class="logo-section">
+        <div class="catch-copy">関西全域対応！！</div>
+        <h1 class="main-title">害獣トラブル119</h1>
     </div>
-</div>
+
+    <div class="contact-buttons">
+        <a href="tel:0120-000-000" class="btn btn-tel">
+            <i class="fas fa-phone"></i>
+            <span>電話</span>
+        </a>
+        <a href="#contact" class="btn btn-mail">
+            <i class="fas fa-envelope"></i>
+            <span>メール</span>
+        </a>
+    </div>
+</header>
 
 </body>
 </html>
