@@ -3,59 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>害虫駆除LP再現</title>
+    <title>害虫駆除LP再現（背景強化版）</title>
     <style>
-        /* 全体の基本設定 */
+        /* 全体の設定 */
         body {
             margin: 0;
             padding: 0;
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            background-color: #1a1a1a; /* 背景の暗いグレー */
-            color: #fff;
+            background-color: #000;
             display: flex;
             justify-content: center;
         }
 
         .wrapper {
             width: 100%;
-            max-width: 480px; /* スマホサイズに最適化 */
+            max-width: 480px;
+            background-color: #1a1a1a;
             position: relative;
-            background: radial-gradient(circle at center, #444 0%, #1a1a1a 100%);
-            padding-bottom: 150px; /* フッター分の余白 */
+            overflow: hidden;
+            padding-bottom: 160px;
         }
 
-        /* ヘッダー部分 */
+        /* 背景のもやっとした影の再現 */
+        .wrapper::before {
+            content: "";
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(50px);
+            z-index: 1;
+        }
+
+        /* 右上の女性（仮のプレースホルダー） */
+        .person-img {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 180px;
+            z-index: 2;
+            filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+        }
+
+        /* ヘッダー */
         .header-section {
-            text-align: center;
-            padding: 40px 20px 20px;
+            position: relative;
+            z-index: 3;
+            padding: 40px 20px 10px;
+            text-align: left; /* 画像に合わせて左寄せ */
+            width: 70%; /* 文字が女性に重ならないように制限 */
         }
 
         .header-section h2 {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             margin: 0;
-            letter-spacing: 1px;
+            color: #fff;
+            line-height: 1.4;
         }
 
         .highlight-yellow {
-            color: #ffeb3b;
+            color: #ffcc00;
             font-size: 1.8rem;
+            display: inline-block;
+            margin: 0 5px;
         }
 
         .header-subtext {
-            font-size: 1.1rem;
-            margin-top: 15px;
-            line-height: 1.6;
+            font-size: 1rem;
+            margin-top: 10px;
             font-weight: bold;
+            line-height: 1.5;
         }
 
-        /* チェックリストの外枠 */
+        /* チェックリスト */
         .content-box {
-            background-color: #f0f0f0;
-            margin: 0 15px;
-            padding: 25px 15px;
-            border-radius: 4px;
-            color: #333;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 3;
+            background-color: #d6d6d6; /* 少し暗めのグレー */
+            margin: 10px 15px;
+            padding: 20px 15px;
+            border: 3px solid #000; /* 黒い縁取り */
+            color: #000;
         }
 
         .checklist {
@@ -66,81 +96,81 @@
 
         .checklist li {
             position: relative;
-            padding-left: 42px;
-            margin-bottom: 18px;
+            padding-left: 45px;
+            margin-bottom: 15px;
             font-size: 1.05rem;
-            font-weight: 800;
-            line-height: 1.4;
+            font-weight: 900;
+            letter-spacing: -0.5px;
         }
 
-        .checklist li:last-child {
-            margin-bottom: 0;
-        }
-
-        /* 赤いチェックアイコン */
         .check-mark {
             position: absolute;
             left: 0;
-            top: 2px;
-            width: 28px;
-            height: 28px;
-            background-color: #c00000;
-            color: white;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            background-color: #b00000;
+            color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 3px;
-            font-size: 18px;
+            border: 2px solid #000;
+            box-sizing: border-box;
         }
 
-        /* 強調文字（赤） */
         .text-red {
-            color: #d32f2f;
+            color: #cc0000;
         }
 
-        /* フッターCTAエリア */
+        /* 下向き矢印 */
+        .arrow-down {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 20px solid #ffcc00;
+            margin: 20px auto;
+            position: relative;
+            z-index: 3;
+        }
+
+        /* 固定フッターCTA */
         .cta-container {
             position: fixed;
             bottom: 0;
             width: 100%;
             max-width: 480px;
             z-index: 1000;
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
         }
 
-        /* 24時間対応バー */
         .info-bar {
-            background-color: #002e63;
-            color: white;
+            background-color: #001a4d;
+            color: #fff;
             text-align: center;
-            padding: 8px 0;
-            font-size: 0.9rem;
+            padding: 5px 0;
             font-weight: bold;
+            font-size: 0.9rem;
         }
 
         .yellow-badge {
             background-color: #ffcc00;
             color: #000;
-            padding: 2px 6px;
-            border-radius: 2px;
-            margin-left: 8px;
+            padding: 2px 8px;
+            margin-left: 10px;
         }
 
-        /* メインアクションボタンエリア */
         .action-area {
-            background-color: #e65100; /* オレンジ背景 */
-            padding: 12px 10px;
+            background-color: #e64a19;
+            padding: 10px;
             display: flex;
             align-items: center;
-            justify-content: space-around;
         }
 
-        /* 円形割引バッジ */
         .discount-circle {
             background-color: #ffeb3b;
             color: #d32f2f;
-            width: 75px;
-            height: 75px;
+            width: 85px;
+            height: 85px;
             border-radius: 50%;
             border: 2px dashed #d32f2f;
             display: flex;
@@ -148,19 +178,12 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            line-height: 1.2;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
+            flex-shrink: 0;
         }
 
-        .discount-circle span {
-            font-size: 1.3rem;
-        }
+        .discount-circle span { font-size: 1.5rem; }
 
-        .discount-circle small {
-            font-size: 0.6rem;
-        }
-
-        /* テキストとボタン */
         .button-group {
             flex: 1;
             text-align: center;
@@ -168,40 +191,32 @@
         }
 
         .button-group p {
-            margin: 0 0 8px 0;
-            font-size: 0.75rem;
+            margin: 0 0 5px 0;
+            font-size: 0.7rem;
             color: #fff;
-            line-height: 1.3;
+            font-weight: bold;
         }
 
         .tel-btn {
             display: block;
             background-color: #fff;
-            color: #e65100;
+            color: #333;
             text-decoration: none;
             padding: 12px 0;
-            border-radius: 50px;
-            font-size: 1.3rem;
+            border-radius: 5px;
+            font-size: 1.4rem;
             font-weight: 900;
-            box-shadow: 0 4px 0 #bf360c;
-        }
-
-        /* 下向き矢印のデザイン */
-        .arrow-down {
-            width: 0;
-            height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-top: 15px solid #ffcc00;
-            margin: 20px auto;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.2);
         }
     </style>
 </head>
 <body>
 
     <div class="wrapper">
+        <img src="https://via.placeholder.com/300x400/000000/000000?text=+" alt="" class="person-img">
+
         <div class="header-section">
-            <h2>こんな<span class="highlight-yellow">症状</span>、出ていませんか？</h2>
+            <h2>こんな<span class="highlight-yellow">症状</span>、<br>出ていませんか？</h2>
             <p class="header-subtext">一つでもチェックが付く方は、<br>今すぐご相談ください</p>
         </div>
 
@@ -227,11 +242,11 @@
             <div class="action-area">
                 <div class="discount-circle">
                     「HP見た」で<br>
-                    <span>20%<small>OFF</small></span>
+                    <span>20%OFF</span>
                     Web割
                 </div>
                 <div class="button-group">
-                    <p>お電話のみで解決サポートできる場合もございます。<br>まずはお気軽にご相談ください！</p>
+                    <p>お電話のみで解決サポートできる場合もございます。<br>まずは気軽にご相談ください！</p>
                     <a href="tel:0120-000-000" class="tel-btn">電話でお問い合わせ</a>
                 </div>
             </div>
