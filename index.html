@@ -1,339 +1,368 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>料金比較チャート</title>
-<style>
-    /* =========================================
-       ベーススタイル
-       ========================================= */
-    body {
-        font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, "Helvetica Neue", Arial, sans-serif;
-        background-color: #f4f8fb;
-        margin: 0;
-        padding: 20px;
-        color: #333;
-        display: flex;
-        justify-content: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基本料金シミュレーション（害虫駆除版）</title>
+    <style>
+        /* --- ベーススタイル --- */
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background: linear-gradient(to bottom, #f0faff, #dcefff);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
 
-    .lp-container {
-        width: 100%;
-        max-width: 900px;
-        background: #fff;
-        padding: 50px 30px;
-        border-radius: 15px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-        /* 背景グラデーション（画像の薄い水色） */
-        background: linear-gradient(180deg, #ffffff 0%, #eef6ff 100%);
-        position: relative;
-    }
+        .simulation-container {
+            width: 100%;
+            max-width: 900px;
+            margin-top: 40px;
+            position: relative;
+        }
 
-    /* =========================================
-       ヘッダーメッセージ
-       ========================================= */
-    .header-message {
-        text-align: left;
-        font-weight: 700;
-        font-size: 1.4rem;
-        line-height: 1.6;
-        margin-bottom: 60px;
-        color: #333;
-    }
-    
-    .header-message .highlight {
-        color: #0088ff; /* 鮮やかな青 */
-        display: block;
-        margin-top: 8px;
-        font-size: 1.5rem;
-    }
+        /* --- ヘッダー --- */
+        .sim-header {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
 
-    /* =========================================
-       チャートエリア（フレックスボックス）
-       ========================================= */
-    .chart-area {
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-        gap: 30px; /* カラム間の隙間 */
-        position: relative;
-        padding-bottom: 20px;
-    }
+        .operator-img-placeholder {
+            position: absolute;
+            bottom: -5px;
+            left: 15%;
+            width: 100px;
+            height: 120px;
+        }
 
-    /* カラム設定 */
-    .column {
-        width: 180px; /* 円柱の幅 */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-        z-index: 2;
-    }
+        .sub-title {
+            display: inline-block;
+            font-size: 16px;
+            color: #0088ea;
+            font-weight: bold;
+            border-bottom: 2px solid #8bd1ff;
+            margin-bottom: 5px;
+        }
 
-    /* 社名テキスト */
-    .company-name {
-        margin-top: 25px;
-        font-weight: 700;
-        font-size: 1.2rem;
-        color: #8899a6;
-        text-align: center;
-        letter-spacing: 0.05em;
-    }
-    .company-name.target {
-        color: #003366; /* 自社は濃い紺色 */
-        font-size: 1.3rem;
-        line-height: 1.3;
-    }
+        .main-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #005691;
+            margin: 0;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 0px #fff;
+        }
 
-    /* =========================================
-       3D円柱（パック）のデザイン
-       ========================================= */
-    .puck {
-        width: 100%;
-        height: 55px; /* 高さ */
-        margin-bottom: 8px; /* パック間の隙間 */
-        position: relative;
-        text-align: center;
-    }
+        /* --- タブナビゲーション --- */
+        .step-tabs {
+            display: flex;
+            width: 100%;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+        }
 
-    /* 円柱の側面（ボディ） */
-    .puck-body {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 45px; /* 厚み */
-        border-radius: 0 0 50% 50% / 0 0 15px 15px; /* 下側をカーブさせる */
-        z-index: 1;
-        box-shadow: 0 5px 10px rgba(0,0,0,0.15); /* 影 */
-    }
+        .tab-item {
+            flex: 1;
+            padding: 15px 5px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            color: #666;
+            background-color: #aebdce;
+            border-right: 1px solid #999;
+            position: relative;
+            cursor: default;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-    /* 円柱の上面（フタ） */
-    .puck-lid {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 30px; /* 上面の楕円の高さ */
-        border-radius: 50%;
-        z-index: 2;
-    }
+        .tab-item.active {
+            background-color: #0088ea;
+            color: #fff;
+            border-right: 1px solid #006ebc;
+        }
+        
+        .tab-item.completed {
+            background-color: #9ac6e8; 
+            color: #00406b;
+            border-right: 1px solid #8ab6d6;
+        }
 
-    /* テキスト */
-    .puck-text {
-        position: absolute;
-        top: 12px; /* 位置調整 */
-        left: 0;
-        width: 100%;
-        z-index: 3;
-        font-size: 0.95rem;
-        font-weight: 700;
-        color: #fff;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    }
+        .tab-arrow {
+            font-size: 10px;
+            margin-left: 5px;
+            display: inline-block;
+        }
 
-    /* =========================================
-       カラーバリエーション
-       ========================================= */
-    /* 赤 (相談・見積) */
-    .type-red .puck-body { background: linear-gradient(to right, #d32f2f, #f44336, #d32f2f); }
-    .type-red .puck-lid  { background: linear-gradient(to bottom, #ffcdd2, #e57373); }
+        .tab-item.result-btn {
+            background-color: #fef29e;
+            color: #e85a5a;
+            border-right: none;
+            font-weight: 900;
+        }
+        .tab-item.result-btn.ready {
+             background-color: #ffeb3b;
+             cursor: pointer;
+        }
 
-    /* オレンジ (追加料金) */
-    .type-orange .puck-body { background: linear-gradient(to right, #f57c00, #ff9800, #f57c00); }
-    .type-orange .puck-lid  { background: linear-gradient(to bottom, #ffe0b2, #ffb74d); }
+        /* --- コンテンツボックス --- */
+        .content-box {
+            background-color: #fff;
+            border: 3px solid #0088ea;
+            border-top: 3px solid #0088ea; 
+            border-radius: 0 0 8px 8px;
+            padding: 30px 20px;
+            text-align: center;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-    /* 黄 (基本料金) */
-    .type-yellow .puck-body { background: linear-gradient(to right, #fbc02d, #fdd835, #fbc02d); }
-    .type-yellow .puck-lid  { background: linear-gradient(to bottom, #fff9c4, #fff176); }
-    /* 黄色は文字が見にくいので少し濃くするか影を強める */
-    
-    /* 水色 (薬剤費) */
-    .type-cyan .puck-body { background: linear-gradient(to right, #0288d1, #29b6f6, #0288d1); }
-    .type-cyan .puck-lid  { background: linear-gradient(to bottom, #b3e5fc, #4fc3f7); }
+        .box-title {
+            color: #005691;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
 
-    /* 紺 (作業費) */
-    .type-navy .puck-body { background: linear-gradient(to right, #1565c0, #1e88e5, #1565c0); }
-    .type-navy .puck-lid  { background: linear-gradient(to bottom, #bbdefb, #64b5f6); }
+        /* --- グリッドレイアウト --- */
+        .options-grid {
+            display: grid;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
 
-    /* ゴースト (不要な費用) */
-    .type-ghost .puck-body { 
-        background: #f0f0f0; 
-        box-shadow: inset 0 0 10px rgba(0,0,0,0.05); /* 凹んだ感じ */
-        border: 1px solid #e0e0e0;
-        border-top: none;
-    }
-    .type-ghost .puck-lid { 
-        background: #fff; 
-        border: 1px solid #e0e0e0;
-    }
-    .type-ghost .puck-text { color: #cccccc; text-shadow: none; }
+        .col-4 { grid-template-columns: repeat(4, 1fr); }
+        .col-3 { grid-template-columns: repeat(3, 1fr); }
 
+        /* --- ボタンデザイン --- */
+        .option-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            border: 1px solid #0088ea;
+            border-radius: 50px;
+            color: #333;
+            font-weight: bold;
+            padding: 15px 5px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            box-sizing: border-box;
+            line-height: 1.2;
+        }
+        .option-btn:hover {
+            background-color: #eaf6ff;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
 
-    /* =========================================
-       点線の矢印
-       ========================================= */
-    .dotted-line-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 10;
-    }
-    /* SVGで線を引くのが一番確実 */
-    .arrow-svg {
-        width: 100%;
-        height: 100%;
-        overflow: visible;
-    }
-    .arrow-path {
-        fill: none;
-        stroke: #999;
-        stroke-width: 2;
-        stroke-dasharray: 4 4; /* 点線 */
-    }
+        /* --- 戻るボタン --- */
+        .back-area {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .back-btn {
+            background-color: #eee;
+            color: #666;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .back-btn:hover {
+            background-color: #ddd;
+        }
 
-    /* =========================================
-       「これだけでOK!」バッジ
-       ========================================= */
-    .ok-badge {
-        position: absolute;
-        right: -95px; /* 右側に配置 */
-        bottom: 80px; /* 薬剤費のあたり */
-        background: #fff;
-        border: 3px solid #d32f2f;
-        border-radius: 12px;
-        padding: 8px 12px;
-        text-align: center;
-        color: #d32f2f;
-        font-weight: 900;
-        line-height: 1.2;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        z-index: 20;
-    }
-    .ok-badge-text-small { font-size: 0.9rem; }
-    .ok-badge-text-big { font-size: 1.8rem; display: block; }
-    
-    /* 吹き出しの三角 */
-    .ok-badge::before {
-        content: "";
-        position: absolute;
-        left: -12px;
-        top: 50%;
-        transform: translateY(-50%);
-        border-top: 8px solid transparent;
-        border-bottom: 8px solid transparent;
-        border-right: 12px solid #d32f2f;
-    }
-    .ok-badge::after {
-        content: "";
-        position: absolute;
-        left: -7px;
-        top: 50%;
-        transform: translateY(-50%);
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        border-right: 9px solid #fff;
-    }
+        /* --- 表示切り替え用 --- */
+        .step-panel {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .step-panel.active-panel {
+            display: block;
+        }
 
-    /* =========================================
-       レスポンシブ対応
-       ========================================= */
-    @media (max-width: 768px) {
-        .header-message { font-size: 1rem; }
-        .column { width: 30%; }
-        .puck { height: 40px; margin-bottom: 5px; }
-        .puck-body { height: 32px; border-radius: 0 0 50% 50% / 0 0 10px 10px;}
-        .puck-lid { height: 20px; }
-        .puck-text { font-size: 0.7rem; top: 8px; }
-        .ok-badge { right: -10px; padding: 5px; border-width: 2px; bottom: 60px; }
-        .ok-badge-text-big { font-size: 1.2rem; }
-        .company-name { font-size: 0.8rem; margin-top: 15px; }
-    }
-</style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- スマホ対応 --- */
+        @media (max-width: 768px) {
+            .col-4, .col-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .main-title { font-size: 22px; }
+            .tab-item { font-size: 11px; padding: 10px 2px; }
+            .content-box { padding: 20px 10px; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="lp-container">
-    <div class="header-message">
-        お見積りの上、ご了承いただけた場合のみ作業を行います。<br>
-        <span class="highlight">ご納得いただけなかった場合、料金は一切掛かりませんのでご安心ください。</span>
+<div class="simulation-container">
+    <div class="sim-header">
+        <div class="operator-img-placeholder">
+            <img src="https://placehold.jp/100x120.png?text=Image" alt="" style="width:100px; opacity:0.5;">
+        </div>
+        <div class="sub-title">簡単10秒！</div>
+        <h1 class="main-title">基本料金シミュレーション</h1>
     </div>
 
-    <div class="chart-area">
-        <div class="dotted-line-container">
-            <svg class="arrow-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <path d="M 23 10 L 50 35 L 77 62" class="arrow-path" vector-effect="non-scaling-stroke"/>
-            </svg>
-        </div>
+    <div class="step-tabs">
+        <div id="tab-1" class="tab-item active" data-default="種類">種類 <span class="tab-arrow">^</span></div>
+        <div id="tab-2" class="tab-item" data-default="トラブル箇所">トラブル箇所 <span class="tab-arrow">∨</span></div>
+        <div id="tab-3" class="tab-item" data-default="物件の種類">物件の種類 <span class="tab-arrow">∨</span></div>
+        <div id="tab-result" class="tab-item result-btn">結果をみる</div>
+    </div>
 
-        <div class="column">
-            <div class="puck type-red">
-                <div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">相談・見積・出張費</div>
+    <div class="content-box">
+        
+        <div id="panel-1" class="step-panel active-panel">
+            <div class="box-title">害虫の種類を選択してください。</div>
+            <div class="options-grid col-3">
+                <button class="option-btn" onclick="nextStep(1, 'ゴキブリ')">ゴキブリ</button>
+                <button class="option-btn" onclick="nextStep(1, 'ハチ・ハチの巣')">ハチ・ハチの巣</button>
+                <button class="option-btn" onclick="nextStep(1, 'トコジラミ')">トコジラミ</button>
+                <button class="option-btn" onclick="nextStep(1, 'シロアリ')">シロアリ</button>
+                <button class="option-btn" onclick="nextStep(1, 'ノミ・ダニ')">ノミ・ダニ</button>
+                <button class="option-btn" onclick="nextStep(1, 'その他')">その他</button>
             </div>
-            <div class="puck type-orange">
-                <div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">追加料金</div>
-            </div>
-            <div class="puck type-yellow">
-                <div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">基本料金</div>
-            </div>
-            <div class="puck type-cyan">
-                <div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">薬剤費</div>
-            </div>
-            <div class="puck type-navy">
-                <div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">作業費</div>
-            </div>
-            <div class="company-name">A社</div>
-        </div>
-
-        <div class="column">
-            <div class="puck type-ghost">
-                <div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">相談・見積・出張費</div>
-            </div>
-            <div class="puck type-orange">
-                <div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">追加料金</div>
-            </div>
-            <div class="puck type-yellow">
-                <div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">基本料金</div>
-            </div>
-            <div class="puck type-cyan">
-                <div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">薬剤費</div>
-            </div>
-            <div class="puck type-navy">
-                <div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">作業費</div>
-            </div>
-            <div class="company-name">B社</div>
-        </div>
-
-        <div class="column">
-            <div class="ok-badge">
-                <span class="ok-badge-text-small">これだけで</span>
-                <span class="ok-badge-text-big">OK!</span>
             </div>
 
-            <div class="puck type-ghost">
-                <div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">相談・見積・出張費</div>
+        <div id="panel-2" class="step-panel">
+            <div class="box-title">トラブル箇所はどこですか？</div>
+            <div class="options-grid col-4">
+                <button class="option-btn" onclick="nextStep(2, '屋根裏')">屋根裏</button>
+                <button class="option-btn" onclick="nextStep(2, '天井裏')">天井裏</button>
+                <button class="option-btn" onclick="nextStep(2, '床下')">床下</button>
+                <button class="option-btn" onclick="nextStep(2, '壁の中')">壁の中</button>
+                <button class="option-btn" onclick="nextStep(2, 'ベランダ・屋外')">ベランダ・屋外</button>
+                <button class="option-btn" onclick="nextStep(2, '倉庫・物置')">倉庫・物置</button>
+                <button class="option-btn" onclick="nextStep(2, 'その他')">その他</button>
             </div>
-            <div class="puck type-ghost">
-                <div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">追加料金</div>
+            <div class="back-area">
+                <button class="back-btn" onclick="goBack(2)">＜ 前に戻る</button>
             </div>
-            <div class="puck type-ghost">
-                <div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">基本料金</div>
-            </div>
-            <div class="puck type-cyan">
-                <div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">薬剤費</div>
-            </div>
-            <div class="puck type-navy">
-                <div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">作業費</div>
-            </div>
-            <div class="company-name target">弊社</div>
         </div>
+
+        <div id="panel-3" class="step-panel">
+            <div class="box-title">物件の種類を選択してください。</div>
+            <div class="options-grid col-3">
+                <button class="option-btn" onclick="finishStep('戸建て')">戸建て</button>
+                <button class="option-btn" onclick="finishStep('マンション・アパート')">マンション・アパート</button>
+                <button class="option-btn" onclick="finishStep('店舗')">店舗</button>
+                <button class="option-btn" onclick="finishStep('オフィス・事務所')">オフィス・事務所</button>
+                <button class="option-btn" onclick="finishStep('ビル・施設')">ビル・施設</button>
+                <button class="option-btn" onclick="finishStep('その他')">その他</button>
+            </div>
+            <div class="back-area">
+                <button class="back-btn" onclick="goBack(3)">＜ 前に戻る</button>
+            </div>
+        </div>
+        
+        <div id="panel-result" class="step-panel">
+            <div class="box-title">診断ありがとうございます！</div>
+            <p style="margin-bottom:20px;">お問い合わせフォームへ移動します。</p>
+            <button class="option-btn" style="background:#fef29e; border-color:#d68c6d; font-weight:900; width:200px; margin:0 auto;">問い合わせる</button>
+            
+            <div class="back-area">
+                <button class="back-btn" onclick="goBack(4)">＜ 修正する</button>
+            </div>
+        </div>
+
     </div>
 </div>
 
+<script>
+    // --- 次へ進む処理 ---
+    function nextStep(currentStepNum, selectedText) {
+        // 現在のタブを「完了」にする
+        const currentTab = document.getElementById('tab-' + currentStepNum);
+        currentTab.classList.remove('active');
+        currentTab.classList.add('completed');
+        currentTab.innerText = selectedText; 
+
+        // 現在のパネルを隠す
+        document.getElementById('panel-' + currentStepNum).classList.remove('active-panel');
+
+        // 次のステップを表示
+        const nextStepNum = currentStepNum + 1;
+        const nextTab = document.getElementById('tab-' + nextStepNum);
+        if(nextTab) {
+            nextTab.classList.add('active');
+        }
+        const nextPanel = document.getElementById('panel-' + nextStepNum);
+        if(nextPanel) {
+            nextPanel.classList.add('active-panel');
+        }
+    }
+
+    // --- 前に戻る処理 ---
+    function goBack(currentStepNum) {
+        const prevStepNum = currentStepNum - 1;
+
+        // 現在のパネルを隠す
+        const currentPanel = document.getElementById('panel-' + currentStepNum);
+        if(currentPanel) currentPanel.classList.remove('active-panel');
+
+        // 現在のタブのactiveを消す
+        const currentTab = document.getElementById('tab-' + currentStepNum);
+        if(currentTab) currentTab.classList.remove('active');
+        
+        // 前のパネルを表示
+        const prevPanel = document.getElementById('panel-' + prevStepNum);
+        if(prevPanel) prevPanel.classList.add('active-panel');
+
+        // 前のタブの状態を「未完了(active)」に戻す
+        const prevTab = document.getElementById('tab-' + prevStepNum);
+        if(prevTab) {
+            prevTab.classList.remove('completed');
+            prevTab.classList.add('active');
+            
+            // タブの文字を初期値に戻す
+            const defaultText = prevTab.getAttribute('data-default');
+            if(defaultText) {
+                prevTab.innerHTML = defaultText + ' <span class="tab-arrow">^</span>';
+            }
+        }
+        
+        if(currentStepNum === 4) {
+             const resTab = document.getElementById('tab-result');
+             resTab.classList.remove('ready');
+        }
+    }
+
+    // --- 完了処理 ---
+    function finishStep(selectedText) {
+        const currentTab = document.getElementById('tab-3');
+        currentTab.classList.remove('active');
+        currentTab.classList.add('completed');
+        currentTab.innerText = selectedText;
+
+        document.getElementById('panel-3').classList.remove('active-panel');
+        
+        const resultTab = document.getElementById('tab-result');
+        resultTab.classList.add('ready');
+
+        document.getElementById('panel-result').classList.add('active-panel');
+    }
+</script>
+
 </body>
 </html>
-
