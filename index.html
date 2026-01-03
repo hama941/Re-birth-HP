@@ -17,7 +17,7 @@
         margin: 0;
         padding: 20px;
         font-family: 'Noto Sans JP', "Helvetica Neue", Arial, sans-serif;
-        position: relative; /* 背景レイヤーの基準点 */
+        position: relative;
         min-height: 100vh;
         display: flex;
         justify-content: center;
@@ -26,17 +26,16 @@
         overflow-x: hidden;
     }
 
-    /* 背景レイヤー（清潔感のある家のイメージ＋透過） */
+    /* 背景レイヤー1：清潔感のある家のイメージ（一番奥） */
     body::before {
         content: "";
-        position: absolute;
+        position: fixed; /* スクロールしても追従させるためfixedに変更 */
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: -1;
+        z-index: -2; /* ゴキブリより奥 */
         
-        /* 青空と清潔な家をイメージしたグラデーションとパターン */
         background: 
             linear-gradient(to bottom, rgba(224, 247, 250, 0.8) 0%, rgba(255, 255, 255, 0.9) 60%),
             repeating-linear-gradient(45deg, transparent 0, transparent 10px, rgba(0, 136, 234, 0.05) 10px, rgba(0, 136, 234, 0.05) 20px),
@@ -46,20 +45,46 @@
         background-size: auto, auto, auto, 40px 40px, 40px 40px;
         background-color: #f0faff;
 
-        /* 背景の透過設定 */
         opacity: 0.6;
         filter: blur(1px);
+    }
+
+    /* 【追加】背景レイヤー2：ゴキブリのイラスト（透過・背景） */
+    body::after {
+        content: "";
+        position: fixed; /* 画面に固定 */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* 画面中央に配置 */
+        
+        width: 80%; /* 画面幅の80%の大きさ */
+        max-width: 600px;
+        height: 80%;
+        
+        /* ここで画像を読み込み */
+        background-image: url('cockroach.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain; /* 全体が入るように調整 */
+        
+        z-index: -1; /* 家の背景より手前、文字より奥 */
+        
+        /* 【重要】透過設定（数値を小さくするとより薄くなります） */
+        opacity: 0.15; 
+        pointer-events: none; /* 背景なのでクリックを邪魔しないように */
     }
 
     .info-container {
         width: 100%;
         max-width: 600px;
         margin: 0 auto;
+        position: relative; /* z-indexを効かせるため */
+        z-index: 1;
     }
 
     /* --- メインの白いボックス --- */
     .info-card {
-        background-color: rgba(255, 255, 255, 0.95); /* カード自体もごく僅かに透過 */
+        background-color: rgba(255, 255, 255, 0.92); /* カードの透過度を少し上げて背景を見やすく */
         border-radius: 20px;
         box-shadow: 0 15px 35px rgba(0, 86, 145, 0.15), 0 5px 15px rgba(0, 0, 0, 0.05);
         overflow: hidden;
@@ -69,29 +94,13 @@
     /* --- ヘッダーエリア --- */
     .info-header {
         text-align: center;
-        padding: 30px 20px 20px;
+        padding: 40px 20px 20px; /* 画像を消したのでパディング調整 */
         background-image: radial-gradient(#cfd8dc 1px, transparent 1px);
         background-size: 20px 20px;
         background-color: #f8fafa;
     }
     
-    /* 【追加】メインビジュアル画像のスタイル */
-    .main-visual-img {
-        display: block;
-        max-width: 200px; /* 画像のサイズ調整 */
-        width: 100%;
-        height: auto;
-        margin: 0 auto 15px auto; /* 中央寄せと下部の余白 */
-        filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); /* 軽く影をつけて浮き上がらせる */
-        
-        /* ふわふわ浮くアニメーション（お好みで削除可） */
-        animation: float 3s ease-in-out infinite;
-    }
-    @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-5px); }
-        100% { transform: translateY(0px); }
-    }
+    /* .main-visual-img は削除しました */
 
     .catch-copy {
         font-size: 20px;
@@ -329,8 +338,6 @@
     <div class="info-card">
         
         <div class="info-header">
-            <img src="cockroach.png" alt="害虫駆除・殺虫スプレー" class="main-visual-img">
-            
             <span class="catch-copy">最短10分で</span>
             <h1 class="main-copy">すぐに<span class="highlight-text">駆けつけます！</span></h1>
         </div>
