@@ -4,16 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>サービス案内</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
 <style>
-    /* ベーススタイル */
+    /* --- 全体のリセットとベース設定 --- */
+    * {
+        box-sizing: border-box; /* 枠のズレを防ぐための重要設定 */
+    }
+    
     body {
         margin: 0;
         padding: 20px;
-        font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-        /* 背景画像（水しぶきと青空）の代わりにグラデーションを設定。
-           実際の画像がある場合は background-image: url('your-background.jpg'); のように指定してください */
-        background: linear-gradient(to bottom, #dcefff 0%, #f0faff 50%, #dcefff 100%);
+        font-family: 'Noto Sans JP', "Helvetica Neue", Arial, sans-serif;
+        /* 背景：爽やかな空のグラデーション */
+        background: linear-gradient(135deg, #e0f7fa 0%, #e3f2fd 100%);
         min-height: 100vh;
         display: flex;
         justify-content: center;
@@ -21,320 +26,304 @@
         color: #333;
     }
 
-    .container {
+    .info-container {
         width: 100%;
-        max-width: 500px; /* スマホ～タブレット向けの幅 */
+        max-width: 600px; /* 少し幅を広げてゆとりを持たせる */
+        margin: 0 auto;
     }
 
-    /* 白いコンテンツボックス */
-    .content-box {
+    /* --- メインの白いボックス --- */
+    .info-card {
         background-color: #fff;
-        border-radius: 15px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        border-radius: 20px;
+        /* ふんわりとした影でおしゃれに */
+        box-shadow: 0 15px 40px rgba(0, 86, 145, 0.15);
         overflow: hidden;
-        position: relative;
+        border: 1px solid #e1f5fe;
     }
 
-    /* --- 上部テキストエリア --- */
-    .header-text {
+    /* --- ヘッダーエリア --- */
+    .info-header {
         text-align: center;
-        padding: 30px 20px 20px;
+        padding: 40px 20px 20px;
+        background-image: radial-gradient(#e1f5fe 1px, transparent 1px);
+        background-size: 20px 20px; /* ドット柄の背景でアクセント */
     }
-    .main-title {
-        font-size: 28px;
+    
+    .catch-copy {
+        font-size: 20px;
         font-weight: bold;
-        color: #0088ea;
+        color: #555;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .main-copy {
+        font-size: 32px;
+        font-weight: 900;
+        color: #005691;
         line-height: 1.3;
         margin: 0;
+        letter-spacing: 0.05em;
     }
-    .main-title .highlight {
-        font-size: 36px;
+    
+    .highlight-text {
         color: #0088ea;
-    }
-    .sub-title {
-        font-size: 24px;
-        font-weight: bold;
-        margin: 5px 0 0;
-    }
-    .sub-title .black {
-        color: #333;
-    }
-    .sub-title .blue {
-        color: #0088ea;
-    }
-
-    /* --- 安心ポイントとクーポン --- */
-    .features-section {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        padding: 20px;
         position: relative;
+        display: inline-block;
+    }
+    /* 下線マーカー風の装飾 */
+    .highlight-text::after {
+        content: '';
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+        width: 100%;
+        height: 10px;
+        background-color: rgba(255, 235, 59, 0.4); /* 薄い黄色 */
+        z-index: -1;
+        transform: rotate(-2deg);
     }
 
-    /* 青いチェックボックス */
-    .check-box-container {
-        flex: 1;
-        background-color: #eaf6ff;
-        border-radius: 10px;
-        padding: 15px;
-        margin-right: 15px; /* クーポンとの間隔 */
+    /* --- 安心ポイントエリア（レイアウト変更） --- */
+    .features-area {
+        padding: 20px 30px;
     }
-    .check-title {
-        font-weight: bold;
+    
+    .features-box {
+        background-color: #f0faff;
+        border-radius: 15px;
+        padding: 25px;
+        border: 2px solid #b3e5fc;
+    }
+
+    .features-title {
+        text-align: center;
+        font-weight: 700;
         color: #0088ea;
-        margin-bottom: 10px;
-        font-size: 16px;
+        font-size: 18px;
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+        width: 100%;
     }
-    .check-list {
+    .features-title::before, .features-title::after {
+        content: '●';
+        color: #b3e5fc;
+        margin: 0 10px;
+        font-size: 12px;
+        vertical-align: middle;
+    }
+
+    /* 2列レイアウトにする */
+    .features-list {
         list-style: none;
         padding: 0;
         margin: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2列 */
+        gap: 15px;
     }
-    .check-list li {
-        margin-bottom: 8px;
-        font-size: 14px;
-        font-weight: bold;
+
+    .features-list li {
+        font-size: 15px;
+        font-weight: 700;
+        color: #444;
         display: flex;
         align-items: center;
     }
-    /* チェックアイコン（Font Awesomeを使用） */
-    .check-icon {
-        color: #0088ea;
-        margin-right: 8px;
-        font-size: 18px;
-    }
 
-    /* 黄色いクーポン */
-    .coupon-box {
-        background-color: #ffeb3b;
-        color: #333;
-        padding: 10px 15px;
-        border-radius: 5px;
-        text-align: center;
-        font-weight: bold;
-        position: relative;
-        /* 少し斜めにする */
-        transform: rotate(5deg);
-        box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
-    }
-    /* クーポンの点線 */
-    .coupon-box::before {
-        content: '';
-        position: absolute;
-        left: -10px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 20px;
-        height: 20px;
-        background-color: #fff; /* 背景色と同じにして切り欠きに見せる */
-        border-radius: 50%;
-    }
-    .coupon-box::after {
-        content: 'COUPON';
-        position: absolute;
-        right: -25px;
-        top: 50%;
-        transform: translateY(-50%) rotate(-90deg);
-        font-size: 12px;
-        color: #666;
-        letter-spacing: 2px;
-    }
-    .coupon-amount {
-        font-size: 48px;
-        font-weight: 900;
-        color: #0088ea;
-        line-height: 1;
-    }
-    .coupon-unit {
-        font-size: 24px;
-        color: #0088ea;
-    }
-    .coupon-text {
-        background-color: #0088ea;
+    .check-mark {
         color: #fff;
+        background-color: #0088ea;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
         font-size: 12px;
-        padding: 2px 10px;
-        border-radius: 20px;
-        display: inline-block;
-        margin-top: 5px;
+        flex-shrink: 0; /* アイコンが潰れないように */
+        box-shadow: 0 2px 5px rgba(0,136,234,0.3);
     }
 
-    /* --- 24時間対応テキスト --- */
-    .support-text {
+    /* --- 24時間対応 --- */
+    .support-msg {
         text-align: center;
         font-size: 20px;
-        font-weight: bold;
+        font-weight: 700;
         color: #005691;
-        margin: 20px 0;
+        margin: 10px 0 30px;
+        letter-spacing: 0.05em;
     }
 
     /* --- ボタンエリア --- */
-    .buttons-section {
-        padding: 0 20px 30px;
+    .action-btns {
+        padding: 0 30px 40px;
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 20px;
     }
-    .btn {
+
+    .action-link {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100%;
-        padding: 15px;
-        border-radius: 50px; /* 丸みのあるボタン */
+        padding: 18px;
+        border-radius: 50px;
         text-decoration: none;
         color: #fff;
-        font-size: 22px;
-        font-weight: bold;
-        box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-        transition: transform 0.2s, opacity 0.2s;
-        /* 立体感を出すためのボーダー */
-        border-bottom: 4px solid rgba(0,0,0,0.1);
+        font-size: 20px;
+        font-weight: 700;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
     }
-    .btn:hover {
-        transform: translateY(2px);
-        opacity: 0.9;
+    
+    .action-link:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.2);
     }
-    .btn:active {
-        transform: translateY(4px);
-        box-shadow: none;
-        border-bottom: none;
-    }
-    .btn-icon {
-        margin-right: 10px;
-        font-size: 24px;
-    }
-    /* 電話ボタン（オレンジグラデーション） */
-    .btn-phone {
-        background: linear-gradient(to bottom, #ff9800, #f57c00);
-    }
-    /* メールボタン（緑グラデーション） */
-    .btn-mail {
-        background: linear-gradient(to bottom, #4caf50, #388e3c);
+    .action-link:active {
+        transform: translateY(1px);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    /* --- お支払方法セクション --- */
-    .payment-section {
-        /* 背景色を上部のコンテンツと区切る */
-        border-top: 1px solid #eee;
+    .icon-box {
+        margin-right: 15px;
+        font-size: 24px;
     }
-    .payment-title {
-        background-color: #0088ea;
+
+    /* 電話ボタン：グラデーション調整 */
+    .btn-tel {
+        background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+    }
+    /* 光るアニメーション効果 */
+    .btn-tel::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: rgba(255,255,255,0.2);
+        transform: rotate(45deg);
+        animation: shine 3s infinite;
+    }
+    @keyframes shine {
+        0% { transform: translateX(-100%) rotate(45deg); }
+        20% { transform: translateX(100%) rotate(45deg); }
+        100% { transform: translateX(100%) rotate(45deg); }
+    }
+
+    /* メールボタン：グラデーション調整 */
+    .btn-mail {
+        background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+        cursor: pointer;
+    }
+
+    /* --- お支払方法 --- */
+    .payment-area {
+        border-top: 1px solid #eee;
+        background-color: #fafafa;
+    }
+    .payment-head {
+        background-color: #005691;
         color: #fff;
         text-align: center;
-        padding: 10px;
+        padding: 12px;
         margin: 0;
-        font-size: 18px;
-        font-weight: bold;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
     }
-    .payment-list {
+    .payment-methods {
         display: flex;
-        padding: 15px 20px;
-        justify-content: space-around; /* 均等配置 */
-        align-items: center;
+        padding: 20px;
+        justify-content: center;
+        gap: 40px; /* アイテム間の隙間 */
     }
-    .payment-item {
-        flex: 1;
+    .pay-item {
         text-align: center;
-        font-weight: bold;
-        font-size: 14px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        /* 区切り線 */
-        border-right: 1px solid #ddd;
+        color: #555;
+        font-weight: 700;
+        font-size: 14px;
     }
-    /* 最後のアイテムは区切り線をなしに */
-    .payment-item:last-child {
-        border-right: none;
+    .pay-icon {
+        font-size: 28px;
+        color: #005691;
+        margin-top: 8px;
+        background: #fff;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     }
-    /* 支払いアイコン（ダミー画像） */
-    .payment-icon-img {
-        height: 30px;
-        width: auto;
-        margin-top: 5px;
-        /* 画像がない場合のプレースホルダー色 */
-        background-color: #ddd;
-        border-radius: 4px;
-    }
-    .cash-icon { width: 40px; } /* 現金アイコンの幅調整 */
-    .bank-icon { width: 40px; } /* 銀行アイコンの幅調整 */
 
-
-    /* --- スマホレイアウト調整 --- */
+    /* スマホ対応 */
     @media (max-width: 480px) {
-        .main-title { font-size: 24px; }
-        .main-title .highlight { font-size: 30px; }
-        .sub-title { font-size: 20px; }
-        
-        /* チェックリストとクーポンを縦並びにする */
-        .features-section {
-            flex-direction: column;
-        }
-        .check-box-container {
-            margin-right: 0;
-            margin-bottom: 20px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .coupon-box {
-            align-self: center; /* 中央寄せ */
-            transform: rotate(0deg); /* 傾きを戻す */
-        }
-        .coupon-box::after { right: -20px; } /* 位置調整 */
-
-        .btn { font-size: 18px; padding: 12px; }
+        .main-copy { font-size: 26px; }
+        .features-list { grid-template-columns: 1fr; } /* スマホでは1列に戻す */
+        .action-link { font-size: 18px; padding: 15px; }
+        .features-area { padding: 20px; }
     }
-
 </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="content-box">
-        <div class="header-text">
-            <h1 class="main-title"><span class="highlight">最短10分</span>で</h1>
-            <p class="sub-title"><span class="black">すぐに</span><span class="blue">駆けつけます！</span></p>
+<div class="info-container">
+    <div class="info-card">
+        
+        <div class="info-header">
+            <span class="catch-copy">最短10分で</span>
+            <h1 class="main-copy">すぐに<span class="highlight-text">駆けつけます！</span></h1>
         </div>
 
-        <div class="features-section">
-            <div class="check-box-container">
-                <div class="check-title">安心してお任せください！</div>
-                <ul class="check-list">
-                    <li><i class="fas fa-check-circle check-icon"></i>深夜料金なし</li>
-                    <li><i class="fas fa-check-circle check-icon"></i>見積り後のキャンセル無料</li>
-                    <li><i class="fas fa-check-circle check-icon"></i>安心の再発保証あり</li>
-                    <li><i class="fas fa-check-circle check-icon"></i>現地調査無料</li>
+        <div class="features-area">
+            <div class="features-box">
+                <div class="features-title">安心してお任せください！</div>
+                <ul class="features-list">
+                    <li><span class="check-mark"><i class="fas fa-check"></i></span>深夜料金なし</li>
+                    <li><span class="check-mark"><i class="fas fa-check"></i></span>見積り後キャンセル無料</li>
+                    <li><span class="check-mark"><i class="fas fa-check"></i></span>安心の再発保証あり</li>
+                    <li><span class="check-mark"><i class="fas fa-check"></i></span>現地調査無料</li>
                 </ul>
             </div>
-            <div class="coupon-box">
-                <div><span class="coupon-amount">20</span><span class="coupon-unit">%<br>OFF</span></div>
-                <div class="coupon-text">「HP見た」でお得！</div>
-            </div>
         </div>
 
-        <p class="support-text">24時間365日対応いたします！</p>
+        <div class="support-msg">
+            24時間365日対応いたします！
+        </div>
 
-        <div class="buttons-section">
-            <a href="tel:0000000000" class="btn btn-phone">
-                <i class="fas fa-phone-alt btn-icon"></i>電話でお問合せ
+        <div class="action-btns">
+            <a href="tel:05035280140" class="action-link btn-tel">
+                <i class="fas fa-phone-alt icon-box"></i>電話でお問合せ
             </a>
-            <a href="mailto:example@example.com" class="btn btn-mail">
-                <i class="far fa-envelope btn-icon"></i>メール相談
+            
+            <a href="javascript:void(0);" onclick="showForm()" class="action-link btn-mail">
+                <i class="far fa-envelope icon-box"></i>メール相談
             </a>
         </div>
 
-        <div class="payment-section">
-            <h2 class="payment-title">お支払方法</h2>
-            <div class="payment-list">
-                <div class="payment-item">
+        <div class="payment-area">
+            <h2 class="payment-head">お支払方法</h2>
+            <div class="payment-methods">
+                <div class="pay-item">
                     <span>現金払い</span>
-                    <img src="https://placehold.jp/40x30.png?text=現金" alt="現金払い" class="payment-icon-img cash-icon">
+                    <div class="pay-icon"><i class="fas fa-coins"></i></div>
                 </div>
-                <div class="payment-item">
+                <div class="pay-item">
                     <span>銀行振込</span>
-                    <img src="https://placehold.jp/40x30.png?text=通帳" alt="銀行振込" class="payment-icon-img bank-icon">
+                    <div class="pay-icon"><i class="fas fa-university"></i></div>
                 </div>
             </div>
         </div>
