@@ -5,19 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>基本料金シミュレーション</title>
     <style>
-        /* ベーススタイル */
+        /* --- ベーススタイル --- */
         body {
             margin: 0;
             padding: 20px;
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            background: linear-gradient(to bottom, #f0faff, #dcefff); /* 全体の背景グラデーション */
+            background: linear-gradient(to bottom, #f0faff, #dcefff);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: flex-start;
         }
 
-        /* シミュレーション全体のコンテナ */
         .simulation-container {
             width: 100%;
             max-width: 900px;
@@ -25,41 +24,22 @@
             position: relative;
         }
 
-        /* --- ヘッダー部分（タイトルと画像） --- */
+        /* --- ヘッダー --- */
         .sim-header {
             text-align: center;
             margin-bottom: 20px;
             position: relative;
         }
 
-        /* 女性の画像（配置用） */
-        .operator-img {
+        .operator-img-placeholder {
+            /* 画像がない場合のダミーエリア */
             position: absolute;
-            bottom: 0;
-            left: 15%; /* タイトルの左側に配置 */
-            width: 120px; /* 画像のサイズに合わせて調整してください */
-            height: auto;
-            z-index: 1;
-            /* 画像がない場合のプレースホルダー（画像セット時は削除可） */
-            display: block;
-        }
-
-        /* 画像がない場合に枠線だけ表示するダミー（本番では削除してください） */
-        .img-placeholder {
-            position: absolute;
-            bottom: -10px;
-            left: 100px;
+            bottom: -5px;
+            left: 15%;
             width: 100px;
             height: 120px;
-            background-color: #ddd;
-            border: 2px dashed #999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            color: #555;
-            z-index: 0;
-            opacity: 0.5;
+            /* 画像がある場合は以下を削除しimgタグを使用してください */
+            /* background: url('woman.png') no-repeat bottom center; background-size: contain; */
         }
 
         .sub-title {
@@ -69,93 +49,89 @@
             font-weight: bold;
             border-bottom: 2px solid #8bd1ff;
             margin-bottom: 5px;
-            position: relative;
-        }
-        
-        /* 「簡単10秒！」の横の装飾 */
-        .sub-title::before, .sub-title::after {
-            content: '';
-            display: inline-block;
-            width: 10px;
         }
 
         .main-title {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: bold;
-            color: #005691; /* 濃い青 */
+            color: #005691;
             margin: 0;
             letter-spacing: 1px;
-            text-shadow: 2px 2px 0px #fff; /* 文字を見やすく */
-            position: relative;
-            z-index: 2;
+            text-shadow: 2px 2px 0px #fff;
         }
 
-        /* --- タブナビゲーション部分 --- */
+        /* --- タブナビゲーション --- */
         .step-tabs {
             display: flex;
             width: 100%;
             border-radius: 5px 5px 0 0;
             overflow: hidden;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
         }
 
         .tab-item {
             flex: 1;
-            padding: 15px 10px;
+            padding: 15px 5px;
             text-align: center;
             font-weight: bold;
-            font-size: 16px;
-            color: #aaa;
-            background-color: #f4f8fb;
-            border-right: 1px solid #e0e0e0;
+            font-size: 15px;
+            color: #666;
+            background-color: #aebdce; /* 未選択の色（グレー） */
+            border-right: 1px solid #999;
             position: relative;
             cursor: default;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        /* アクティブなタブ（トラブル箇所） */
+        /* 現在アクティブなステップ（濃い青） */
         .tab-item.active {
             background-color: #0088ea;
             color: #fff;
+            border-right: 1px solid #006ebc;
         }
         
-        /* 三角形の矢印（アクティブタブの右側） */
-        .tab-item.active::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            right: -8px; /* 微調整 */
-            transform: translateY(-50%);
-            border-left: 8px solid #0088ea;
-            border-top: 8px solid transparent;
-            border-bottom: 8px solid transparent;
-            z-index: 2;
+        /* 選択済みのステップ（薄い青グレー：画像の左側タブの色） */
+        .tab-item.completed {
+            background-color: #9ac6e8; 
+            color: #00406b;
+            border-right: 1px solid #8ab6d6;
         }
 
-        /* ドロップダウンアイコン（v） */
+        /* タブの矢印装飾 */
         .tab-arrow {
-            display: inline-block;
+            font-size: 10px;
             margin-left: 5px;
-            font-size: 12px;
-            vertical-align: middle;
+            display: inline-block;
         }
 
         /* 結果を見るボタン（黄色） */
         .tab-item.result-btn {
             background-color: #fef29e;
-            color: #d68c6d;
+            color: #e85a5a;
             border-right: none;
+            font-weight: 900;
+        }
+        .tab-item.result-btn.ready {
+             /* すべて選択完了後に押せる感を出す場合 */
+             background-color: #ffeb3b;
+             cursor: pointer;
         }
 
-        /* --- メインコンテンツエリア --- */
+        /* --- コンテンツボックス --- */
         .content-box {
             background-color: #fff;
-            border: 3px solid #0088ea; /* 青い太枠 */
-            border-top: none; /* タブとつながるように上線はなし（または調整） */
-            /* 画像を見るとタブの下に青枠があるのでborder-topありにするか、タブの構成による。
-               今回は画像のデザインに合わせて、ボックス全体を囲む形にします */
+            border: 3px solid #0088ea;
             border-top: 3px solid #0088ea; 
             border-radius: 0 0 8px 8px;
-            padding: 30px 40px;
+            padding: 30px 20px;
             text-align: center;
+            min-height: 250px; /* 高さを確保 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .box-title {
@@ -165,29 +141,45 @@
             margin-bottom: 30px;
         }
 
-        /* ボタンのグリッド配置 */
+        /* --- グリッドレイアウト --- */
         .options-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4列 */
             gap: 20px;
             max-width: 800px;
             margin: 0 auto;
+            width: 100%;
         }
 
+        /* 4列 (ステップ1) */
+        .col-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        /* 4列 (ステップ2: 画像に合わせて) */
+        .col-4-step2 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        /* 3列 (ステップ3: 6項目なので3x2が見やすい) */
+        .col-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* ボタンデザイン */
         .option-btn {
             display: flex;
             align-items: center;
             justify-content: center;
             background-color: #fff;
             border: 1px solid #0088ea;
-            border-radius: 50px; /* 丸みのあるボタン */
+            border-radius: 50px;
             color: #333;
             font-weight: bold;
             padding: 15px 5px;
-            font-size: 16px;
+            font-size: 15px;
             cursor: pointer;
             transition: all 0.2s;
             text-decoration: none;
+            box-sizing: border-box;
+            line-height: 1.2;
         }
 
         .option-btn:hover {
@@ -196,74 +188,15 @@
             box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
 
-        /* スマホ向けレスポンシブ調整 */
-        @media (max-width: 768px) {
-            .options-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2列に変更 */
-            }
-            
-            .tab-item {
-                font-size: 12px;
-                padding: 10px 5px;
-            }
-            
-            .main-title {
-                font-size: 24px;
-            }
-            
-            .operator-img, .img-placeholder {
-                display: none; /* スマホでは画像を消すか調整 */
-            }
-            
-            .content-box {
-                padding: 20px 15px;
-            }
+        /* --- 表示切り替え用 --- */
+        .step-panel {
+            display: none; /* デフォルト非表示 */
+            animation: fadeIn 0.4s ease;
         }
-    </style>
-</head>
-<body>
+        .step-panel.active-panel {
+            display: block; /* アクティブなパネルだけ表示 */
+        }
 
-    <div class="simulation-container">
-        <div class="sim-header">
-            <div class="img-placeholder">女性の画像<br>配置エリア</div>
-
-            <div class="sub-title">簡単10秒！</div>
-            <h1 class="main-title">基本料金シミュレーション</h1>
-        </div>
-
-        <div class="step-tabs">
-            <div class="tab-item active">
-                トラブル箇所 <span class="tab-arrow">^</span>
-            </div>
-            <div class="tab-item">
-                症状 <span class="tab-arrow">∨</span>
-            </div>
-            <div class="tab-item">
-                物件の種類 <span class="tab-arrow">∨</span>
-            </div>
-            <div class="tab-item result-btn">
-                結果をみる
-            </div>
-        </div>
-
-        <div class="content-box">
-            <div class="box-title">下記から選択してください。</div>
-
-            <div class="options-grid">
-                <a href="#" class="option-btn">トイレ</a>
-                <a href="#" class="option-btn">キッチン・シンク</a>
-                <a href="#" class="option-btn">蛇口・水栓</a>
-                <a href="#" class="option-btn">排水溝</a>
-                
-                <a href="#" class="option-btn">水道管・配管</a>
-                <a href="#" class="option-btn">お風呂</a>
-                <a href="#" class="option-btn">洗面台・流し台</a>
-                <a href="#" class="option-btn">洗濯機</a>
-                
-                <a href="#" class="option-btn">給湯器・給湯管</a>
-                </div>
-        </div>
-    </div>
-
-</body>
-</html>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
