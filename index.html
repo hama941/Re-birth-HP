@@ -1,208 +1,785 @@
 <!DOCTYPE html>
+
 <html lang="ja">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>トラブル解決までの流れ</title>
+
+<title>サービス案内</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+
+
 <style>
-  /* ベーススタイル */
-  body {
-    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-    color: #333;
-    line-height: 1.6;
-    margin: 0;
-    padding: 20px;
-    background-color: #f9f9f9;
-  }
 
-  /* 全体コンテナ */
-  .flow-section {
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
-    padding-bottom: 50px;
-  }
+    /* --- 全体のリセットとベース設定 --- */
 
-  /* タイトル周り */
-  .flow-header {
-    margin-bottom: 40px;
-  }
-  .flow-sub-title {
-    color: #007bff; /* 水色っぽい青 */
-    font-weight: bold;
-    font-size: 1.2rem;
-    display: inline-block;
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-  }
-  .flow-main-title {
-    color: #0056b3; /* 濃い青 */
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 0;
-  }
-  .flow-description {
-    font-weight: bold;
-    margin-top: 15px;
-    font-size: 1.1rem;
-  }
+    * {
 
-  /* カードレイアウト（PCでは横並び、スマホでは縦並び） */
-  .flow-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 40px 20px; /* 縦の隙間40px, 横の隙間20px */
-  }
+        box-sizing: border-box;
 
-  /* 個別カード */
-  .flow-card {
-    background: #fff;
-    border: 2px solid #0056b3; /* 枠線の色 */
-    border-radius: 8px;
-    width: 300px; /* カードの幅 */
-    padding: 30px 20px 20px; /* 上パディングを多めに */
-    position: relative;
-    box-sizing: border-box;
-    margin-top: 20px; /* 上部のSTEPバッジ用スペース */
-    text-align: left;
-  }
-
-  /* STEPバッジ（円形） */
-  .step-badge {
-    position: absolute;
-    top: -25px; /* 上にはみ出させる */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 60px;
-    background-color: #003366; /* 紺色 */
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    z-index: 10;
-  }
-  .step-badge span {
-    font-size: 0.7rem;
-    font-weight: bold;
-    line-height: 1;
-  }
-  .step-badge strong {
-    font-size: 1.4rem;
-    font-weight: bold;
-    line-height: 1;
-  }
-
-  /* 画像 */
-  .flow-image {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    background-color: #eee;
-    margin-bottom: 15px;
-    border-radius: 4px;
-  }
-
-  /* 見出しとテキスト */
-  .flow-card h3 {
-    color: #0099ff; /* 明るい青 */
-    font-size: 1.1rem;
-    margin: 0 0 10px 0;
-    font-weight: bold;
-  }
-  .flow-card p {
-    font-size: 0.95rem;
-    margin: 0;
-    color: #333;
-  }
-
-  /* レスポンシブ対応（スマホ幅） */
-  @media (max-width: 600px) {
-    .flow-container {
-      flex-direction: column;
-      align-items: center;
     }
-    .flow-card {
-      width: 100%;
-      max-width: 340px;
+
+    
+
+    body {
+
+        margin: 0;
+
+        padding: 20px;
+
+        font-family: 'Noto Sans JP', "Helvetica Neue", Arial, sans-serif;
+
+        position: relative;
+
+        min-height: 100vh;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        color: #333;
+
+        overflow-x: hidden;
+
     }
-    .flow-main-title {
-      font-size: 1.5rem;
+
+
+
+    /* 背景レイヤー1：清潔感のある家のイメージ（一番奥） */
+
+    body::before {
+
+        content: "";
+
+        position: fixed; /* スクロールしても追従させるためfixedに変更 */
+
+        top: 0;
+
+        left: 0;
+
+        width: 100%;
+
+        height: 100%;
+
+        z-index: -2; /* ゴキブリより奥 */
+
+        
+
+        background: 
+
+            linear-gradient(to bottom, rgba(224, 247, 250, 0.8) 0%, rgba(255, 255, 255, 0.9) 60%),
+
+            repeating-linear-gradient(45deg, transparent 0, transparent 10px, rgba(0, 136, 234, 0.05) 10px, rgba(0, 136, 234, 0.05) 20px),
+
+            repeating-linear-gradient(-45deg, transparent 0, transparent 10px, rgba(0, 136, 234, 0.05) 10px, rgba(0, 136, 234, 0.05) 20px),
+
+            radial-gradient(#e1f5fe 20%, transparent 20%) 0 0,
+
+            radial-gradient(#e1f5fe 20%, transparent 20%) 10px 10px;
+
+        background-size: auto, auto, auto, 40px 40px, 40px 40px;
+
+        background-color: #f0faff;
+
+
+
+        opacity: 0.6;
+
+        filter: blur(1px);
+
     }
-  }
+
+
+
+    /* 【追加】背景レイヤー2：ゴキブリのイラスト（透過・背景） */
+
+    body::after {
+
+        content: "";
+
+        position: fixed; /* 画面に固定 */
+
+        top: 50%;
+
+        left: 50%;
+
+        transform: translate(-50%, -50%); /* 画面中央に配置 */
+
+        
+
+        width: 80%; /* 画面幅の80%の大きさ */
+
+        max-width: 600px;
+
+        height: 80%;
+
+        
+
+        /* ここで画像を読み込み */
+
+        background-image: url('cockroach-insecticide.png');
+
+        background-repeat: no-repeat;
+
+        background-position: center;
+
+        background-size: contain; /* 全体が入るように調整 */
+
+        
+
+        z-index: -1; /* 家の背景より手前、文字より奥 */
+
+        
+
+        /* 【重要】透過設定（数値を小さくするとより薄くなります） */
+
+        opacity: 0.15; 
+
+        pointer-events: none; /* 背景なのでクリックを邪魔しないように */
+
+    }
+
+
+
+    .info-container {
+
+        width: 100%;
+
+        max-width: 600px;
+
+        margin: 0 auto;
+
+        position: relative; /* z-indexを効かせるため */
+
+        z-index: 1;
+
+    }
+
+
+
+    /* --- メインの白いボックス --- */
+
+    .info-card {
+
+        background-color: rgba(255, 255, 255, 0.92); /* カードの透過度を少し上げて背景を見やすく */
+
+        border-radius: 20px;
+
+        box-shadow: 0 15px 35px rgba(0, 86, 145, 0.15), 0 5px 15px rgba(0, 0, 0, 0.05);
+
+        overflow: hidden;
+
+        border: 1px solid rgba(255, 255, 255, 0.8);
+
+    }
+
+
+
+    /* --- ヘッダーエリア --- */
+
+    .info-header {
+
+        text-align: center;
+
+        padding: 40px 20px 20px; /* 画像を消したのでパディング調整 */
+
+        background-image: radial-gradient(#cfd8dc 1px, transparent 1px);
+
+        background-size: 20px 20px;
+
+        background-color: #f8fafa;
+
+    }
+
+    
+
+    /* .main-visual-img は削除しました */
+
+
+
+    .catch-copy {
+
+        font-size: 20px;
+
+        font-weight: bold;
+
+        color: #555;
+
+        margin-bottom: 10px;
+
+        display: block;
+
+    }
+
+
+
+    .main-copy {
+
+        font-size: 32px;
+
+        font-weight: 900;
+
+        color: #005691;
+
+        line-height: 1.3;
+
+        margin: 0;
+
+        letter-spacing: 0.05em;
+
+    }
+
+    
+
+    .highlight-text {
+
+        color: #0088ea;
+
+        position: relative;
+
+        display: inline-block;
+
+    }
+
+    .highlight-text::after {
+
+        content: '';
+
+        position: absolute;
+
+        bottom: 5px;
+
+        left: 0;
+
+        width: 100%;
+
+        height: 10px;
+
+        background-color: rgba(255, 235, 59, 0.4);
+
+        z-index: -1;
+
+        transform: rotate(-2deg);
+
+    }
+
+
+
+    /* --- 安心ポイントエリア --- */
+
+    .features-area {
+
+        padding: 20px 30px;
+
+    }
+
+    
+
+    .features-box {
+
+        background-color: #f0faff;
+
+        border-radius: 15px;
+
+        padding: 25px;
+
+        border: 2px solid #b3e5fc;
+
+    }
+
+
+
+    .features-title-wrap {
+
+        text-align: center;
+
+        margin-bottom: 20px;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+    }
+
+
+
+    .features-title {
+
+        font-weight: 700;
+
+        color: #0088ea;
+
+        font-size: 20px;
+
+        margin: 0 15px;
+
+        position: relative;
+
+        display: inline-block;
+
+    }
+
+    
+
+    .title-icon {
+
+        color: #0088ea;
+
+        font-size: 24px;
+
+        filter: drop-shadow(2px 2px 2px rgba(0, 136, 234, 0.2));
+
+    }
+
+
+
+    .features-list {
+
+        list-style: none;
+
+        padding: 0;
+
+        margin: 0;
+
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 15px;
+
+    }
+
+
+
+    .features-list li {
+
+        font-size: 15px;
+
+        font-weight: 700;
+
+        color: #444;
+
+        display: flex;
+
+        align-items: center;
+
+    }
+
+
+
+    .check-mark {
+
+        color: #fff;
+
+        background-color: #0088ea;
+
+        border-radius: 50%;
+
+        width: 24px;
+
+        height: 24px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        margin-right: 10px;
+
+        font-size: 12px;
+
+        flex-shrink: 0;
+
+        box-shadow: 0 2px 5px rgba(0,136,234,0.3);
+
+    }
+
+
+
+    /* --- 24時間対応 --- */
+
+    .support-msg {
+
+        text-align: center;
+
+        font-size: 20px;
+
+        font-weight: 700;
+
+        color: #005691;
+
+        margin: 10px 0 30px;
+
+        letter-spacing: 0.05em;
+
+    }
+
+
+
+    /* --- ボタンエリア --- */
+
+    .action-btns {
+
+        padding: 0 30px 40px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 20px;
+
+    }
+
+
+
+    .action-link {
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        width: 100%;
+
+        padding: 18px;
+
+        border-radius: 50px;
+
+        text-decoration: none;
+
+        color: #fff;
+
+        font-size: 20px;
+
+        font-weight: 700;
+
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+
+        transition: all 0.3s ease;
+
+        position: relative;
+
+        overflow: hidden;
+
+    }
+
+    
+
+    .action-link:hover {
+
+        transform: translateY(-3px);
+
+        box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+
+    }
+
+    .action-link:active {
+
+        transform: translateY(1px);
+
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+    }
+
+
+
+    .icon-box {
+
+        margin-right: 15px;
+
+        font-size: 24px;
+
+    }
+
+
+
+    .btn-tel {
+
+        background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+
+    }
+
+    .btn-tel::after {
+
+        content: "";
+
+        position: absolute;
+
+        top: -50%;
+
+        left: -50%;
+
+        width: 200%;
+
+        height: 200%;
+
+        background: rgba(255,255,255,0.2);
+
+        transform: rotate(45deg);
+
+        animation: shine 3s infinite;
+
+    }
+
+    @keyframes shine {
+
+        0% { transform: translateX(-100%) rotate(45deg); }
+
+        20% { transform: translateX(100%) rotate(45deg); }
+
+        100% { transform: translateX(100%) rotate(45deg); }
+
+    }
+
+
+
+    .btn-mail {
+
+        background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+
+        cursor: pointer;
+
+    }
+
+
+
+    /* --- お支払方法 --- */
+
+    .payment-area {
+
+        border-top: 1px solid #eee;
+
+        background-color: #fafafa;
+
+    }
+
+    .payment-head {
+
+        background-color: #005691;
+
+        color: #fff;
+
+        text-align: center;
+
+        padding: 12px;
+
+        margin: 0;
+
+        font-size: 16px;
+
+        font-weight: 700;
+
+        letter-spacing: 0.1em;
+
+    }
+
+    .payment-methods {
+
+        display: flex;
+
+        padding: 20px;
+
+        justify-content: center;
+
+        gap: 40px;
+
+    }
+
+    .pay-item {
+
+        text-align: center;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        color: #555;
+
+        font-weight: 700;
+
+        font-size: 14px;
+
+    }
+
+    .pay-icon {
+
+        font-size: 28px;
+
+        color: #005691;
+
+        margin-top: 8px;
+
+        background: #fff;
+
+        width: 50px;
+
+        height: 50px;
+
+        border-radius: 50%;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+
+    }
+
+
+
+    /* スマホ対応 */
+
+    @media (max-width: 480px) {
+
+        .main-copy { font-size: 26px; }
+
+        .features-title { font-size: 18px; margin: 0 10px; }
+
+        .title-icon { font-size: 20px; }
+
+        .features-list { grid-template-columns: 1fr; }
+
+        .action-link { font-size: 18px; padding: 15px; }
+
+        .features-area { padding: 20px; }
+
+    }
+
 </style>
+
 </head>
+
 <body>
 
-<section class="flow-section">
-  <div class="flow-header">
-    <div class="flow-sub-title">安心5ステップ！</div>
-    <h2 class="flow-main-title">トラブル解決までの流れ</h2>
-    <p class="flow-description">
-      最短10分で駆けつけ、<br>
-      「早く・正確に」解決いたします。
-    </p>
-  </div>
 
-  <div class="flow-container">
-    <article class="flow-card">
-      <div class="step-badge">
-        <span>STEP</span>
-        <strong>01</strong>
-      </div>
-      <img src="https://placehold.jp/300x200.png?text=TEL_Image" alt="電話相談" class="flow-image">
-      <h3>お電話で無料相談</h3>
-      <p>まずは、お電話またはお問い合わせフォームより、トラブルの状況についてお聞かせ下さい。</p>
-    </article>
 
-    <article class="flow-card">
-      <div class="step-badge">
-        <span>STEP</span>
-        <strong>02</strong>
-      </div>
-      <img src="https://placehold.jp/300x200.png?text=Arrival_Image" alt="駆けつけ" class="flow-image">
-      <h3>最短10分で駆け付け</h3>
-      <p>お電話から最短10分、お問い合わせフォームの送信から最短30分でお伺いします。（繁忙時はお時間をいただく場合があります。）</p>
-    </article>
+<div class="info-container">
 
-    <article class="flow-card">
-      <div class="step-badge">
-        <span>STEP</span>
-        <strong>03</strong>
-      </div>
-      <img src="https://placehold.jp/300x200.png?text=Quote_Image" alt="見積り" class="flow-image">
-      <h3>現地で無料見積り</h3>
-      <p>現地にて状況を調査し、必要な作業について無料見積もりを作成いたします。</p>
-    </article>
+    <div class="info-card">
 
-    <article class="flow-card">
-      <div class="step-badge">
-        <span>STEP</span>
-        <strong>04</strong>
-      </div>
-      <img src="https://placehold.jp/300x200.png?text=Work_Image" alt="駆除作業" class="flow-image">
-      <h3>プロによる駆除作業</h3>
-      <p>お見積り内容にご納得いただけましたら、作業を開始します。経験豊富なスタッフが徹底的に駆除・清掃を行います。</p>
-    </article>
+        
 
-    <article class="flow-card">
-      <div class="step-badge">
-        <span>STEP</span>
-        <strong>05</strong>
-      </div>
-      <img src="https://placehold.jp/300x200.png?text=Payment_Image" alt="お支払い・再発防止" class="flow-image">
-      <h3>お支払い・再発防止策</h3>
-      <p>作業確認後にお支払いです。終了後、今後同じ被害に遭わないための再発防止レクチャーも無料で行います。</p>
-    </article>
+        <div class="info-header">
 
-  </div>
-</section>
+            <span class="catch-copy">最短10分で</span>
+
+            <h1 class="main-copy">すぐに<span class="highlight-text">駆けつけます！</span></h1>
+
+        </div>
+
+
+
+        <div class="features-area">
+
+            <div class="features-box">
+
+                <div class="features-title-wrap">
+
+                    <i class="fas fa-user-shield title-icon"></i>
+
+                    <h2 class="features-title">安心してお任せください！</h2>
+
+                    <i class="fas fa-user-shield title-icon"></i>
+
+                </div>
+
+                <ul class="features-list">
+
+                    <li><span class="check-mark"><i class="fas fa-check"></i></span>深夜料金なし</li>
+
+                    <li><span class="check-mark"><i class="fas fa-check"></i></span>見積り後キャンセル無料</li>
+
+                    <li><span class="check-mark"><i class="fas fa-check"></i></span>安心の再発保証あり</li>
+
+                    <li><span class="check-mark"><i class="fas fa-check"></i></span>現地調査無料</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="support-msg">
+
+            24時間365日対応いたします！
+
+        </div>
+
+
+
+        <div class="action-btns">
+
+            <a href="tel:05035280140" class="action-link btn-tel">
+
+                <i class="fas fa-phone-alt icon-box"></i>電話でお問合せ
+
+            </a>
+
+            
+
+            <a href="javascript:void(0);" onclick="showForm()" class="action-link btn-mail">
+
+                <i class="far fa-envelope icon-box"></i>メール相談
+
+            </a>
+
+        </div>
+
+
+
+        <div class="payment-area">
+
+            <h2 class="payment-head">お支払方法</h2>
+
+            <div class="payment-methods">
+
+                <div class="pay-item">
+
+                    <span>現金払い</span>
+
+                    <div class="pay-icon"><i class="fas fa-coins"></i></div>
+
+                </div>
+
+                <div class="pay-item">
+
+                    <span>銀行振込</span>
+
+                    <div class="pay-icon"><i class="fas fa-university"></i></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+
 
 </body>
-</html>
 
+</html>
