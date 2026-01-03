@@ -1,202 +1,183 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>基本料金シミュレーション</title>
-    <style>
-        /* --- ベーススタイル --- */
-        body {
-            margin: 0;
-            padding: 20px;
-            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            background: linear-gradient(to bottom, #f0faff, #dcefff);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>料金シミュレーション（修正版）</title>
+<style>
+    /* 基本設定 */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0faff;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    .container {
+        width: 100%;
+        max-width: 800px;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    
+    /* ヘッダー */
+    h1 {
+        text-align: center;
+        color: #005691;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
 
-        .simulation-container {
-            width: 100%;
-            max-width: 900px;
-            margin-top: 40px;
-            position: relative;
-        }
+    /* タブ */
+    .tabs {
+        display: flex;
+        border-bottom: 3px solid #0088ea;
+        margin-bottom: 20px;
+    }
+    .tab {
+        flex: 1;
+        padding: 10px;
+        text-align: center;
+        background: #eee;
+        color: #666;
+        border-right: 1px solid #ddd;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .tab.active {
+        background: #0088ea;
+        color: #fff;
+    }
+    .tab.done {
+        background: #9ac6e8;
+        color: #00406b;
+    }
 
-        /* --- ヘッダー --- */
-        .sim-header {
-            text-align: center;
-            margin-bottom: 20px;
-            position: relative;
-        }
+    /* 選択肢ボタン */
+    .panel {
+        display: none; /* 基本は非表示 */
+        text-align: center;
+    }
+    .panel.show {
+        display: block; /* showクラスがついたら表示 */
+    }
 
-        .operator-img-placeholder {
-            /* 画像がない場合のダミーエリア */
-            position: absolute;
-            bottom: -5px;
-            left: 15%;
-            width: 100px;
-            height: 120px;
-            /* 画像がある場合は以下を削除しimgタグを使用してください */
-            /* background: url('woman.png') no-repeat bottom center; background-size: contain; */
-        }
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* スマホは2列 */
+        gap: 15px;
+        margin-top: 20px;
+    }
+    /* PCなら4列 */
+    @media (min-width: 600px) {
+        .grid { grid-template-columns: repeat(4, 1fr); }
+    }
 
-        .sub-title {
-            display: inline-block;
-            font-size: 16px;
-            color: #0088ea;
-            font-weight: bold;
-            border-bottom: 2px solid #8bd1ff;
-            margin-bottom: 5px;
-        }
+    button {
+        padding: 15px;
+        border: 1px solid #0088ea;
+        background: #fff;
+        color: #333;
+        border-radius: 50px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+    }
+    button:hover {
+        background-color: #eaf6ff;
+    }
+</style>
+</head>
+<body>
 
-        .main-title {
-            font-size: 32px;
-            font-weight: bold;
-            color: #005691;
-            margin: 0;
-            letter-spacing: 1px;
-            text-shadow: 2px 2px 0px #fff;
-        }
+<div class="container">
+    <h1>料金シミュレーション</h1>
 
-        /* --- タブナビゲーション --- */
-        .step-tabs {
-            display: flex;
-            width: 100%;
-            border-radius: 5px 5px 0 0;
-            overflow: hidden;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
-        }
+    <div class="tabs">
+        <div id="tab1" class="tab active">1.トラブル箇所</div>
+        <div id="tab2" class="tab">2.症状</div>
+        <div id="tab3" class="tab">3.物件</div>
+        <div id="tab4" class="tab" style="background:#fff3cd; color:#333;">結果</div>
+    </div>
 
-        .tab-item {
-            flex: 1;
-            padding: 15px 5px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 15px;
-            color: #666;
-            background-color: #aebdce; /* 未選択の色（グレー） */
-            border-right: 1px solid #999;
-            position: relative;
-            cursor: default;
-            transition: background-color 0.3s;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+    <div id="step1" class="panel show">
+        <p>トラブル箇所を選んでください</p>
+        <div class="grid">
+            <button onclick="goNext(1, 'トイレ')">トイレ</button>
+            <button onclick="goNext(1, 'キッチン')">キッチン</button>
+            <button onclick="goNext(1, 'お風呂')">お風呂</button>
+            <button onclick="goNext(1, '洗面所')">洗面所</button>
+        </div>
+    </div>
 
-        /* 現在アクティブなステップ（濃い青） */
-        .tab-item.active {
-            background-color: #0088ea;
-            color: #fff;
-            border-right: 1px solid #006ebc;
-        }
+    <div id="step2" class="panel">
+        <p>症状を選んでください</p>
+        <div class="grid">
+            <button onclick="goNext(2, 'つまり')">つまり</button>
+            <button onclick="goNext(2, '水漏れ')">水漏れ</button>
+            <button onclick="goNext(2, '故障')">故障</button>
+            <button onclick="goNext(2, 'その他')">その他</button>
+        </div>
+    </div>
+
+    <div id="step3" class="panel">
+        <p>物件の種類を選んでください</p>
+        <div class="grid">
+            <button onclick="finish('戸建て')">戸建て</button>
+            <button onclick="finish('マンション')">マンション</button>
+            <button onclick="finish('店舗')">店舗</button>
+            <button onclick="finish('オフィス')">オフィス</button>
+            <button onclick="finish('施設')">施設</button>
+            <button onclick="finish('その他')">その他</button>
+        </div>
+    </div>
+
+    <div id="step4" class="panel">
+        <h2 style="color:#0088ea;">診断完了</h2>
+        <p>お問い合わせ画面へ移動します...</p>
+    </div>
+
+</div>
+
+<script>
+    function goNext(currentStep, value) {
+        // 現在のタブを「完了」にする
+        document.getElementById('tab' + currentStep).classList.remove('active');
+        document.getElementById('tab' + currentStep).classList.add('done');
+        document.getElementById('tab' + currentStep).innerText = value;
+
+        // 現在の画面を隠す
+        document.getElementById('step' + currentStep).classList.remove('show');
+
+        // 次のステップ番号
+        var nextStep = currentStep + 1;
+
+        // 次のタブを「アクティブ」に
+        var nextTab = document.getElementById('tab' + nextStep);
+        if(nextTab) nextTab.classList.add('active');
+
+        // 次の画面を表示
+        var nextPanel = document.getElementById('step' + nextStep);
+        if(nextPanel) nextPanel.classList.add('show');
+    }
+
+    function finish(value) {
+        // ステップ3を完了に
+        document.getElementById('tab3').classList.remove('active');
+        document.getElementById('tab3').classList.add('done');
+        document.getElementById('tab3').innerText = value;
         
-        /* 選択済みのステップ（薄い青グレー：画像の左側タブの色） */
-        .tab-item.completed {
-            background-color: #9ac6e8; 
-            color: #00406b;
-            border-right: 1px solid #8ab6d6;
-        }
+        // 画面切り替え
+        document.getElementById('step3').classList.remove('show');
+        document.getElementById('step4').classList.add('show');
+        
+        // 本番ではここでページ移動などを入れます
+        alert('選択された物件: ' + value + '\n問い合わせ画面へ移動します（テスト）');
+    }
+</script>
 
-        /* タブの矢印装飾 */
-        .tab-arrow {
-            font-size: 10px;
-            margin-left: 5px;
-            display: inline-block;
-        }
-
-        /* 結果を見るボタン（黄色） */
-        .tab-item.result-btn {
-            background-color: #fef29e;
-            color: #e85a5a;
-            border-right: none;
-            font-weight: 900;
-        }
-        .tab-item.result-btn.ready {
-             /* すべて選択完了後に押せる感を出す場合 */
-             background-color: #ffeb3b;
-             cursor: pointer;
-        }
-
-        /* --- コンテンツボックス --- */
-        .content-box {
-            background-color: #fff;
-            border: 3px solid #0088ea;
-            border-top: 3px solid #0088ea; 
-            border-radius: 0 0 8px 8px;
-            padding: 30px 20px;
-            text-align: center;
-            min-height: 250px; /* 高さを確保 */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .box-title {
-            color: #005691;
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 30px;
-        }
-
-        /* --- グリッドレイアウト --- */
-        .options-grid {
-            display: grid;
-            gap: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        /* 4列 (ステップ1) */
-        .col-4 {
-            grid-template-columns: repeat(4, 1fr);
-        }
-        /* 4列 (ステップ2: 画像に合わせて) */
-        .col-4-step2 {
-            grid-template-columns: repeat(4, 1fr);
-        }
-        /* 3列 (ステップ3: 6項目なので3x2が見やすい) */
-        .col-3 {
-            grid-template-columns: repeat(3, 1fr);
-        }
-
-        /* ボタンデザイン */
-        .option-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #fff;
-            border: 1px solid #0088ea;
-            border-radius: 50px;
-            color: #333;
-            font-weight: bold;
-            padding: 15px 5px;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none;
-            box-sizing: border-box;
-            line-height: 1.2;
-        }
-
-        .option-btn:hover {
-            background-color: #eaf6ff;
-            transform: translateY(-2px);
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-        }
-
-        /* --- 表示切り替え用 --- */
-        .step-panel {
-            display: none; /* デフォルト非表示 */
-            animation: fadeIn 0.4s ease;
-        }
-        .step-panel.active-panel {
-            display: block; /* アクティブなパネルだけ表示 */
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+</body>
+</html>
