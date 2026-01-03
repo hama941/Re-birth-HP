@@ -10,158 +10,146 @@
     margin: 0;
     padding: 0;
     font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-    background-color: #f4f8fd; /* 全体の背景色（薄い青） */
+    background-color: #f4f8fd;
     color: #333;
   }
 
   /* --- セクション全体 --- */
   .reasons-section {
-    padding: 60px 20px;
+    padding: 40px 10px; /* スマホで見やすいよう余白調整 */
     text-align: center;
   }
 
-  /* --- ヘッダー部分 --- */
+  /* --- ヘッダー --- */
   .reasons-header {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  /* 「安心してお任せください！」の装飾 */
   .sub-title {
     display: inline-block;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color: #0078d7;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     position: relative;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
   }
-  /* 下線 */
   .sub-title::after {
     content: '';
     position: absolute;
     bottom: 0; left: 0;
-    width: 100%; height: 3px;
+    width: 100%; height: 2px;
     background: #0078d7;
   }
-  /* 下線中央の三角形 */
   .sub-title::before {
     content: '';
     position: absolute;
-    bottom: -6px; left: 50%;
+    bottom: -4px; left: 50%;
     transform: translateX(-50%);
-    border-top: 6px solid #0078d7;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
+    border-top: 5px solid #0078d7;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
   }
 
-  /* メインタイトル */
   .main-title {
-    font-size: 2.4rem;
+    font-size: 2rem;
     font-weight: 900;
     color: #0056b3;
-    margin: 0 0 25px;
+    margin: 0 0 20px;
   }
 
-  /* リード文 */
   .lead-text {
-    font-size: 1.1rem;
-    line-height: 1.8;
+    font-size: 0.95rem;
+    line-height: 1.6;
     font-weight: bold;
     color: #444;
   }
 
-  /* --- グリッドレイアウト（4つの円を並べるコンテナ） --- */
+  /* --- グリッドレイアウト（ここが重要） --- */
   .reasons-grid {
     display: grid;
-    /* PC画面で横2列の設定 */
+    /* 【重要】画面幅に関わらず常に横2列を維持 */
     grid-template-columns: repeat(2, 1fr);
-    /* アイテム間の余白（縦 横） */
-    gap: 40px 30px;
-    max-width: 700px; /* 全体の幅を制限して中央寄せ */
+    /* スマホでも入りきるように隙間を少し狭く設定 */
+    gap: 15px; 
+    
+    max-width: 600px; /* PCで広がりすぎないように制限 */
     margin: 0 auto;
-    justify-items: center; /* 各アイテムを中央揃え */
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  /* --- 各理由の円形デザイン --- */
+  /* --- 各円のデザイン --- */
   .reason-item {
     position: relative;
-    width: 280px;
-    height: 280px;
+    width: 100%; /* 親枠に合わせて伸縮 */
+    aspect-ratio: 1 / 1; /* 常に正円（1:1）を保つ */
+    
     border-radius: 50%;
-    /* 画像の雰囲気に近い青のグラデーション */
     background: linear-gradient(145deg, #4fa3f7 0%, #0064c2 100%);
     color: #fff;
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 25px;
+    
+    padding: 5px; /* 内側の余白 */
     box-sizing: border-box;
-    /* 影をつけて立体感を出す */
-    box-shadow: 0 10px 25px rgba(0, 86, 179, 0.4);
+    box-shadow: 0 5px 15px rgba(0, 86, 179, 0.3);
   }
 
-  /* 内側の点線装飾（月桂樹の雰囲気の代用） */
+  /* 内側の点線 */
   .reason-item::after {
     content: '';
     position: absolute;
-    top: 12px; left: 12px; right: 12px; bottom: 12px;
-    border: 2px dashed rgba(255, 255, 255, 0.25);
+    top: 6%; left: 6%; right: 6%; bottom: 6%;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     pointer-events: none;
   }
 
-  /* 数字 */
+  /* --- 文字サイズの調整（スマホで小さく、PCで大きく） --- */
+  
+  /* 数字 (01, 02...) */
   .reason-num {
     font-family: 'Arial Black', sans-serif;
-    font-size: 2.8rem;
+    font-size: clamp(1.8rem, 5vw, 2.5rem); /* 可変サイズ */
     line-height: 1;
-    margin-bottom: 5px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-    opacity: 0.9;
+    margin-bottom: 2px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
   }
 
   /* タイトル */
   .reason-title {
-    font-size: 1.4rem;
+    font-size: clamp(0.85rem, 3.5vw, 1.3rem); /* スマホで小さく、PCで大きく */
     font-weight: 900;
-    margin-bottom: 15px;
-    line-height: 1.3;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    margin-bottom: 5px;
+    line-height: 1.25;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
   }
 
   /* 説明文 */
   .reason-desc {
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: clamp(0.6rem, 2.5vw, 0.85rem); /* スマホでかなり小さく */
+    line-height: 1.3;
     font-weight: 500;
+    width: 90%; /* 円の端ギリギリに行かないように幅制限 */
   }
 
-  /* --- レスポンシブ対応（スマホ画面） --- */
-  @media (max-width: 768px) {
-    .main-title {
-      font-size: 2rem;
-    }
+  /* PCなどの大きい画面用の微調整 */
+  @media (min-width: 768px) {
     .reasons-grid {
-      /* スマホでは縦1列にする */
-      grid-template-columns: 1fr;
-      gap: 30px;
-    }
-    /* スマホで円が大きすぎないように少し調整 */
-    .reason-item {
-      width: 260px;
-      height: 260px;
-    }
-    .reason-title {
-      font-size: 1.3rem;
+      gap: 30px; /* 画面が広いときは隙間を広げる */
     }
     .reason-desc {
-      font-size: 0.9rem;
+      line-height: 1.5;
     }
   }
+
 </style>
 </head>
 <body>
@@ -202,9 +190,9 @@
       <div class="reason-num">03</div>
       <div class="reason-title">充実の<br>アフターサービス</div>
       <div class="reason-desc">
-        施工後の万が一のトラブルや<br>
-        ご相談にも、責任を持って<br>
-        迅速・丁寧に対応いたします。
+        施工後の万が一の<br>
+        トラブルにも責任を持って<br>
+        対応いたします。
       </div>
     </div>
 
@@ -212,9 +200,9 @@
       <div class="reason-num">04</div>
       <div class="reason-title">経験豊富な<br>スタッフ</div>
       <div class="reason-desc">
-        高い技術と知識を持った<br>
-        熟練のプロが対応。<br>
-        あらゆる問題を解決に導きます。
+        熟練の技術を持つプロが<br>
+        豊富な実績とノウハウで<br>
+        解決します。
       </div>
     </div>
   </div>
@@ -222,3 +210,4 @@
 
 </body>
 </html>
+
