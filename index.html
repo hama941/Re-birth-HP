@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>サービス一覧</title>
+<title>サービス一覧（スマホ2列対応）</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
     /* --- ベース設定 --- */
@@ -47,44 +47,52 @@
         margin-top: 15px;
         font-weight: bold;
         font-size: 16px;
+        line-height: 1.6;
     }
 
-    /* --- カードグリッド --- */
+    /* --- カードグリッド（PC用デフォルト設定） --- */
     .service-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 幅に合わせて自動折り返し */
-        gap: 20px;
+        /* PCでは幅に合わせて自動で折り返す（基本3列など） */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px; /* カード間の隙間 */
         justify-content: center;
     }
 
     /* --- 個別カードスタイル --- */
     .service-card {
         background-color: #fff;
-        border-radius: 10px;
-        overflow: hidden; /* 角丸からはみ出さないように */
-        box-shadow: 0 5px 15px rgba(0,0,0,0.08); /* ふんわりした影 */
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         transition: transform 0.2s;
+        display: flex;
+        flex-direction: column;
+        height: 100%; /* 高さを揃える */
     }
     .service-card:hover {
-        transform: translateY(-5px); /* ホバー時に少し浮く */
+        transform: translateY(-5px);
     }
 
     /* 画像エリア */
     .card-img-area {
         width: 100%;
-        height: 200px;
+        height: 180px; /* PCでの画像の高さ */
         background-color: #eee;
         overflow: hidden;
     }
     .card-img {
         width: 100%;
         height: 100%;
-        object-fit: cover; /* 枠に合わせてトリミング */
+        object-fit: cover;
     }
 
     /* テキストエリア */
     .card-content {
         padding: 20px;
+        flex-grow: 1; /* 内容が少なくても高さを伸ばす */
+        display: flex;
+        flex-direction: column;
     }
 
     /* サービス名 */
@@ -97,14 +105,16 @@
 
     /* 価格 */
     .service-price {
-        font-size: 32px; /* 大きく強調 */
+        font-size: 30px;
         font-weight: 900;
         color: #c0392b; /* 濃い赤 */
         margin: 0 0 15px 0;
         line-height: 1;
+        padding-bottom: 15px;
+        border-bottom: 1px dashed #ddd; /* 価格の下に区切り線を追加 */
     }
     .price-unit {
-        font-size: 20px;
+        font-size: 18px;
         color: #c0392b;
     }
 
@@ -115,32 +125,32 @@
         margin: 0;
     }
     .feature-list li {
-        font-size: 14px;
+        font-size: 15px;
         margin-bottom: 8px;
-        padding-left: 1.5em;
+        padding-left: 1.4em;
         position: relative;
         color: #444;
         font-weight: 500;
+        line-height: 1.5;
     }
     .feature-list li::before {
         content: '●'; /* 丸ポチ */
         color: #8ed27e; /* 薄い緑色 */
         position: absolute;
         left: 0;
-        top: 0;
+        top: 0.1em;
         font-size: 12px;
-        line-height: 1.8;
     }
 
     /* --- 「その他」カード専用スタイル --- */
     .service-card.others {
-        display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
         padding: 30px 20px;
-        border: 2px solid #eee; /* 少し枠線をつける */
+        border: 3px dotted #ccc; /* 点線の枠に変更 */
+        background-color: #f9f9f9; /* 少し背景色を変える */
+        box-shadow: none;
     }
     .others-title {
         font-size: 18px;
@@ -150,28 +160,56 @@
     }
     .others-text {
         font-size: 15px;
-        line-height: 1.6;
+        line-height: 1.8;
         margin-bottom: 20px;
         color: #666;
     }
     .others-highlight {
         color: #c0392b;
         font-weight: 900;
-        font-size: 16px;
+        font-size: 18px;
+        background: #ffebee; /* 赤いマーカー風背景 */
+        padding: 5px 10px;
+        display: inline-block;
     }
 
-    /* スマホ調整（2列にする場合） */
-    @media (max-width: 480px) {
-        .service-grid {
-            /* スマホでも2列で見せたい場合は以下を有効化 */
-            /* grid-template-columns: 1fr 1fr; */
-            /* gap: 10px; */
+    /* ----------------------------------
+       ▼ スマホ・タブレット向け調整 (768px以下) ▼
+    ---------------------------------- */
+    @media (max-width: 768px) {
+        body {
+            padding: 15px;
         }
-        .main-header { font-size: 24px; }
-        .card-img-area { height: 150px; }
-        .service-title { font-size: 18px; }
-        .service-price { font-size: 24px; }
-        .feature-list li { font-size: 12px; }
+        .main-header { font-size: 26px; }
+        .header-desc { font-size: 14px; }
+
+        /* グリッドを強制的に2列にする */
+        .service-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px; /* 隙間を狭く */
+        }
+
+        /* カード内の文字サイズなどを小さく調整 */
+        .card-img-area { height: 130px; } /* 画像を少し低く */
+        .card-content { padding: 15px; }
+        .service-title { font-size: 16px; margin-bottom: 8px; }
+        .service-price {
+            font-size: 24px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+        }
+        .price-unit { font-size: 14px; }
+        .feature-list li {
+            font-size: 13px;
+            line-height: 1.4;
+            margin-bottom: 6px;
+        }
+
+        /* 「その他」カードのスマホ調整 */
+        .service-card.others { padding: 20px 15px; }
+        .others-text br { display: none; } /* スマホでは改行せず詰める */
+        .others-text { font-size: 13px; line-height: 1.6; }
+        .others-highlight { font-size: 14px; }
     }
 </style>
 </head>
