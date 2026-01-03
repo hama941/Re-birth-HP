@@ -1,179 +1,267 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>エリア対応LPパーツ</title>
-<style>
-    /* 全体のリセットと基本フォント */
-    * {
-        box-sizing: border-box;
-    }
-    body {
-        font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-        margin: 0;
-        padding: 20px;
-        background-color: #f0f0f0;
-        display: flex;
-        justify-content: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基本料金シミュレーション</title>
+    <style>
+        /* ベーススタイル */
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background: linear-gradient(to bottom, #f0faff, #dcefff); /* 全体の背景グラデーション */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
 
-    /* --- メインのカード枠 --- */
-    .area-card {
-        max-width: 500px;
-        width: 100%;
-        background-color: #fff;
-        border: 3px solid #009ae0; /* 外枠の青 */
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
+        /* シミュレーション全体のコンテナ */
+        .simulation-container {
+            width: 100%;
+            max-width: 900px;
+            margin-top: 40px;
+            position: relative;
+        }
 
-    /* --- 青いヘッダー部分 --- */
-    .area-header {
-        background-color: #009ae0;
-        padding: 15px 10px;
-        text-align: center;
-    }
+        /* --- ヘッダー部分（タイトルと画像） --- */
+        .sim-header {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
 
-    .header-prefectures {
-        color: #fff100; /* 黄色い文字 */
-        font-weight: bold;
-        font-size: 1.2rem;
-        margin-bottom: 5px;
-        letter-spacing: 1px;
-    }
+        /* 女性の画像（配置用） */
+        .operator-img {
+            position: absolute;
+            bottom: 0;
+            left: 15%; /* タイトルの左側に配置 */
+            width: 120px; /* 画像のサイズに合わせて調整してください */
+            height: auto;
+            z-index: 1;
+            /* 画像がない場合のプレースホルダー（画像セット時は削除可） */
+            display: block;
+        }
 
-    .header-title {
-        color: #fff;
-        font-weight: bold;
-        font-size: 1.6rem;
-        letter-spacing: 2px;
-    }
+        /* 画像がない場合に枠線だけ表示するダミー（本番では削除してください） */
+        .img-placeholder {
+            position: absolute;
+            bottom: -10px;
+            left: 100px;
+            width: 100px;
+            height: 120px;
+            background-color: #ddd;
+            border: 2px dashed #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #555;
+            z-index: 0;
+            opacity: 0.5;
+        }
 
-    /* --- コンテンツボディ部分 --- */
-    .area-body {
-        padding: 20px;
-        text-align: center;
-        /* 背景の薄いストライプ（走査線のような効果） */
-        background-image: repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(0, 154, 224, 0.05) 3px,
-            rgba(0, 154, 224, 0.05) 4px
-        );
-    }
+        .sub-title {
+            display: inline-block;
+            font-size: 16px;
+            color: #0088ea;
+            font-weight: bold;
+            border-bottom: 2px solid #8bd1ff;
+            margin-bottom: 5px;
+            position: relative;
+        }
+        
+        /* 「簡単10秒！」の横の装飾 */
+        .sub-title::before, .sub-title::after {
+            content: '';
+            display: inline-block;
+            width: 10px;
+        }
 
-    /* --- 「最短10分で駆けつけ！」の部分 --- */
-    .catch-copy {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 15px;
-        display: flex;
-        align-items: baseline;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
+        .main-title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #005691; /* 濃い青 */
+            margin: 0;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 0px #fff; /* 文字を見やすく */
+            position: relative;
+            z-index: 2;
+        }
 
-    /* 「最短」の上のオレンジの点 */
-    .emphasis-text {
-        position: relative;
-        color: #0056b3; /* 濃い青 */
-        margin-right: 5px;
-    }
-    .emphasis-text::before {
-        content: '● ●'; /* 点々 */
-        position: absolute;
-        top: -15px;
-        left: 0;
-        width: 100%;
-        text-align: center;
-        color: #ff6f00; /* オレンジ色 */
-        font-size: 0.6em;
-        letter-spacing: 0.2em;
-    }
+        /* --- タブナビゲーション部分 --- */
+        .step-tabs {
+            display: flex;
+            width: 100%;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+        }
 
-    /* 「10分」の強調 */
-    .highlight-number {
-        font-size: 3.5rem;
-        font-style: italic;
-        font-weight: 900;
-        color: #004ea2; /* メインの濃い青 */
-        line-height: 1;
-        margin: 0 5px;
-        font-family: sans-serif; /* ゴシック体系 */
-    }
+        .tab-item {
+            flex: 1;
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            color: #aaa;
+            background-color: #f4f8fb;
+            border-right: 1px solid #e0e0e0;
+            position: relative;
+            cursor: default;
+        }
 
-    .suffix {
-        font-size: 1.2rem;
-        color: #333;
-    }
+        /* アクティブなタブ（トラブル箇所） */
+        .tab-item.active {
+            background-color: #0088ea;
+            color: #fff;
+        }
+        
+        /* 三角形の矢印（アクティブタブの右側） */
+        .tab-item.active::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: -8px; /* 微調整 */
+            transform: translateY(-50%);
+            border-left: 8px solid #0088ea;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            z-index: 2;
+        }
 
-    /* --- 説明文 --- */
-    .sub-text {
-        font-weight: bold;
-        margin: 0 0 10px 0;
-        font-size: 1rem;
-        color: #222;
-    }
+        /* ドロップダウンアイコン（v） */
+        .tab-arrow {
+            display: inline-block;
+            margin-left: 5px;
+            font-size: 12px;
+            vertical-align: middle;
+        }
 
-    .description {
-        font-size: 0.95rem;
-        margin: 0 0 20px 0;
-        line-height: 1.5;
-        color: #444;
-        text-align: left; /* 文章は左寄せの方が読みやすい場合あり。中央ならcenterへ */
-        display: inline-block;
-    }
+        /* 結果を見るボタン（黄色） */
+        .tab-item.result-btn {
+            background-color: #fef29e;
+            color: #d68c6d;
+            border-right: none;
+        }
 
-    /* --- 地図画像エリア --- */
-    .map-container {
-        width: 100%;
-        position: relative;
-    }
+        /* --- メインコンテンツエリア --- */
+        .content-box {
+            background-color: #fff;
+            border: 3px solid #0088ea; /* 青い太枠 */
+            border-top: none; /* タブとつながるように上線はなし（または調整） */
+            /* 画像を見るとタブの下に青枠があるのでborder-topありにするか、タブの構成による。
+               今回は画像のデザインに合わせて、ボックス全体を囲む形にします */
+            border-top: 3px solid #0088ea; 
+            border-radius: 0 0 8px 8px;
+            padding: 30px 40px;
+            text-align: center;
+        }
 
-    .map-container img {
-        width: 100%;
-        height: auto;
-        display: block;
-        /* 画像がない場合の仮スタイル */
-        min-height: 250px;
-        background-color: #eee;
-        object-fit: contain;
-    }
+        .box-title {
+            color: #005691;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
 
-    /* スマホ表示調整 */
-    @media (max-width: 480px) {
-        .header-prefectures { font-size: 1rem; }
-        .header-title { font-size: 1.3rem; }
-        .catch-copy { font-size: 1.2rem; }
-        .highlight-number { font-size: 2.8rem; }
-    }
-</style>
+        /* ボタンのグリッド配置 */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4列 */
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .option-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            border: 1px solid #0088ea;
+            border-radius: 50px; /* 丸みのあるボタン */
+            color: #333;
+            font-weight: bold;
+            padding: 15px 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .option-btn:hover {
+            background-color: #eaf6ff;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        /* スマホ向けレスポンシブ調整 */
+        @media (max-width: 768px) {
+            .options-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2列に変更 */
+            }
+            
+            .tab-item {
+                font-size: 12px;
+                padding: 10px 5px;
+            }
+            
+            .main-title {
+                font-size: 24px;
+            }
+            
+            .operator-img, .img-placeholder {
+                display: none; /* スマホでは画像を消すか調整 */
+            }
+            
+            .content-box {
+                padding: 20px 15px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <div class="area-card">
-        <div class="area-header">
-            <div class="header-prefectures">大阪府・京都府・兵庫県・奈良県</div>
-            <div class="header-title">近郊エリア 対応</div>
+    <div class="simulation-container">
+        <div class="sim-header">
+            <div class="img-placeholder">女性の画像<br>配置エリア</div>
+
+            <div class="sub-title">簡単10秒！</div>
+            <h1 class="main-title">基本料金シミュレーション</h1>
         </div>
 
-        <div class="area-body">
-            <div class="catch-copy">
-                <span class="emphasis-text">最短</span>
-                <span class="highlight-number">10分</span>
-                <span class="suffix">で駆けつけ！</span>
+        <div class="step-tabs">
+            <div class="tab-item active">
+                トラブル箇所 <span class="tab-arrow">^</span>
             </div>
-
-            <p class="sub-text">多くの拠点でスタッフが待機しています。</p>
-            <p class="description">お客様のお住まいエリアの近くの拠点から緊急出動いたします！</p>
-
-            <div class="map-container">
-                <img src="map_placeholder.png" alt="対応エリアマップ：大阪・京都・兵庫・奈良">
+            <div class="tab-item">
+                症状 <span class="tab-arrow">∨</span>
             </div>
+            <div class="tab-item">
+                物件の種類 <span class="tab-arrow">∨</span>
+            </div>
+            <div class="tab-item result-btn">
+                結果をみる
+            </div>
+        </div>
+
+        <div class="content-box">
+            <div class="box-title">下記から選択してください。</div>
+
+            <div class="options-grid">
+                <a href="#" class="option-btn">トイレ</a>
+                <a href="#" class="option-btn">キッチン・シンク</a>
+                <a href="#" class="option-btn">蛇口・水栓</a>
+                <a href="#" class="option-btn">排水溝</a>
+                
+                <a href="#" class="option-btn">水道管・配管</a>
+                <a href="#" class="option-btn">お風呂</a>
+                <a href="#" class="option-btn">洗面台・流し台</a>
+                <a href="#" class="option-btn">洗濯機</a>
+                
+                <a href="#" class="option-btn">給湯器・給湯管</a>
+                </div>
         </div>
     </div>
 
