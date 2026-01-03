@@ -1,157 +1,181 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        /* 全体の背景：シルエットが見えやすいように少し明るいグレーのグラデーション */
-        body {
-            background: radial-gradient(circle, #444 0%, #222 100%);
-            margin: 0;
-            padding: 40px 10px;
-            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-            position: relative;
-            overflow: hidden; /* 巨大なシルエットがはみ出すので隠す */
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>エリア対応LPパーツ</title>
+<style>
+    /* 全体のリセットと基本フォント */
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+    }
 
-        /* --- 巨大なゴキブリのシルエット（SVG） --- */
-        .giant-bug {
-            position: fixed;
-            z-index: 0;
-            fill: #000; /* 真っ黒な影 */
-            opacity: 0.9; /* かなり濃く表示 */
-            pointer-events: none;
-        }
+    /* --- メインのカード枠 --- */
+    .area-card {
+        max-width: 500px;
+        width: 100%;
+        background-color: #fff;
+        border: 3px solid #009ae0; /* 外枠の青 */
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
 
-        /* 画面中央にドカンと配置 */
-        .bug-center {
-            top: 50%;
-            left: 50%;
-            width: 800px; /* 超巨大 */
-            height: auto;
-            transform: translate(-50%, -50%) rotate(25deg);
-        }
+    /* --- 青いヘッダー部分 --- */
+    .area-header {
+        background-color: #009ae0;
+        padding: 15px 10px;
+        text-align: center;
+    }
 
-        /* 端から這い出る影 */
-        .bug-corner {
-            bottom: -50px;
-            right: -50px;
-            width: 400px;
-            transform: rotate(-15deg);
-        }
+    .header-prefectures {
+        color: #fff100; /* 黄色い文字 */
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+        letter-spacing: 1px;
+    }
 
-        /* --- チェックリストコンテナ --- */
-        .checklist-container {
-            position: relative;
-            max-width: 500px;
-            width: 100%;
-            /* 背景を適度に透過させて、後ろの巨大な影を見せる */
-            background-color: rgba(235, 235, 235, 0.85);
-            border: 4px solid #000;
-            padding: 30px 20px;
-            box-sizing: border-box;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
-            z-index: 10; /* 最前面 */
-        }
+    .header-title {
+        color: #fff;
+        font-weight: bold;
+        font-size: 1.6rem;
+        letter-spacing: 2px;
+    }
 
-        .header-title {
-            text-align: center;
-            font-size: 1.4rem;
-            font-weight: 900;
-            line-height: 1.4;
-            margin-bottom: 25px;
-            color: #000;
-        }
+    /* --- コンテンツボディ部分 --- */
+    .area-body {
+        padding: 20px;
+        text-align: center;
+        /* 背景の薄いストライプ（走査線のような効果） */
+        background-image: repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 154, 224, 0.05) 3px,
+            rgba(0, 154, 224, 0.05) 4px
+        );
+    }
 
-        .checklist {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+    /* --- 「最短10分で駆けつけ！」の部分 --- */
+    .catch-copy {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
 
-        .checklist-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 18px;
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #000;
-            line-height: 1.4;
-        }
+    /* 「最短」の上のオレンジの点 */
+    .emphasis-text {
+        position: relative;
+        color: #0056b3; /* 濃い青 */
+        margin-right: 5px;
+    }
+    .emphasis-text::before {
+        content: '● ●'; /* 点々 */
+        position: absolute;
+        top: -15px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        color: #ff6f00; /* オレンジ色 */
+        font-size: 0.6em;
+        letter-spacing: 0.2em;
+    }
 
-        /* 赤枠のチェックボックス */
-        .check-box {
-            flex-shrink: 0;
-            width: 26px;
-            height: 26px;
-            border: 2px solid #000;
-            background-color: #fff;
-            margin-right: 12px;
-            position: relative;
-            margin-top: 2px;
-        }
+    /* 「10分」の強調 */
+    .highlight-number {
+        font-size: 3.5rem;
+        font-style: italic;
+        font-weight: 900;
+        color: #004ea2; /* メインの濃い青 */
+        line-height: 1;
+        margin: 0 5px;
+        font-family: sans-serif; /* ゴシック体系 */
+    }
 
-        .check-box::after {
-            content: '';
-            position: absolute;
-            left: 5px;
-            top: 1px;
-            width: 11px;
-            height: 11px;
-            border-left: 4px solid #d00;
-            border-bottom: 4px solid #d00;
-            transform: rotate(-45deg);
-        }
+    .suffix {
+        font-size: 1.2rem;
+        color: #333;
+    }
 
-        .red {
-            color: #d00;
-        }
+    /* --- 説明文 --- */
+    .sub-text {
+        font-weight: bold;
+        margin: 0 0 10px 0;
+        font-size: 1rem;
+        color: #222;
+    }
 
-        @media (max-width: 480px) {
-            .bug-center { width: 400px; }
-            .checklist-item { font-size: 0.95rem; }
-        }
-    </style>
+    .description {
+        font-size: 0.95rem;
+        margin: 0 0 20px 0;
+        line-height: 1.5;
+        color: #444;
+        text-align: left; /* 文章は左寄せの方が読みやすい場合あり。中央ならcenterへ */
+        display: inline-block;
+    }
+
+    /* --- 地図画像エリア --- */
+    .map-container {
+        width: 100%;
+        position: relative;
+    }
+
+    .map-container img {
+        width: 100%;
+        height: auto;
+        display: block;
+        /* 画像がない場合の仮スタイル */
+        min-height: 250px;
+        background-color: #eee;
+        object-fit: contain;
+    }
+
+    /* スマホ表示調整 */
+    @media (max-width: 480px) {
+        .header-prefectures { font-size: 1rem; }
+        .header-title { font-size: 1.3rem; }
+        .catch-copy { font-size: 1.2rem; }
+        .highlight-number { font-size: 2.8rem; }
+    }
+</style>
 </head>
 <body>
 
-<svg class="giant-bug bug-center" viewBox="0 0 200 200">
-    <path d="M100,60 Q80,10 40,5 M100,60 Q120,10 160,5" fill="none" stroke="black" stroke-width="2" opacity="0.8"/>
-    <ellipse cx="100" cy="110" rx="35" ry="55" />
-    <ellipse cx="100" cy="65" rx="20" ry="15" />
-    <path d="M75,80 L40,60 M70,110 L30,110 M75,140 L40,165" stroke="black" stroke-width="5" stroke-linecap="round"/>
-    <path d="M125,80 L160,60 M130,110 L170,110 M125,140 L160,165" stroke="black" stroke-width="5" stroke-linecap="round"/>
-</svg>
+    <div class="area-card">
+        <div class="area-header">
+            <div class="header-prefectures">大阪府・京都府・兵庫県・奈良県</div>
+            <div class="header-title">近郊エリア 対応</div>
+        </div>
 
-<svg class="giant-bug bug-corner" viewBox="0 0 200 200">
-    <ellipse cx="100" cy="110" rx="35" ry="55" />
-    <ellipse cx="100" cy="65" rx="20" ry="15" />
-    <path d="M75,80 L40,60 M70,110 L30,110 M75,140 L40,165" stroke="black" stroke-width="5"/>
-    <path d="M125,80 L160,60 M130,110 L170,110 M125,140 L160,165" stroke="black" stroke-width="5"/>
-</svg>
+        <div class="area-body">
+            <div class="catch-copy">
+                <span class="emphasis-text">最短</span>
+                <span class="highlight-number">10分</span>
+                <span class="suffix">で駆けつけ！</span>
+            </div>
 
-<div class="checklist-container">
-    <div class="header-title">
-        一つでもチェックが付く方は、<br>
-        今すぐご相談ください！
+            <p class="sub-text">多くの拠点でスタッフが待機しています。</p>
+            <p class="description">お客様のお住まいエリアの近くの拠点から緊急出動いたします！</p>
+
+            <div class="map-container">
+                <img src="map_placeholder.png" alt="対応エリアマップ：大阪・京都・兵庫・奈良">
+            </div>
+        </div>
     </div>
-
-    <ul class="checklist">
-        <li class="checklist-item"><div class="check-box"></div><span>近所を<span class="red">ハチが飛んでて</span>、刺されそうで怖い…</span></li>
-        <li class="checklist-item"><div class="check-box"></div><span>急に<span class="red">ゴキブリが現れた！</span>今すぐ駆除してほしい…</span></li>
-        <li class="checklist-item"><div class="check-box"></div><span><span class="red">市販の殺虫剤</span>で駆除したけど、また出てきた…</span></li>
-        <li class="checklist-item"><div class="check-box"></div><span>庭でムシが大量発生した…<span class="red">隣の家まで被害が…</span></span></li>
-        <li class="checklist-item"><div class="check-box"></div><span><span class="red">大きなハチの巣</span>があって、何とかしてほしい…</span></li>
-        <li class="checklist-item"><div class="check-box"></div><span><span class="red">毎年ムシが出る</span>ので、もう出ないようにしてほしい…</span></li>
-        <li class="checklist-item"><div class="check-box"></div><span><span class="red">床がギシギシ音がする…シロアリ</span>かもしれない…</span></li>
-        <li class="checklist-item"><div class="check-box"></div><span>駆除後の<span class="red">予防方法</span>も教えてほしい…</span></li>
-        <li class="checklist-item"><div class="check-box"></div><span>他で見積りしたけど、<span class="red">費用が高くて</span>頼めない…</span></li>
-        <li class="checklist-item"><div class="check-box"></div><span><span class="red">どのような対策をするのか</span>話だけでも聞いてみたい…</span></li>
-    </ul>
-</div>
 
 </body>
 </html>
