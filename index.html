@@ -3,385 +3,344 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>悪徳業者注意喚起LP</title>
+<title>サービス案内</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 <style>
-    /* --- ベースのスタイル --- */
+    /* ベーススタイル */
     body {
         margin: 0;
         padding: 20px;
-        background-color: #111; /* 背景：暗い色 */
-        font-family: "Helvetica Neue", Arial, sans-serif;
+        font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+        /* 背景画像（水しぶきと青空）の代わりにグラデーションを設定。
+           実際の画像がある場合は background-image: url('your-background.jpg'); のように指定してください */
+        background: linear-gradient(to bottom, #dcefff 0%, #f0faff 50%, #dcefff 100%);
+        min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 100vh;
-        box-sizing: border-box;
-    }
-
-    /* --- 共通スタイル（ストライプ） --- */
-    .stripe {
-        width: 100%;
-        height: 30px; /* 少し細めに調整 */
-        background: repeating-linear-gradient(
-            -45deg,
-            #ffe600,
-            #ffe600 20px,
-            #333 20px,
-            #333 40px
-        );
-    }
-
-    /* =========================================
-       1. バナー（トリガー）のスタイル
-       ========================================= */
-    .warning-banner {
-        width: 100%;
-        max-width: 600px;
-        background-color: #fff;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-        text-align: center;
-    }
-
-    .banner-content {
-        padding: 30px 20px 50px 20px;
-        position: relative;
-    }
-
-    /* 背景の巨大な警告アイコン */
-    .bg-icon-banner {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 280px;
-        height: auto;
-        opacity: 0.6;
-        pointer-events: none;
-    }
-
-    /* バナータイトル */
-    .banner-title-upper {
-        font-size: 1.6rem;
-        font-weight: 900;
-        display: inline-block;
-        position: relative;
-    }
-    .dots-mark::before {
-        content: "・・・・";
-        position: absolute;
-        top: -22px;
-        left: 0;
-        width: 100%;
-        color: #e63935;
-        font-size: 1.6rem;
-        font-weight: 900;
-    }
-    .banner-title-main {
-        font-size: 2.2rem;
-        font-weight: 900;
-        margin: 10px 0 20px 0;
-    }
-    .banner-description {
-        font-weight: 700;
-        margin-bottom: 20px;
-    }
-
-    /* トリガーボタン */
-    .btn-trigger {
-        position: absolute;
-        bottom: -15px;
-        right: 20px;
-        background-color: #f54d42;
-        color: #fff;
-        border: none;
-        font-size: 1.4rem;
-        font-weight: bold;
-        padding: 8px 30px 8px 20px;
-        border-radius: 4px;
-        cursor: pointer;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        transition: transform 0.2s;
-    }
-    .btn-trigger:hover {
-        transform: translateY(-2px);
-    }
-
-
-    /* =========================================
-       2. モーダル（ポップアップ）のスタイル
-       ========================================= */
-    /* モーダル背景のオーバーレイ */
-    .modal-overlay {
-        display: none; /* 初期状態は非表示 */
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        z-index: 1000;
-        justify-content: center;
-        align-items: flex-start; /* 上寄せにする */
-        overflow-y: auto; /* 縦スクロール可能に */
-        padding: 20px 0; /* 上下の余白 */
-    }
-
-    /* モーダル本体 */
-    .modal-content {
-        background-color: #fff;
-        width: 90%;
-        max-width: 600px;
-        position: relative;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        /* ここに背景イラストの画像を指定できます */
-        /* background-image: url('path/to/devil-bg.png'); */
-        background-size: cover;
-        background-position: center;
-    }
-
-    /* 閉じるボタン */
-    .close-btn {
-        position: absolute;
-        top: 40px; /* ストライプの下 */
-        right: 15px;
-        font-size: 2rem;
-        color: #666;
-        cursor: pointer;
-        z-index: 10;
-        background: #eee;
-        width: 40px;
-        height: 40px;
-        line-height: 36px;
-        text-align: center;
-        border-radius: 50%;
-        font-weight: bold;
-    }
-    .close-btn:hover {
-        background: #ddd;
         color: #333;
     }
 
-    /* モーダルの中身 */
-    .modal-body {
-        padding: 30px 20px;
-        color: #333;
+    .container {
+        width: 100%;
+        max-width: 500px; /* スマホ～タブレット向けの幅 */
     }
 
-    /* モーダルのヘッダー部分（タイトルとアイコン） */
-    .modal-header-area {
+    /* 白いコンテンツボックス */
+    .content-box {
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* --- 上部テキストエリア --- */
+    .header-text {
+        text-align: center;
+        padding: 30px 20px 20px;
+    }
+    .main-title {
+        font-size: 28px;
+        font-weight: bold;
+        color: #0088ea;
+        line-height: 1.3;
+        margin: 0;
+    }
+    .main-title .highlight {
+        font-size: 36px;
+        color: #0088ea;
+    }
+    .sub-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 5px 0 0;
+    }
+    .sub-title .black {
+        color: #333;
+    }
+    .sub-title .blue {
+        color: #0088ea;
+    }
+
+    /* --- 安心ポイントとクーポン --- */
+    .features-section {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        margin-bottom: 20px;
-        padding-right: 50px; /* 閉じるボタンのスペース */
-    }
-    .modal-title-wrapper {
-        text-align: left;
-    }
-    .modal-title-upper {
-        font-size: 1.4rem;
-        font-weight: 900;
+        padding: 20px;
         position: relative;
-        display: inline-block;
-    }
-    /* モーダルの点々（赤色） */
-    .modal-dots::before {
-        content: "・・・・";
-        position: absolute;
-        top: -20px;
-        left: 0;
-        width: 100%;
-        color: #e63935;
-        font-size: 1.4rem;
-        font-weight: 900;
-        text-align: center;
-    }
-    .modal-title-main {
-        font-size: 2rem;
-        font-weight: 900;
-        margin: 5px 0 0 0;
-        line-height: 1.2;
     }
 
-    /* モーダル右上の警告アイコン */
-    .modal-warning-icon {
-        width: 80px;
-        height: auto;
-        flex-shrink: 0;
-        margin-left: 10px;
-        margin-top: 10px;
+    /* 青いチェックボックス */
+    .check-box-container {
+        flex: 1;
+        background-color: #eaf6ff;
+        border-radius: 10px;
+        padding: 15px;
+        margin-right: 15px; /* クーポンとの間隔 */
     }
-
-    /* モーダルのリード文 */
-    .modal-lead {
+    .check-title {
         font-weight: bold;
-        margin-bottom: 30px;
-        font-size: 1.1rem;
-    }
-
-    /* --- 注意点リストのスタイル --- */
-    .caution-list {
-        text-align: left;
-    }
-    .caution-item {
-        margin-bottom: 25px;
-    }
-    /* 赤い見出し */
-    .caution-title {
-        color: #e63935;
-        font-size: 1.3rem;
-        font-weight: 900;
+        color: #0088ea;
         margin-bottom: 10px;
+        font-size: 16px;
     }
-    /* 本文 */
-    .caution-text {
-        font-size: 1rem;
-        line-height: 1.6;
-        font-weight: 500;
+    .check-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .check-list li {
+        margin-bottom: 8px;
+        font-size: 14px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+    }
+    /* チェックアイコン（Font Awesomeを使用） */
+    .check-icon {
+        color: #0088ea;
+        margin-right: 8px;
+        font-size: 18px;
     }
 
-    /* --- スマホ対応（レスポンシブ） --- */
+    /* 黄色いクーポン */
+    .coupon-box {
+        background-color: #ffeb3b;
+        color: #333;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+        position: relative;
+        /* 少し斜めにする */
+        transform: rotate(5deg);
+        box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
+    }
+    /* クーポンの点線 */
+    .coupon-box::before {
+        content: '';
+        position: absolute;
+        left: -10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        background-color: #fff; /* 背景色と同じにして切り欠きに見せる */
+        border-radius: 50%;
+    }
+    .coupon-box::after {
+        content: 'COUPON';
+        position: absolute;
+        right: -25px;
+        top: 50%;
+        transform: translateY(-50%) rotate(-90deg);
+        font-size: 12px;
+        color: #666;
+        letter-spacing: 2px;
+    }
+    .coupon-amount {
+        font-size: 48px;
+        font-weight: 900;
+        color: #0088ea;
+        line-height: 1;
+    }
+    .coupon-unit {
+        font-size: 24px;
+        color: #0088ea;
+    }
+    .coupon-text {
+        background-color: #0088ea;
+        color: #fff;
+        font-size: 12px;
+        padding: 2px 10px;
+        border-radius: 20px;
+        display: inline-block;
+        margin-top: 5px;
+    }
+
+    /* --- 24時間対応テキスト --- */
+    .support-text {
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        color: #005691;
+        margin: 20px 0;
+    }
+
+    /* --- ボタンエリア --- */
+    .buttons-section {
+        padding: 0 20px 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 15px;
+        border-radius: 50px; /* 丸みのあるボタン */
+        text-decoration: none;
+        color: #fff;
+        font-size: 22px;
+        font-weight: bold;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        transition: transform 0.2s, opacity 0.2s;
+        /* 立体感を出すためのボーダー */
+        border-bottom: 4px solid rgba(0,0,0,0.1);
+    }
+    .btn:hover {
+        transform: translateY(2px);
+        opacity: 0.9;
+    }
+    .btn:active {
+        transform: translateY(4px);
+        box-shadow: none;
+        border-bottom: none;
+    }
+    .btn-icon {
+        margin-right: 10px;
+        font-size: 24px;
+    }
+    /* 電話ボタン（オレンジグラデーション） */
+    .btn-phone {
+        background: linear-gradient(to bottom, #ff9800, #f57c00);
+    }
+    /* メールボタン（緑グラデーション） */
+    .btn-mail {
+        background: linear-gradient(to bottom, #4caf50, #388e3c);
+    }
+
+    /* --- お支払方法セクション --- */
+    .payment-section {
+        /* 背景色を上部のコンテンツと区切る */
+        border-top: 1px solid #eee;
+    }
+    .payment-title {
+        background-color: #0088ea;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        margin: 0;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .payment-list {
+        display: flex;
+        padding: 15px 20px;
+        justify-content: space-around; /* 均等配置 */
+        align-items: center;
+    }
+    .payment-item {
+        flex: 1;
+        text-align: center;
+        font-weight: bold;
+        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* 区切り線 */
+        border-right: 1px solid #ddd;
+    }
+    /* 最後のアイテムは区切り線をなしに */
+    .payment-item:last-child {
+        border-right: none;
+    }
+    /* 支払いアイコン（ダミー画像） */
+    .payment-icon-img {
+        height: 30px;
+        width: auto;
+        margin-top: 5px;
+        /* 画像がない場合のプレースホルダー色 */
+        background-color: #ddd;
+        border-radius: 4px;
+    }
+    .cash-icon { width: 40px; } /* 現金アイコンの幅調整 */
+    .bank-icon { width: 40px; } /* 銀行アイコンの幅調整 */
+
+
+    /* --- スマホレイアウト調整 --- */
     @media (max-width: 480px) {
-        /* バナー調整 */
-        .banner-title-upper { font-size: 1.3rem; }
-        .dots-mark::before { font-size: 1.3rem; top: -18px; }
-        .banner-title-main { font-size: 1.6rem; }
-        .btn-trigger { font-size: 1.1rem; padding: 6px 20px; }
+        .main-title { font-size: 24px; }
+        .main-title .highlight { font-size: 30px; }
+        .sub-title { font-size: 20px; }
+        
+        /* チェックリストとクーポンを縦並びにする */
+        .features-section {
+            flex-direction: column;
+        }
+        .check-box-container {
+            margin-right: 0;
+            margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .coupon-box {
+            align-self: center; /* 中央寄せ */
+            transform: rotate(0deg); /* 傾きを戻す */
+        }
+        .coupon-box::after { right: -20px; } /* 位置調整 */
 
-        /* モーダル調整 */
-        .modal-title-upper { font-size: 1.2rem; }
-        .modal-dots::before { font-size: 1.2rem; top: -16px; }
-        .modal-title-main { font-size: 1.5rem; }
-        .modal-warning-icon { width: 60px; }
-        .modal-lead { font-size: 1rem; }
-        .caution-title { font-size: 1.1rem; }
-        .caution-text { font-size: 0.95rem; }
-        .close-btn { width: 32px; height: 32px; line-height: 28px; font-size: 1.6rem; top: 35px; right: 10px; }
+        .btn { font-size: 18px; padding: 12px; }
     }
+
 </style>
 </head>
 <body>
 
-<div class="warning-banner">
-    <div class="stripe"></div>
-    <div class="banner-content">
-        <svg class="bg-icon-banner" viewBox="0 0 100 100">
-            <path d="M50 10 L90 85 H10 Z" fill="#fff8c4" stroke="#bfbfbf" stroke-width="6" stroke-linejoin="round"/>
-            <circle cx="50" cy="72" r="4" fill="#999" />
-            <path d="M47 35 L53 35 L52 60 L48 60 Z" fill="#999" />
-        </svg>
-        <div style="position: relative; z-index: 1;">
-            <div class="banner-title-upper">
-                <span class="dots-mark">悪徳業者</span>による
+<div class="container">
+    <div class="content-box">
+        <div class="header-text">
+            <h1 class="main-title"><span class="highlight">最短10分</span>で</h1>
+            <p class="sub-title"><span class="black">すぐに</span><span class="blue">駆けつけます！</span></p>
+        </div>
+
+        <div class="features-section">
+            <div class="check-box-container">
+                <div class="check-title">安心してお任せください！</div>
+                <ul class="check-list">
+                    <li><i class="fas fa-check-circle check-icon"></i>深夜料金なし</li>
+                    <li><i class="fas fa-check-circle check-icon"></i>見積り後のキャンセル無料</li>
+                    <li><i class="fas fa-check-circle check-icon"></i>安心の再発保証あり</li>
+                    <li><i class="fas fa-check-circle check-icon"></i>現地調査無料</li>
+                </ul>
             </div>
-            <div class="banner-title-main">
-                トラブル発生中！
-            </div>
-            <div class="banner-description">
-                3つの注意点をしっかり確認して、安心できる業<br>
-                者を選びましょう。
+            <div class="coupon-box">
+                <div><span class="coupon-amount">20</span><span class="coupon-unit">%<br>OFF</span></div>
+                <div class="coupon-text">「HP見た」でお得！</div>
             </div>
         </div>
-        <button id="openModalBtn" class="btn-trigger">Click ></button>
-    </div>
-    <div class="stripe"></div>
-</div>
 
+        <p class="support-text">24時間365日対応いたします！</p>
 
-<div id="modalOverlay" class="modal-overlay">
-    <div class="modal-content">
-        <span id="closeModalBtn" class="close-btn">&times;</span>
-        
-        <div class="stripe"></div>
+        <div class="buttons-section">
+            <a href="tel:0000000000" class="btn btn-phone">
+                <i class="fas fa-phone-alt btn-icon"></i>電話でお問合せ
+            </a>
+            <a href="mailto:example@example.com" class="btn btn-mail">
+                <i class="far fa-envelope btn-icon"></i>メール相談
+            </a>
+        </div>
 
-        <div class="modal-body">
-            <div class="modal-header-area">
-                <div class="modal-title-wrapper">
-                    <div class="modal-title-upper">
-                        <span class="modal-dots">悪徳業者</span>による
-                    </div>
-                    <div class="modal-title-main">
-                        トラブル発生中！
-                    </div>
+        <div class="payment-section">
+            <h2 class="payment-title">お支払方法</h2>
+            <div class="payment-list">
+                <div class="payment-item">
+                    <span>現金払い</span>
+                    <img src="https://placehold.jp/40x30.png?text=現金" alt="現金払い" class="payment-icon-img cash-icon">
                 </div>
-                <svg class="modal-warning-icon" viewBox="0 0 100 100">
-                    <path d="M50 5 L95 90 H5 Z" fill="#ffe600" stroke="#333" stroke-width="4" stroke-linejoin="round"/>
-                    <path d="M46 35 L54 35 L52 65 L48 65 Z" fill="#333" />
-                    <circle cx="50" cy="78" r="5" fill="#333" />
-                </svg>
-            </div>
-
-            <p class="modal-lead">
-                3つの注意点をしっかり確認して、安心できる業者を選びましょう。
-            </p>
-
-            <div class="caution-list">
-                <div class="caution-item">
-                    <div class="caution-title">1.料金説明が不適切</div>
-                    <div class="caution-text">
-                        費用に対する明確な説明をせずに、話を進める業者には注意が必要です。<br>
-                        作業前に必ず料金設定に基づいた見積りを提示し、承諾の確認をしっかり取る業者を選びましょう。
-                    </div>
-                </div>
-                <div class="caution-item">
-                    <div class="caution-title">2.不要なオプションをつける</div>
-                    <div class="caution-text">
-                        依頼以外の修理や部品交換を勧め、高額請求を行う悪質業者が存在します。<br>
-                        修理を依頼する際は、見積りが無料かつ、見積り後のキャンセルに対応している業者を選ぶのがおすすめです。
-                    </div>
-                </div>
-                <div class="caution-item">
-                    <div class="caution-title">3.所在地・法人名が不明</div>
-                    <div class="caution-text">
-                        運営会社の名称や、所在地が明記されていない業者は要注意です。<br>
-                        会社名や所在地をしっかりと名乗っているかどうかをチェックしましょう。
-                    </div>
+                <div class="payment-item">
+                    <span>銀行振込</span>
+                    <img src="https://placehold.jp/40x30.png?text=通帳" alt="銀行振込" class="payment-icon-img bank-icon">
                 </div>
             </div>
         </div>
-        
-        <div class="stripe"></div>
+
     </div>
 </div>
-
-<script>
-    // 要素の取得
-    const openModalBtn = document.getElementById('openModalBtn');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const modalOverlay = document.getElementById('modalOverlay');
-
-    // モーダルを開く関数
-    function openModal() {
-        modalOverlay.style.display = 'flex';
-        // モーダルを開いたときに背景固定（スクロール防止）する場合
-        // document.body.style.overflow = 'hidden';
-    }
-
-    // モーダルを閉じる関数
-    function closeModal() {
-        modalOverlay.style.display = 'none';
-        // 背景固定を解除する場合
-        // document.body.style.overflow = 'auto';
-    }
-
-    // イベントリスナーの設定
-    // 1. 「Click >」ボタンクリックで開く
-    openModalBtn.addEventListener('click', openModal);
-
-    // 2. 「×」ボタンクリックで閉じる
-    closeModalBtn.addEventListener('click', closeModal);
-
-    // 3. モーダルの背景（黒い部分）クリックでも閉じる
-    modalOverlay.addEventListener('click', function(e) {
-        if (e.target === modalOverlay) {
-            closeModal();
-        }
-    });
-</script>
 
 </body>
 </html>
