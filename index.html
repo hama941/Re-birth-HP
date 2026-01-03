@@ -10,15 +10,17 @@
 <style>
     /* --- 全体のリセットとベース設定 --- */
     * {
-        box-sizing: border-box; /* 枠のズレを防ぐための重要設定 */
+        box-sizing: border-box;
     }
     
     body {
         margin: 0;
         padding: 20px;
         font-family: 'Noto Sans JP', "Helvetica Neue", Arial, sans-serif;
-        /* 背景：爽やかな空のグラデーション */
-        background: linear-gradient(135deg, #e0f7fa 0%, #e3f2fd 100%);
+        /* 【変更点】背景：プロフェッショナルで頼もしい、深みのあるダークブルーのグラデーション */
+        /* 暗い色から明るい色への変化で、問題解決（駆除成功）のイメージも表現 */
+        background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+        
         min-height: 100vh;
         display: flex;
         justify-content: center;
@@ -28,7 +30,7 @@
 
     .info-container {
         width: 100%;
-        max-width: 600px; /* 少し幅を広げてゆとりを持たせる */
+        max-width: 600px;
         margin: 0 auto;
     }
 
@@ -36,18 +38,21 @@
     .info-card {
         background-color: #fff;
         border-radius: 20px;
-        /* ふんわりとした影でおしゃれに */
-        box-shadow: 0 15px 40px rgba(0, 86, 145, 0.15);
+        /* 背景が暗くなった分、影を少し強調して立体感を出す */
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
         overflow: hidden;
-        border: 1px solid #e1f5fe;
+        /* 枠線は削除してスッキリさせる */
+        border: none;
     }
 
     /* --- ヘッダーエリア --- */
     .info-header {
         text-align: center;
         padding: 40px 20px 20px;
-        background-image: radial-gradient(#e1f5fe 1px, transparent 1px);
-        background-size: 20px 20px; /* ドット柄の背景でアクセント */
+        /* 背景パターンを少し落ち着いた色味に変更 */
+        background-image: radial-gradient(#b0bec5 1px, transparent 1px);
+        background-size: 20px 20px;
+        background-color: #eceff1; /* 薄いグレーの背景色を追加 */
     }
     
     .catch-copy {
@@ -72,7 +77,6 @@
         position: relative;
         display: inline-block;
     }
-    /* 下線マーカー風の装飾 */
     .highlight-text::after {
         content: '';
         position: absolute;
@@ -80,12 +84,12 @@
         left: 0;
         width: 100%;
         height: 10px;
-        background-color: rgba(255, 235, 59, 0.4); /* 薄い黄色 */
+        background-color: rgba(255, 235, 59, 0.4);
         z-index: -1;
         transform: rotate(-2deg);
     }
 
-    /* --- 安心ポイントエリア（レイアウト変更） --- */
+    /* --- 安心ポイントエリア --- */
     .features-area {
         padding: 20px 30px;
     }
@@ -115,13 +119,12 @@
         vertical-align: middle;
     }
 
-    /* 2列レイアウトにする */
     .features-list {
         list-style: none;
         padding: 0;
         margin: 0;
         display: grid;
-        grid-template-columns: repeat(2, 1fr); /* 2列 */
+        grid-template-columns: repeat(2, 1fr);
         gap: 15px;
     }
 
@@ -144,7 +147,7 @@
         justify-content: center;
         margin-right: 10px;
         font-size: 12px;
-        flex-shrink: 0; /* アイコンが潰れないように */
+        flex-shrink: 0;
         box-shadow: 0 2px 5px rgba(0,136,234,0.3);
     }
 
@@ -197,11 +200,9 @@
         font-size: 24px;
     }
 
-    /* 電話ボタン：グラデーション調整 */
     .btn-tel {
         background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
     }
-    /* 光るアニメーション効果 */
     .btn-tel::after {
         content: "";
         position: absolute;
@@ -219,7 +220,6 @@
         100% { transform: translateX(100%) rotate(45deg); }
     }
 
-    /* メールボタン：グラデーション調整 */
     .btn-mail {
         background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
         cursor: pointer;
@@ -244,7 +244,7 @@
         display: flex;
         padding: 20px;
         justify-content: center;
-        gap: 40px; /* アイテム間の隙間 */
+        gap: 40px;
     }
     .pay-item {
         text-align: center;
@@ -272,7 +272,7 @@
     /* スマホ対応 */
     @media (max-width: 480px) {
         .main-copy { font-size: 26px; }
-        .features-list { grid-template-columns: 1fr; } /* スマホでは1列に戻す */
+        .features-list { grid-template-columns: 1fr; }
         .action-link { font-size: 18px; padding: 15px; }
         .features-area { padding: 20px; }
     }
