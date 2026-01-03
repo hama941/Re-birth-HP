@@ -17,143 +17,131 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* 上寄せ */
+            align-items: flex-start;
             color: #333;
         }
 
         .container {
             width: 100%;
-            max-width: 900px;
+            max-width: 800px; /* 少し幅を調整 */
             margin-top: 20px;
             margin-bottom: 50px;
         }
 
         /* --- フォーム画面のコンテナ枠 --- */
-        /* シミュレーションの「mode-form」の状態をデフォルトにしています */
         .form-box {
             background-color: #fff;
             border: 8px solid #fff9c4; /* 黄色い太枠 */
-            border-radius: 8px;
-            padding: 30px 20px;
+            border-radius: 10px;
+            padding: 40px 30px;
             width: 100%;
             text-align: left;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
-        /* --- イントロダクション（選択内容の確認） --- */
-        .form-intro {
+        /* --- タイトル --- */
+        .form-title {
             text-align: center;
-            margin-bottom: 30px;
-        }
-        .form-intro-text {
+            font-size: 24px;
+            font-weight: 900;
             color: #005691;
-            font-weight: bold;
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-        
-        .confirm-items {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            max-width: 400px;
-            margin: 0 auto 15px auto;
-        }
-        .confirm-btn {
-            background-color: #0088ea;
-            color: #fff;
-            padding: 12px;
-            border-radius: 30px;
-            text-align: center;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .form-intro-end {
-            color: #005691;
-            font-weight: bold;
-            font-size: 18px;
+            margin: 0 0 40px 0; /* 下に余白 */
+            padding-bottom: 15px;
+            border-bottom: 2px dashed #ddd; /* 破線で区切り */
         }
 
         /* --- フォーム要素 --- */
         .form-group {
-            margin-bottom: 20px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 25px;
+            max-width: 100%;
         }
         .form-label {
             display: block;
             font-weight: bold;
-            margin-bottom: 8px;
-            font-size: 14px;
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: #333;
         }
         
         /* 必須・任意バッジ */
         .badge {
             display: inline-block;
-            font-size: 11px;
-            padding: 2px 6px;
+            font-size: 12px;
+            padding: 3px 8px;
             border-radius: 4px;
-            margin-left: 8px;
+            margin-left: 10px;
             vertical-align: middle;
+            position: relative;
+            top: -1px;
         }
         .badge-required {
             background-color: #f36e21; /* オレンジ */
             color: #fff;
         }
-        /* 必要であれば任意のスタイルもここに追加 */
+        .badge-optional {
+            background-color: #999;
+            color: #fff;
+            font-size: 11px;
+        }
 
         .form-input, .form-textarea {
             width: 100%;
-            padding: 12px;
+            padding: 15px;
             border: 1px solid #ccc;
             border-radius: 6px;
             font-size: 16px;
             background-color: #f9f9f9;
+            transition: border-color 0.3s;
+        }
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #0088ea;
+            background-color: #fff;
         }
         .form-textarea {
-            height: 120px;
+            height: 150px;
             resize: vertical;
         }
 
         /* --- 送信ボタン --- */
         .submit-area {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 40px;
         }
         .submit-btn {
             background: linear-gradient(to bottom, #5cb1f7, #2d7cd1);
             color: #fff;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
             border: none;
-            padding: 15px 60px;
-            border-radius: 8px;
+            padding: 18px 80px;
+            border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
-            transition: transform 0.1s;
+            box-shadow: 0 5px 15px rgba(45, 124, 209, 0.3);
+            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
         }
         .submit-btn::after {
             content: "▶";
-            font-size: 14px;
+            font-size: 16px;
             margin-left: 15px;
         }
         .submit-btn:hover {
             opacity: 0.9;
-            transform: translateY(1px);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(45, 124, 209, 0.4);
         }
         .submit-btn:active {
-            transform: translateY(3px);
+            transform: translateY(1px);
             box-shadow: none;
         }
 
         /* --- スマホ対応 --- */
         @media (max-width: 768px) {
-            .form-box { padding: 20px 10px; }
-            .confirm-items { width: 100%; }
-            .form-intro-text, .form-intro-end { font-size: 16px; }
+            .form-box { padding: 30px 15px; }
+            .form-title { font-size: 20px; }
+            .submit-btn { width: 100%; padding: 15px; justify-content: center; }
         }
     </style>
 </head>
@@ -162,15 +150,7 @@
 <div class="container">
     <div class="form-box">
         
-        <div class="form-intro">
-            <div class="form-intro-text">お客様のトラブルは・・・</div>
-            <div class="confirm-items">
-                <div id="conf-type" class="confirm-btn">ゴキブリ（例）</div>
-                <div id="conf-place" class="confirm-btn">キッチン（例）</div>
-                <div id="conf-building" class="confirm-btn">戸建て（例）</div>
-            </div>
-            <div class="form-intro-end">で承ります。</div>
-        </div>
+        <h1 class="form-title">お問い合わせフォーム</h1>
 
         <form action="" method="post" onsubmit="event.preventDefault(); alert('送信完了（デモ）');">
             <div class="form-group">
