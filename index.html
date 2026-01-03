@@ -16,21 +16,19 @@
 
   /* セクション全体 */
   .reason-section {
-    padding: 60px 20px;
+    padding: 60px 10px; /* 横の余白を少し減らしました */
     text-align: center;
-    /* 全体の中央寄せ */
     margin: 0 auto;
   }
 
   /* --- ヘッダー部分 --- */
   .reason-header {
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  /* 「安心してお任せください！」のデザイン */
   .sub-title {
     display: inline-block;
     font-size: 1.2rem;
@@ -61,17 +59,13 @@
     border-top: 6px solid #0078d7;
   }
 
-  /* 「選ばれる4つの理由」 */
   .main-title {
     font-size: 2.2rem;
     font-weight: 900;
     color: #0056b3;
     margin: 10px 0 20px;
   }
-  .main-title span {
-    color: #004494;
-  }
-
+  
   .description-text {
     font-size: 1rem;
     line-height: 1.8;
@@ -79,35 +73,41 @@
     color: #333;
   }
 
-  /* --- 円形リスト部分（レイアウト変更箇所） --- */
+  /* --- グリッド設定（強制2列） --- */
   .reason-grid {
     display: grid;
-    /* ここで「横に2つ」を指定 */
-    grid-template-columns: repeat(2, 1fr);
-    /* アイテム同士の間隔（縦40px, 横30px） */
-    gap: 40px 30px;
-    /* グリッド内のアイテムを中央寄せ */
-    justify-items: center;
+    /* 強制的に1:1の割合で2列にする */
+    grid-template-columns: 1fr 1fr;
+    /* 間隔の調整（狭い画面でも入るよう少し狭めました） */
+    gap: 30px 20px;
     
-    /* 2列がきれいに収まる幅に制限して中央配置 */
+    /* コンテナの最大幅 */
     max-width: 650px; 
     margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   /* 各アイテム（円） */
   .reason-item {
     position: relative;
-    width: 280px;
-    height: 280px;
+    
+    /* 固定幅をやめて、親枠に合わせて伸縮するように変更 */
+    width: 100%;
+    max-width: 280px; /* 最大でも280px */
+    
+    /* 正円を保つ設定 */
+    aspect-ratio: 1 / 1;
+    margin: 0 auto; /* グリッド内で中央寄せ */
+
     border-radius: 50%;
-    /* ブルーグラデーション */
     background: linear-gradient(160deg, #6cbdf5 0%, #2b8bd6 50%, #0c5ea8 100%);
     color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 10px; /* パディングを少し調整 */
     box-sizing: border-box;
     box-shadow: 0 10px 20px rgba(0, 86, 179, 0.3);
     text-align: center;
@@ -117,53 +117,47 @@
   .reason-item::before {
     content: '';
     position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
+    top: 8px; left: 8px; right: 8px; bottom: 8px;
     border: 2px dashed rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     pointer-events: none;
   }
 
+  /* テキストサイズの調整（円が小さくなった時に文字がはみ出ないようvwなども併用可だが、今回はrem調整） */
   .reason-num {
     font-family: 'Arial', sans-serif;
-    font-size: 2.5rem;
+    font-size: 2.2rem; /* 少し小さめに調整 */
     font-weight: bold;
     line-height: 1;
     margin-bottom: 5px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-    opacity: 0.9;
   }
 
   .reason-title {
-    font-size: 1.3rem;
+    font-size: 1.1rem; /* 少し小さめに調整 */
     font-weight: 900;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     line-height: 1.3;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   }
 
   .reason-desc {
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: 0.85rem;
+    line-height: 1.4;
     font-weight: 500;
   }
 
-  /* --- スマホ対応 --- */
-  @media (max-width: 640px) {
+  /* --- スマホ対応（かなり狭い画面のみ1列にする） --- */
+  @media (max-width: 480px) {
     .reason-grid {
-      /* スマホのような狭い画面では1列にする */
+      /* iPhone SEなどかなり狭い端末だけ1列に戻す。
+         ここも2列にしたい場合はこの @media ブロックごと消してください */
       grid-template-columns: 1fr;
-      max-width: 300px; /* スマホでの幅制限 */
+      max-width: 300px;
     }
     
-    .main-title {
-      font-size: 1.8rem;
-    }
     .reason-item {
-      width: 260px;
-      height: 260px;
+      max-width: 280px; /* 1列の時は元のサイズに戻す */
     }
   }
 </style>
