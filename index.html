@@ -3,241 +3,273 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>4つの安心 LPセクション</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-
+<title>サービス一覧</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-    /* ベーススタイル */
+    /* --- ベース設定 --- */
+    * {
+        box-sizing: border-box;
+    }
     body {
         margin: 0;
-        padding: 0;
+        padding: 20px;
         font-family: 'Noto Sans JP', sans-serif;
+        background-color: #f0faff; /* 全体の背景色（薄い青） */
         color: #333;
-        background-color: #f0f8ff; /* 全体の背景色（薄い水色） */
     }
 
-    /* セクション全体 */
-    .promise-section {
+    .container {
         max-width: 1000px;
         margin: 0 auto;
-        padding: 60px 20px;
+        padding-bottom: 50px;
+    }
+
+    /* --- セクションタイトル --- */
+    .section-header {
         text-align: center;
-        background: linear-gradient(135deg, #eef9ff 0%, #ffffff 100%); /* 背景のグラデーション */
+        margin-bottom: 40px;
     }
-
-    /* メインタイトル */
-    .section-title {
-        font-size: 28px;
-        font-weight: 700;
-        color: #0056b3; /* 濃い青 */
-        margin-bottom: 50px;
-        line-height: 1.4;
-        position: relative;
+    .sub-header {
+        color: #0088ea;
+        font-weight: bold;
+        font-size: 16px;
         display: inline-block;
+        border-bottom: 2px solid #0088ea;
+        margin-bottom: 10px;
     }
-    
-    /* タイトルの装飾（ハートの手のアイコン風イメージは画像推奨ですが、ここではCSSで雰囲気だけ再現） */
-    .section-title::after {
-        content: '';
-        display: block;
-        width: 60px;
-        height: 60px;
-        background-color: #e0f0ff;
-        border-radius: 50%;
-        position: absolute;
-        top: -10px;
-        right: -40px;
-        z-index: -1;
-        opacity: 0.6;
+    .main-header {
+        font-size: 32px;
+        font-weight: 900;
+        color: #005691;
+        margin: 0;
+    }
+    .header-desc {
+        margin-top: 15px;
+        font-weight: bold;
+        font-size: 16px;
     }
 
-    /* カードのグリッドレイアウト */
-    .cards-container {
-        display: flex;
-        flex-wrap: wrap;
+    /* --- カードグリッド --- */
+    .service-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 幅に合わせて自動折り返し */
+        gap: 20px;
         justify-content: center;
-        gap: 30px;
     }
 
-    /* 個別カード */
-    .card {
-        background: #fff;
-        border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        width: 100%;
-        max-width: 300px; /* カードの最大幅 */
-        overflow: visible; /* バッジがはみ出るように */
-        position: relative;
-        text-align: left;
-        padding-bottom: 20px;
-        transition: transform 0.3s ease;
+    /* --- 個別カードスタイル --- */
+    .service-card {
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden; /* 角丸からはみ出さないように */
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08); /* ふんわりした影 */
+        transition: transform 0.2s;
+    }
+    .service-card:hover {
+        transform: translateY(-5px); /* ホバー時に少し浮く */
     }
 
     /* 画像エリア */
-    .card-image-area {
-        position: relative;
+    .card-img-area {
         width: 100%;
-        height: 180px;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-        overflow: hidden; /* 画像自体の角丸 */
+        height: 200px;
+        background-color: #eee;
+        overflow: hidden;
     }
-
-    .card-image-area img {
+    .card-img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: cover; /* 枠に合わせてトリミング */
     }
 
-    /* 金色のバッジ */
-    .badge {
+    /* テキストエリア */
+    .card-content {
+        padding: 20px;
+    }
+
+    /* サービス名 */
+    .service-title {
+        font-size: 20px;
+        font-weight: 900;
+        margin: 0 0 10px 0;
+        color: #333;
+    }
+
+    /* 価格 */
+    .service-price {
+        font-size: 32px; /* 大きく強調 */
+        font-weight: 900;
+        color: #c0392b; /* 濃い赤 */
+        margin: 0 0 15px 0;
+        line-height: 1;
+    }
+    .price-unit {
+        font-size: 20px;
+        color: #c0392b;
+    }
+
+    /* 箇条書きリスト（緑の丸ポチ） */
+    .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .feature-list li {
+        font-size: 14px;
+        margin-bottom: 8px;
+        padding-left: 1.5em;
+        position: relative;
+        color: #444;
+        font-weight: 500;
+    }
+    .feature-list li::before {
+        content: '●'; /* 丸ポチ */
+        color: #8ed27e; /* 薄い緑色 */
         position: absolute;
-        top: -15px;
-        left: -15px;
-        width: 90px;
-        height: 90px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #fceabb 0%, #fccd4d 50%, #f8b500 100%);
-        border: 3px solid #fff;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        left: 0;
+        top: 0;
+        font-size: 12px;
+        line-height: 1.8;
+    }
+
+    /* --- 「その他」カード専用スタイル --- */
+    .service-card.others {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        color: #5a4a1b;
-        font-weight: bold;
-        line-height: 1.1;
-        z-index: 10;
         text-align: center;
+        padding: 30px 20px;
+        border: 2px solid #eee; /* 少し枠線をつける */
     }
-    
-    .badge .crown {
-        font-size: 12px;
-        margin-bottom: 2px;
-    }
-
-    .badge .sub-text {
-        font-size: 10px;
-        transform: scale(0.9);
-    }
-
-    .badge .main-text {
-        font-size: 20px;
-        color: #8B4513; /* 茶色っぽい文字色 */
-    }
-
-    .badge .main-text span {
-        font-size: 14px;
-    }
-
-    /* カード本文エリア */
-    .card-body {
-        padding: 20px;
-    }
-
-    /* カード見出し */
-    .card-title {
+    .others-title {
         font-size: 18px;
-        font-weight: 700;
-        color: #0091ea; /* 水色 */
-        margin-bottom: 15px;
-        line-height: 1.4;
+        font-weight: 900;
+        color: #555;
+        margin-bottom: 20px;
     }
-
-    /* カード説明文 */
-    .card-text {
-        font-size: 14px;
+    .others-text {
+        font-size: 15px;
         line-height: 1.6;
-        color: #444;
-        margin: 0;
+        margin-bottom: 20px;
+        color: #666;
+    }
+    .others-highlight {
+        color: #c0392b;
+        font-weight: 900;
+        font-size: 16px;
     }
 
-    /* レスポンシブ対応（スマホ） */
-    @media (max-width: 768px) {
-        .cards-container {
-            flex-direction: column;
-            align-items: center;
+    /* スマホ調整（2列にする場合） */
+    @media (max-width: 480px) {
+        .service-grid {
+            /* スマホでも2列で見せたい場合は以下を有効化 */
+            /* grid-template-columns: 1fr 1fr; */
+            /* gap: 10px; */
         }
-        .card {
-            max-width: 100%; /* スマホ時は幅いっぱいに */
-        }
-        .section-title {
-            font-size: 22px;
-        }
+        .main-header { font-size: 24px; }
+        .card-img-area { height: 150px; }
+        .service-title { font-size: 18px; }
+        .service-price { font-size: 24px; }
+        .feature-list li { font-size: 12px; }
     }
 </style>
 </head>
 <body>
 
-<section class="promise-section">
-    <h2 class="section-title">
-        私たちは<br>
-        4つの安心をお約束します
-    </h2>
+<div class="container">
+    
+    <div class="section-header">
+        <span class="sub-header">様々なトラブルに対応します！</span>
+        <h2 class="main-header">サービス一覧</h2>
+        <p class="header-desc">水漏れ、つまり、故障、<br>様々なトラブルに対処いたします。</p>
+    </div>
 
-    <div class="cards-container">
-        
-        <div class="card">
-            <div class="image-area">
-                <div class="card-image-area">
-                    <img src="https://placehold.co/600x400/eeeeee/999999?text=Image1" alt="作業員の写真">
-                </div>
-                <div class="badge">
-                    <div class="crown">👑</div>
-                    <div class="sub-text">出張費・見積り</div>
-                    <div class="main-text">0<span>円</span></div>
-                </div>
+    <div class="service-grid">
+
+        <div class="service-card">
+            <div class="card-img-area">
+                <img src="https://placehold.jp/400x300.png?text=ゴキブリ画像" alt="ゴキブリ駆除" class="card-img">
             </div>
-            <div class="card-body">
-                <h3 class="card-title">見積り後のキャンセル料、<br>出張料はいただきません</h3>
-                <p class="card-text">
-                    お見積り後のキャンセルもOK！出張費も一切かかりません。費用に納得していただいてから作業を進めるので、安心してご依頼ください。無理な営業も一切なし！
-                </p>
+            <div class="card-content">
+                <h3 class="service-title">ゴキブリ駆除</h3>
+                <p class="service-price">2,980<span class="price-unit">円～</span></p>
+                <ul class="feature-list">
+                    <li>市販の駆除剤が効かない</li>
+                    <li>一度業者に頼んだのにまた発生した</li>
+                    <li>徹底的な除菌・消毒まで対応</li>
+                </ul>
             </div>
         </div>
 
-        <div class="card">
-            <div class="image-area">
-                <div class="card-image-area">
-                    <img src="https://placehold.co/600x400/eeeeee/999999?text=Image2" alt="作業の説明">
-                </div>
-                <div class="badge">
-                    <div class="crown">👑</div>
-                    <div class="sub-text">追加料金</div>
-                    <div class="main-text">なし</div>
-                </div>
+        <div class="service-card">
+            <div class="card-img-area">
+                <img src="https://placehold.jp/400x300.png?text=ハチの巣画像" alt="ハチの巣駆除" class="card-img">
             </div>
-            <div class="card-body">
-                <h3 class="card-title">内容ご納得の上<br>作業だから安心</h3>
-                <p class="card-text">
-                    修理内容と費用を事前にしっかりご説明しております。ご納得していただいてから作業を行いますので、思わぬ追加料金の心配もありません。安心してご依頼ください！
-                </p>
+            <div class="card-content">
+                <h3 class="service-title">ハチの巣駆除</h3>
+                <p class="service-price">2,980<span class="price-unit">円～</span></p>
+                <ul class="feature-list">
+                    <li>放っておくのは危険を伴います</li>
+                    <li>即日対応で巣をまるごと除去</li>
+                </ul>
             </div>
         </div>
 
-        <div class="card">
-            <div class="image-area">
-                <div class="card-image-area">
-                    <img src="https://placehold.co/600x400/eeeeee/999999?text=Image3" alt="保証イメージ">
-                </div>
-                <div class="badge">
-                    <div class="crown">👑</div>
-                    <div class="sub-text">再発保証</div>
-                    <div class="main-text">あり</div>
-                </div>
+        <div class="service-card">
+            <div class="card-img-area">
+                <img src="https://placehold.jp/400x300.png?text=トコジラミ画像" alt="トコジラミ駆除" class="card-img">
             </div>
-            <div class="card-body">
-                <h3 class="card-title">充実の保証内容</h3>
-                <p class="card-text">
-                    修理後も安心！弊社は保険加入済みで、万が一のトラブルにも迅速に対応致します。さらに、再発時の補償制度もご用意しており、長く安心してお使いいただけます。
-                </p>
+            <div class="card-content">
+                <h3 class="service-title">トコジラミ駆除</h3>
+                <p class="service-price">3,980<span class="price-unit">円～</span></p>
+                <ul class="feature-list">
+                    <li>猛烈なかゆみと繁殖力を根絶</li>
+                    <li>プロの薬剤で完全に死滅させます</li>
+                </ul>
             </div>
         </div>
 
+        <div class="service-card">
+            <div class="card-img-area">
+                <img src="https://placehold.jp/400x300.png?text=シロアリ画像" alt="シロアリ駆除" class="card-img">
+            </div>
+            <div class="card-content">
+                <h3 class="service-title">シロアリ駆除</h3>
+                <p class="service-price">3,980<span class="price-unit">円～</span></p>
+                <ul class="feature-list">
+                    <li>建物内部から被害が進行します</li>
+                    <li>再発防止までしっかり対応</li>
+                </ul>
+            </div>
         </div>
-</section>
+
+        <div class="service-card">
+            <div class="card-img-area">
+                <img src="https://placehold.jp/400x300.png?text=ノミ・ダニ画像" alt="ノミ・ダニ駆除" class="card-img">
+            </div>
+            <div class="card-content">
+                <h3 class="service-title">ノミ・ダニ駆除</h3>
+                <p class="service-price">2,980<span class="price-unit">円～</span></p>
+                <ul class="feature-list">
+                    <li>刺されるとかゆみ・炎症の原因に</li>
+                    <li>室内全体を徹底処理します</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="service-card others">
+            <h3 class="others-title">【その他対応一覧】</h3>
+            <p class="others-text">
+                チャタムシ、ムカデ、イタチ、<br>
+                アライグマ等、あらゆる<br>
+                害虫・害獣に対応します。
+            </p>
+            <p class="others-highlight">現地調査・見積もりは完全無料です！</p>
+        </div>
+
+    </div>
+</div>
 
 </body>
 </html>
