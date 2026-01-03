@@ -3,374 +3,373 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>安く・早く実現できる理由</title>
+    <title>基本料金シミュレーション（戻る機能付き）</title>
     <style>
-        /* --- 基本設定 --- */
-        :root {
-            --primary-blue: #0056b3;       /* 濃い青（見出し、枠線） */
-            --accent-cyan: #0099e6;        /* 明るい水色（強調テキスト） */
-            --text-black: #333333;         /* 通常テキスト */
-            --bg-light: #f0f8ff;           /* 全体の背景色（薄い水色） */
-            --box-bg: #ffffff;             /* ボックスの背景 */
-            --gray-border: #e0e0e0;        /* グレーの枠線 */
-        }
-
+        /* --- ベーススタイル --- */
         body {
-            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: var(--bg-light);
-            color: var(--text-black);
-            line-height: 1.6;
+            padding: 20px;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background: linear-gradient(to bottom, #f0faff, #dcefff);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
         }
 
-        .section-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            background: linear-gradient(to bottom, #eef9ff 0%, #fff 100%);
+        .simulation-container {
+            width: 100%;
+            max-width: 900px;
+            margin-top: 40px;
+            position: relative;
         }
 
-        /* --- 見出しエリア --- */
-        .header-area {
+        /* --- ヘッダー --- */
+        .sim-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .operator-img-placeholder {
+            position: absolute;
+            bottom: -5px;
+            left: 15%;
+            width: 100px;
+            height: 120px;
         }
 
         .sub-title {
             display: inline-block;
-            font-size: 1rem;
+            font-size: 16px;
+            color: #0088ea;
             font-weight: bold;
-            color: var(--primary-blue);
-            border-bottom: 2px solid var(--accent-cyan);
-            padding-bottom: 5px;
-            margin-bottom: 10px;
+            border-bottom: 2px solid #8bd1ff;
+            margin-bottom: 5px;
         }
 
         .main-title {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--primary-blue);
-            margin: 0;
-        }
-
-        /* --- 説明文エリア --- */
-        .description {
-            font-size: 1rem;
+            font-size: 32px;
             font-weight: bold;
-            margin-bottom: 40px;
-            text-align: left;
+            color: #005691;
+            margin: 0;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 0px #fff;
         }
 
-        .highlight {
-            color: var(--accent-cyan);
-        }
-
-        /* --- 比較図エリア（全体） --- */
-        .comparison-wrapper {
+        /* --- タブナビゲーション --- */
+        .step-tabs {
             display: flex;
-            gap: 20px;
-            justify-content: center;
-            align-items: stretch;
-            flex-wrap: wrap; /* 画面が狭いときは縦並び */
+            width: 100%;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
         }
 
-        /* 共通ボックススタイル */
-        .comp-box {
-            background-color: var(--box-bg);
+        .tab-item {
             flex: 1;
-            min-width: 300px; /* 最小幅 */
-            padding: 20px 15px;
-            border-radius: 8px;
+            padding: 15px 5px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            color: #666;
+            background-color: #aebdce;
+            border-right: 1px solid #999;
             position: relative;
+            cursor: default;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .tab-item.active {
+            background-color: #0088ea;
+            color: #fff;
+            border-right: 1px solid #006ebc;
+        }
+        
+        .tab-item.completed {
+            background-color: #9ac6e8; 
+            color: #00406b;
+            border-right: 1px solid #8ab6d6;
+        }
+
+        .tab-arrow {
+            font-size: 10px;
+            margin-left: 5px;
+            display: inline-block;
+        }
+
+        .tab-item.result-btn {
+            background-color: #fef29e;
+            color: #e85a5a;
+            border-right: none;
+            font-weight: 900;
+        }
+        .tab-item.result-btn.ready {
+             background-color: #ffeb3b;
+             cursor: pointer;
+        }
+
+        /* --- コンテンツボックス --- */
+        .content-box {
+            background-color: #fff;
+            border: 3px solid #0088ea;
+            border-top: 3px solid #0088ea; 
+            border-radius: 0 0 8px 8px;
+            padding: 30px 20px;
+            text-align: center;
+            min-height: 280px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-        }
-
-        /* 左側：一般的な業者 */
-        .box-general {
-            border: 1px solid var(--gray-border);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        /* 右側：当サービス（強調） */
-        .box-ours {
-            border: 3px solid var(--primary-blue);
-            box-shadow: 0 5px 15px rgba(0,86,179,0.15);
+            justify-content: center;
         }
 
         .box-title {
-            font-size: 0.95rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            text-align: center;
+            color: #005691;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 30px;
         }
 
-        .box-ours .box-title {
-            color: var(--primary-blue); /* 右側のタイトル色 */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-        
-        /* 王冠アイコン簡易表現 */
-        .crown-icon {
-            width: 20px;
-            height: 20px;
-            fill: var(--accent-cyan);
-        }
-
-        /* --- フロー図（アイコンと矢印） --- */
-        .flow-diagram {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* --- グリッドレイアウト --- */
+        .options-grid {
+            display: grid;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
             width: 100%;
-            margin-bottom: 20px;
-            gap: 5px;
         }
 
-        .flow-item {
+        .col-4, .col-4-step2 { grid-template-columns: repeat(4, 1fr); }
+        .col-3 { grid-template-columns: repeat(3, 1fr); }
+
+        /* --- ボタンデザイン --- */
+        .option-btn {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 60px;
-        }
-
-        .icon-svg {
-            width: 40px;
-            height: 40px;
-            fill: #333;
-            margin-bottom: 5px;
-        }
-
-        .flow-label {
-            font-size: 0.8rem;
-            font-weight: bold;
-            writing-mode: vertical-rl; /* 縦書き */
-            text-orientation: upright;
-            letter-spacing: 2px;
-        }
-
-        /* 矢印 */
-        .arrow {
-            color: var(--accent-cyan);
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        /* 中間の業者ボックス */
-        .middle-agent {
-            background-color: #222;
-            color: #fff;
-            padding: 10px 5px;
-            border-radius: 4px;
-            width: 30px;
-            display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-        }
-        .middle-agent .flow-label {
-            color: #fff;
-            font-size: 0.75rem;
-        }
-        .middle-agent svg {
-            fill: #fff;
-            width: 20px;
-            height: 20px;
-            margin-bottom: 5px;
-        }
-
-        /* 点線の枠（中抜き） */
-        .dashed-box {
-            border: 2px dashed #999;
-            width: 30px;
-            height: 100px; /* 高さを確保 */
-            border-radius: 4px;
-        }
-
-        /* --- 下部の説明エリア（吹き出し風） --- */
-        .bottom-desc {
-            width: 100%;
-            margin-top: auto; /* 下に寄せる */
-            padding: 15px 10px;
-            border-radius: 10px;
-            font-size: 0.9rem;
+            background-color: #fff;
+            border: 1px solid #0088ea;
+            border-radius: 50px;
+            color: #333;
             font-weight: bold;
+            padding: 15px 5px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
             box-sizing: border-box;
+            line-height: 1.2;
+        }
+        .option-btn:hover {
+            background-color: #eaf6ff;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
 
-        /* 左側の説明 */
-        .desc-general {
-            background-color: #e6e6e6;
-            color: #444;
-            position: relative;
-        }
-        .desc-general::before {
-            content: "";
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 0 10px 10px 10px;
-            border-style: solid;
-            border-color: transparent transparent #e6e6e6 transparent;
-        }
-
-        /* 右側の説明 */
-        .desc-ours {
-            background-color: var(--primary-blue);
-            color: #fff;
-            position: relative;
-        }
-        .desc-ours::before {
-            content: "";
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 0 10px 10px 10px;
-            border-style: solid;
-            border-color: transparent transparent var(--primary-blue) transparent;
-        }
-
-        .desc-title {
+        /* --- 戻るボタン --- */
+        .back-area {
+            margin-top: 30px;
             text-align: center;
-            margin-bottom: 5px;
-            font-size: 0.85rem;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-            padding-bottom: 5px;
+        }
+        .back-btn {
+            background-color: #eee;
+            color: #666;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .back-btn:hover {
+            background-color: #ddd;
+        }
+
+        /* --- 表示切り替え用 --- */
+        .step-panel {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .step-panel.active-panel {
             display: block;
         }
-        .desc-ours .desc-title {
-            border-bottom: 1px solid rgba(255,255,255,0.3);
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .check-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            text-align: left;
-            display: inline-block;
-        }
-        
-        /* 中央揃えのためのラッパー */
-        .check-center {
-            text-align: center;
-        }
-
-        .check-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2px;
-        }
-        .check-item::before {
-            content: "✔";
-            margin-right: 5px;
-        }
-        .box-ours .check-item::before {
-            color: #ffd700; /* 黄色のチェック */
-        }
-
-        /* スマホ向け調整 */
-        @media (max-width: 480px) {
-            .main-title { font-size: 1.5rem; }
-            .comparison-wrapper { flex-direction: column; }
-            .comp-box { min-width: auto; }
+        /* --- スマホ対応 --- */
+        @media (max-width: 768px) {
+            .col-4, .col-4-step2, .col-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .main-title { font-size: 22px; }
+            .tab-item { font-size: 11px; padding: 10px 2px; }
+            .content-box { padding: 20px 10px; }
         }
     </style>
 </head>
 <body>
 
-<section class="section-container">
-    
-    <div class="header-area">
-        <div class="sub-title">お困りごとを即解決！</div>
-        <h2 class="main-title">安く・早く実現できる理由</h2>
+<div class="simulation-container">
+    <div class="sim-header">
+        <div class="operator-img-placeholder">
+            <img src="https://placehold.jp/100x120.png?text=Image" alt="" style="width:100px; opacity:0.5;">
+        </div>
+        <div class="sub-title">簡単10秒！</div>
+        <h1 class="main-title">基本料金シミュレーション</h1>
     </div>
 
-    <div class="description">
-        仲介業者による不透明な費用の上乗せはされないため、<span class="highlight">一般的な業者と比べて低価格でサービス提供が可能</span>です。<br>
-        また、対応エリアを関西地域に絞っているため、問い合わせをいただいた際、<span class="highlight">現場から最も近いスタッフが駆け付け、すぐに対応いたします。</span>
+    <div class="step-tabs">
+        <div id="tab-1" class="tab-item active" data-default="トラブル箇所">トラブル箇所 <span class="tab-arrow">^</span></div>
+        <div id="tab-2" class="tab-item" data-default="症状">症状 <span class="tab-arrow">∨</span></div>
+        <div id="tab-3" class="tab-item" data-default="物件の種類">物件の種類 <span class="tab-arrow">∨</span></div>
+        <div id="tab-result" class="tab-item result-btn">結果をみる</div>
     </div>
 
-    <div class="comparison-wrapper">
+    <div class="content-box">
         
-        <div class="comp-box box-general">
-            <div class="box-title">一般的な水道事業者</div>
-            
-            <div class="flow-diagram">
-                <div class="flow-item">
-                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                    <span class="flow-label">お客様</span>
-                </div>
-                
-                <div class="arrow">➡</div>
-
-                <div class="middle-agent">
-                    <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                    <span class="flow-label">仲介業者</span>
-                </div>
-
-                <div class="arrow">➡</div>
-
-                <div class="flow-item">
-                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
-                    <span class="flow-label">工事業者</span>
-                </div>
+        <div id="panel-1" class="step-panel active-panel">
+            <div class="box-title">下記から選択してください。</div>
+            <div class="options-grid col-4">
+                <button class="option-btn" onclick="nextStep(1, 'トイレ')">トイレ</button>
+                <button class="option-btn" onclick="nextStep(1, 'キッチン・シンク')">キッチン・シンク</button>
+                <button class="option-btn" onclick="nextStep(1, '蛇口・水栓')">蛇口・水栓</button>
+                <button class="option-btn" onclick="nextStep(1, '排水溝')">排水溝</button>
+                <button class="option-btn" onclick="nextStep(1, '水道管・配管')">水道管・配管</button>
+                <button class="option-btn" onclick="nextStep(1, 'お風呂')">お風呂</button>
+                <button class="option-btn" onclick="nextStep(1, '洗面台・流し台')">洗面台・流し台</button>
+                <button class="option-btn" onclick="nextStep(1, '洗濯機')">洗濯機</button>
+            </div>
             </div>
 
-            <div class="bottom-desc desc-general">
-                <span class="desc-title">仲介料が含まれるため</span>
-                <div class="check-center">
-                    <ul class="check-list">
-                        <li class="check-item">料金が割高になる</li>
-                        <li class="check-item">対応に時間がかかる</li>
-                    </ul>
-                </div>
+        <div id="panel-2" class="step-panel">
+            <div class="box-title">どのような症状ですか？</div>
+            <div class="options-grid col-4-step2">
+                <button class="option-btn" onclick="nextStep(2, '詰まり、流れが悪い')">詰まり、流れが悪い</button>
+                <button class="option-btn" onclick="nextStep(2, '水漏れ')">水漏れ</button>
+                <button class="option-btn" onclick="nextStep(2, '水・お湯が出ない')">水・お湯が出ない</button>
+                <button class="option-btn" onclick="nextStep(2, '故障、取付、交換')">故障、取付、交換</button>
+                <button class="option-btn" onclick="nextStep(2, 'わからない・それ以外')">わからない・それ以外</button>
+            </div>
+            <div class="back-area">
+                <button class="back-btn" onclick="goBack(2)">＜ 前に戻る</button>
             </div>
         </div>
 
-        <div class="comp-box box-ours">
-            <div class="box-title">
-                <svg class="crown-icon" viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11h-14zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>
-                指定水道屋クイックホーム
+        <div id="panel-3" class="step-panel">
+            <div class="box-title">物件の種類を選択してください。</div>
+            <div class="options-grid col-3">
+                <button class="option-btn" onclick="finishStep('戸建て')">戸建て</button>
+                <button class="option-btn" onclick="finishStep('マンション・アパート')">マンション・アパート</button>
+                <button class="option-btn" onclick="finishStep('店舗')">店舗</button>
+                <button class="option-btn" onclick="finishStep('オフィス・事務所')">オフィス・事務所</button>
+                <button class="option-btn" onclick="finishStep('ビル・施設')">ビル・施設</button>
+                <button class="option-btn" onclick="finishStep('その他')">その他</button>
             </div>
-
-            <div class="flow-diagram">
-                <div class="flow-item">
-                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                    <span class="flow-label">お客様</span>
-                </div>
-                
-                <div class="arrow">➡</div>
-
-                <div class="dashed-box"></div>
-
-                <div class="arrow">➡</div>
-
-                <div class="flow-item">
-                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
-                    <span class="flow-label">工事業者</span>
-                </div>
+            <div class="back-area">
+                <button class="back-btn" onclick="goBack(3)">＜ 前に戻る</button>
             </div>
-
-            <div class="bottom-desc desc-ours">
-                <span class="desc-title">お客様と直接関わるため</span>
-                <div class="check-center">
-                    <ul class="check-list">
-                        <li class="check-item">料金が安い</li>
-                        <li class="check-item">対応が早い</li>
-                    </ul>
-                </div>
+        </div>
+        
+        <div id="panel-result" class="step-panel">
+            <div class="box-title">診断ありがとうございます！</div>
+            <p style="margin-bottom:20px;">お問い合わせフォームへ移動します。</p>
+            <button class="option-btn" style="background:#fef29e; border-color:#d68c6d; font-weight:900; width:200px; margin:0 auto;">問い合わせる</button>
+            
+            <div class="back-area">
+                <button class="back-btn" onclick="goBack(4)">＜ 修正する</button>
             </div>
         </div>
 
     </div>
-</section>
+</div>
+
+<script>
+    // --- 次へ進む処理 ---
+    function nextStep(currentStepNum, selectedText) {
+        // 現在のタブを「完了」にする
+        const currentTab = document.getElementById('tab-' + currentStepNum);
+        currentTab.classList.remove('active');
+        currentTab.classList.add('completed');
+        currentTab.innerText = selectedText; // 選んだ項目名を表示
+
+        // 現在のパネルを隠す
+        document.getElementById('panel-' + currentStepNum).classList.remove('active-panel');
+
+        // 次のステップを表示
+        const nextStepNum = currentStepNum + 1;
+        const nextTab = document.getElementById('tab-' + nextStepNum);
+        if(nextTab) {
+            nextTab.classList.add('active');
+        }
+        const nextPanel = document.getElementById('panel-' + nextStepNum);
+        if(nextPanel) {
+            nextPanel.classList.add('active-panel');
+        }
+    }
+
+    // --- 前に戻る処理 ---
+    // currentStepNum: 現在表示されている（戻るボタンを押した）ステップ番号
+    function goBack(currentStepNum) {
+        const prevStepNum = currentStepNum - 1;
+
+        // 1. 現在のパネルを隠す
+        const currentPanel = document.getElementById('panel-' + currentStepNum);
+        if(currentPanel) currentPanel.classList.remove('active-panel');
+
+        // 2. 現在のタブのactiveを消す（もしあれば）
+        const currentTab = document.getElementById('tab-' + currentStepNum);
+        if(currentTab) currentTab.classList.remove('active');
+        
+        // 特殊：結果画面(4)から戻る場合、タブ3はcompletedのままactiveにする必要があるが、
+        // 今回の仕様では「戻ったら再選択」なので、タブ3の完了状態も解除します。
+        
+        // 3. 前のパネルを表示
+        const prevPanel = document.getElementById('panel-' + prevStepNum);
+        if(prevPanel) prevPanel.classList.add('active-panel');
+
+        // 4. 前のタブの状態を「未完了(active)」に戻す
+        const prevTab = document.getElementById('tab-' + prevStepNum);
+        if(prevTab) {
+            prevTab.classList.remove('completed');
+            prevTab.classList.add('active');
+            
+            // ★重要：タブの文字を「トラブル箇所」などの初期値に戻す
+            // HTMLの data-default 属性から元の文字を取得しています
+            const defaultText = prevTab.getAttribute('data-default');
+            if(defaultText) {
+                prevTab.innerHTML = defaultText + ' <span class="tab-arrow">^</span>'; // 矢印も復活させるならこのように
+            }
+        }
+        
+        // 結果画面から戻った場合の「結果をみる」タブのリセット
+        if(currentStepNum === 4) {
+             const resTab = document.getElementById('tab-result');
+             resTab.classList.remove('ready');
+        }
+    }
+
+    // --- 完了処理 ---
+    function finishStep(selectedText) {
+        const currentTab = document.getElementById('tab-3');
+        currentTab.classList.remove('active');
+        currentTab.classList.add('completed');
+        currentTab.innerText = selectedText;
+
+        document.getElementById('panel-3').classList.remove('active-panel');
+        
+        const resultTab = document.getElementById('tab-result');
+        resultTab.classList.add('ready');
+
+        // 結果画面を表示（仮想ステップ4として扱います）
+        document.getElementById('panel-result').classList.add('active-panel');
+    }
+</script>
 
 </body>
 </html>
