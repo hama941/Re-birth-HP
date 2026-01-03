@@ -3,226 +3,349 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>選ばれる4つの理由</title>
+<title>サービス案内</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
 <style>
-  /* ベースのスタイル */
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-    background-color: #f9faff; /* 全体の背景色（薄い青白） */
-    color: #333;
-  }
-
-  /* セクション全体 */
-  .reason-section {
-    padding: 60px 20px;
-    text-align: center;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  /* --- ヘッダー部分 --- */
-  .reason-header {
-    margin-bottom: 50px;
-  }
-
-  /* 「安心してお任せください！」のデザイン */
-  .sub-title {
-    display: inline-block;
-    font-size: 1.2rem;
-    color: #0078d7;
-    font-weight: bold;
-    margin-bottom: 10px;
-    position: relative;
-    padding-bottom: 5px;
-  }
-  /* 下線の装飾 */
-  .sub-title::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 2px;
-    background: #0078d7;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
-  /* 下線の折れ曲がり装飾（簡易版） */
-  .sub-title::before {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #0078d7;
-  }
-
-  /* 「選ばれる4つの理由」 */
-  .main-title {
-    font-size: 2.2rem;
-    font-weight: 900;
-    color: #0056b3;
-    margin: 10px 0 20px;
-  }
-  
-  /* 数字の部分だけ色を変える場合 */
-  .main-title span {
-    color: #004494;
-  }
-
-  /* 説明文 */
-  .description-text {
-    font-size: 1rem;
-    line-height: 1.8;
-    font-weight: bold;
-    color: #333;
-  }
-
-  /* --- 円形リスト部分（グリッド） --- */
-  .reason-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px; /* 円同士の間隔 */
-  }
-
-  /* 各アイテム（円） */
-  .reason-item {
-    position: relative;
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    /* ブルーのグラデーション背景 */
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); 
-    /* 画像の雰囲気に近い少し濃いめの青グラデーションに変更 */
-    background: linear-gradient(160deg, #6cbdf5 0%, #2b8bd6 50%, #0c5ea8 100%);
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    box-sizing: border-box;
-    box-shadow: 0 10px 20px rgba(0, 86, 179, 0.3);
-    text-align: center;
-  }
-
-  /* 背景の装飾（月桂樹の代わりに薄いリングを表示） */
-  .reason-item::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    border: 2px dashed rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    pointer-events: none;
-  }
-
-  /* 数字 (01, 02...) */
-  .reason-num {
-    font-family: 'Arial', sans-serif;
-    font-size: 2.5rem;
-    font-weight: bold;
-    line-height: 1;
-    margin-bottom: 5px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-    opacity: 0.9;
-  }
-
-  /* タイトル (エリア密着の...) */
-  .reason-title {
-    font-size: 1.3rem;
-    font-weight: 900;
-    margin-bottom: 15px;
-    line-height: 1.3;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  }
-
-  /* 本文 */
-  .reason-desc {
-    font-size: 0.9rem;
-    line-height: 1.5;
-    font-weight: 500;
-  }
-
-  /* --- レスポンシブ対応（スマホ） --- */
-  @media (max-width: 768px) {
-    .main-title {
-      font-size: 1.8rem;
+    /* --- 全体のリセットとベース設定 --- */
+    * {
+        box-sizing: border-box;
     }
-    .reason-grid {
-      flex-direction: column;
-      align-items: center;
+    
+    body {
+        margin: 0;
+        padding: 20px;
+        font-family: 'Noto Sans JP', "Helvetica Neue", Arial, sans-serif;
+        /* 背景：プロフェッショナルで頼もしい、深みのあるダークブルーのグラデーション */
+        background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+        
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #333;
     }
-    .reason-item {
-      width: 260px;
-      height: 260px;
+
+    .info-container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
     }
-  }
+
+    /* --- メインの白いボックス --- */
+    .info-card {
+        background-color: #fff;
+        border-radius: 20px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        border: none;
+    }
+
+    /* --- ヘッダーエリア --- */
+    .info-header {
+        text-align: center;
+        padding: 40px 20px 20px;
+        background-image: radial-gradient(#b0bec5 1px, transparent 1px);
+        background-size: 20px 20px;
+        background-color: #eceff1;
+    }
+    
+    .catch-copy {
+        font-size: 20px;
+        font-weight: bold;
+        color: #555;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .main-copy {
+        font-size: 32px;
+        font-weight: 900;
+        color: #005691;
+        line-height: 1.3;
+        margin: 0;
+        letter-spacing: 0.05em;
+    }
+    
+    .highlight-text {
+        color: #0088ea;
+        position: relative;
+        display: inline-block;
+    }
+    .highlight-text::after {
+        content: '';
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+        width: 100%;
+        height: 10px;
+        background-color: rgba(255, 235, 59, 0.4);
+        z-index: -1;
+        transform: rotate(-2deg);
+    }
+
+    /* --- 安心ポイントエリア --- */
+    .features-area {
+        padding: 20px 30px;
+    }
+    
+    .features-box {
+        background-color: #f0faff;
+        border-radius: 15px;
+        padding: 25px;
+        border: 2px solid #b3e5fc;
+    }
+
+    /* 【変更点】タイトルのスタイル調整 */
+    .features-title-wrap {
+        text-align: center;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .features-title {
+        font-weight: 700;
+        color: #0088ea;
+        font-size: 20px; /* 少し大きく */
+        margin: 0 15px;
+        position: relative;
+        display: inline-block;
+    }
+    
+    /* 【変更点】タイトル横のイラスト（アイコン） */
+    .title-icon {
+        color: #0088ea; /* タイトルと同じ青 */
+        font-size: 24px; /* タイトルより少し大きく */
+        /* アイコンに少し影をつけて立体感を出す */
+        filter: drop-shadow(2px 2px 2px rgba(0, 136, 234, 0.2));
+    }
+    /* 左右で少し傾きを変えて動きを出す */
+    .icon-left { transform: rotate(-10deg); }
+    .icon-right { transform: rotate(10deg); }
+
+    /* 以前のドット装飾は削除 */
+    /* .features-title::before, .features-title::after { ... } */
+
+    .features-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .features-list li {
+        font-size: 15px;
+        font-weight: 700;
+        color: #444;
+        display: flex;
+        align-items: center;
+    }
+
+    .check-mark {
+        color: #fff;
+        background-color: #0088ea;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        font-size: 12px;
+        flex-shrink: 0;
+        box-shadow: 0 2px 5px rgba(0,136,234,0.3);
+    }
+
+    /* --- 24時間対応 --- */
+    .support-msg {
+        text-align: center;
+        font-size: 20px;
+        font-weight: 700;
+        color: #005691;
+        margin: 10px 0 30px;
+        letter-spacing: 0.05em;
+    }
+
+    /* --- ボタンエリア --- */
+    .action-btns {
+        padding: 0 30px 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .action-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 18px;
+        border-radius: 50px;
+        text-decoration: none;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 700;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .action-link:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    }
+    .action-link:active {
+        transform: translateY(1px);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .icon-box {
+        margin-right: 15px;
+        font-size: 24px;
+    }
+
+    .btn-tel {
+        background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+    }
+    .btn-tel::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: rgba(255,255,255,0.2);
+        transform: rotate(45deg);
+        animation: shine 3s infinite;
+    }
+    @keyframes shine {
+        0% { transform: translateX(-100%) rotate(45deg); }
+        20% { transform: translateX(100%) rotate(45deg); }
+        100% { transform: translateX(100%) rotate(45deg); }
+    }
+
+    .btn-mail {
+        background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+        cursor: pointer;
+    }
+
+    /* --- お支払方法 --- */
+    .payment-area {
+        border-top: 1px solid #eee;
+        background-color: #fafafa;
+    }
+    .payment-head {
+        background-color: #005691;
+        color: #fff;
+        text-align: center;
+        padding: 12px;
+        margin: 0;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+    }
+    .payment-methods {
+        display: flex;
+        padding: 20px;
+        justify-content: center;
+        gap: 40px;
+    }
+    .pay-item {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #555;
+        font-weight: 700;
+        font-size: 14px;
+    }
+    .pay-icon {
+        font-size: 28px;
+        color: #005691;
+        margin-top: 8px;
+        background: #fff;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    /* スマホ対応 */
+    @media (max-width: 480px) {
+        .main-copy { font-size: 26px; }
+        .features-title { font-size: 18px; margin: 0 10px; }
+        .title-icon { font-size: 20px; }
+        .features-list { grid-template-columns: 1fr; }
+        .action-link { font-size: 18px; padding: 15px; }
+        .features-area { padding: 20px; }
+    }
 </style>
 </head>
 <body>
 
-<section class="reason-section">
-  <div class="reason-header">
-    <div class="sub-title">安心してお任せください！</div>
-    <h2 class="main-title">選ばれる4つの理由</h2>
-    <p class="description-text">
-      選ばれるには理由があります。<br>
-      安心・迅速・確実なサービスを<br>
-      お約束します。
-    </p>
-  </div>
+<div class="info-container">
+    <div class="info-card">
+        
+        <div class="info-header">
+            <span class="catch-copy">最短10分で</span>
+            <h1 class="main-copy">すぐに<span class="highlight-text">駆けつけます！</span></h1>
+        </div>
 
-  <div class="reason-grid">
-    <div class="reason-item">
-      <div class="reason-num">01</div>
-      <div class="reason-title">エリア密着の<br>迅速な対応</div>
-      <div class="reason-desc">
-        最短10分で駆けつけ、<br>
-        「早く・正確に」<br>
-        解決いたします。
-      </div>
+        <div class="features-area">
+            <div class="features-box">
+                <div class="features-title-wrap">
+                    <i class="fas fa-user-shield title-icon icon-left"></i>
+                    <h2 class="features-title">安心してお任せください！</h2>
+                    <i class="fas fa-user-shield title-icon icon-right"></i>
+                </div>
+                <ul class="features-list">
+                    <li><span class="check-mark"><i class="fas fa-check"></i></span>深夜料金なし</li>
+                    <li><span class="check-mark"><i class="fas fa-check"></i></span>見積り後キャンセル無料</li>
+                    <li><span class="check-mark"><i class="fas fa-check"></i></span>安心の再発保証あり</li>
+                    <li><span class="check-mark"><i class="fas fa-check"></i></span>現地調査無料</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="support-msg">
+            24時間365日対応いたします！
+        </div>
+
+        <div class="action-btns">
+            <a href="tel:05035280140" class="action-link btn-tel">
+                <i class="fas fa-phone-alt icon-box"></i>電話でお問合せ
+            </a>
+            
+            <a href="javascript:void(0);" onclick="showForm()" class="action-link btn-mail">
+                <i class="far fa-envelope icon-box"></i>メール相談
+            </a>
+        </div>
+
+        <div class="payment-area">
+            <h2 class="payment-head">お支払方法</h2>
+            <div class="payment-methods">
+                <div class="pay-item">
+                    <span>現金払い</span>
+                    <div class="pay-icon"><i class="fas fa-coins"></i></div>
+                </div>
+                <div class="pay-item">
+                    <span>銀行振込</span>
+                    <div class="pay-icon"><i class="fas fa-university"></i></div>
+                </div>
+            </div>
+        </div>
+
     </div>
-
-    <div class="reason-item">
-      <div class="reason-num">02</div>
-      <div class="reason-title">安心の<br>明朗会計</div>
-      <div class="reason-desc">
-        明朗会計をモットーに<br>
-        わかりやすい料金体系にて<br>
-        ご案内しております。
-      </div>
-    </div>
-
-    <div class="reason-item">
-      <div class="reason-num">03</div>
-      <div class="reason-title">充実の<br>アフターサービス</div>
-      <div class="reason-desc">
-        施工後の万が一の再発や<br>
-        トラブルにも、責任を持って<br>
-        誠実に対応いたします。
-      </div>
-    </div>
-
-    <div class="reason-item">
-      <div class="reason-num">04</div>
-      <div class="reason-title">経験豊富な<br>スタッフ</div>
-      <div class="reason-desc">
-        熟練の技術を持つプロが対応。<br>
-        豊富な実績とノウハウで<br>
-        お悩みを解決します。
-      </div>
-    </div>
-
-  </div>
-</section>
+</div>
 
 </body>
 </html>
-
