@@ -9,7 +9,7 @@
     
     <style>
         /* =========================================
-           基本設定 (Global)
+           基本設定 (Global - LP側)
            ========================================= */
         :root {
             --primary-blue: #0056b3;
@@ -1158,6 +1158,258 @@
             .action-link { font-size: 18px; padding: 15px; }
             .features-area { padding: 20px; }
         }
+
+        /* =========================================
+           8. 悪徳業者注意喚起 (追加セクション)
+           ========================================= */
+        /* 背景を黒にするためのラッパー */
+        .warning-section-wrapper {
+            background-color: #111;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* --- 共通スタイル（ストライプ） --- */
+        .stripe {
+            width: 100%;
+            height: 30px; /* 少し細めに調整 */
+            background: repeating-linear-gradient(
+                -45deg,
+                #ffe600,
+                #ffe600 20px,
+                #333 20px,
+                #333 40px
+            );
+        }
+
+        /* バナー（トリガー）のスタイル */
+        .warning-banner {
+            width: 100%;
+            max-width: 600px;
+            background-color: #fff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .banner-content {
+            padding: 30px 20px 50px 20px;
+            position: relative;
+        }
+
+        /* 背景の巨大な警告アイコン */
+        .bg-icon-banner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            height: auto;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* バナータイトル */
+        .banner-title-upper {
+            font-size: 1.6rem;
+            font-weight: 900;
+            display: inline-block;
+            position: relative;
+        }
+        .dots-mark::before {
+            content: "・・・・";
+            position: absolute;
+            top: -22px;
+            left: 0;
+            width: 100%;
+            color: #e63935;
+            font-size: 1.6rem;
+            font-weight: 900;
+        }
+        .banner-title-main {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin: 10px 0 20px 0;
+        }
+        .banner-description {
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        /* トリガーボタン */
+        .btn-trigger {
+            position: absolute;
+            bottom: -15px;
+            right: 20px;
+            background-color: #f54d42;
+            color: #fff;
+            border: none;
+            font-size: 1.4rem;
+            font-weight: bold;
+            padding: 8px 30px 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        .btn-trigger:hover {
+            transform: translateY(-2px);
+        }
+
+        /* モーダル（ポップアップ）のスタイル */
+        /* モーダル背景のオーバーレイ */
+        .modal-overlay {
+            display: none; /* 初期状態は非表示 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 20000; /* ステータスバーより上 */
+            justify-content: center;
+            align-items: flex-start; /* 上寄せにする */
+            overflow-y: auto; /* 縦スクロール可能に */
+            padding: 20px 0; /* 上下の余白 */
+        }
+
+        /* モーダル本体 */
+        .modal-content {
+            background-color: #fff;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* 閉じるボタン */
+        .close-btn {
+            position: absolute;
+            top: 40px; /* ストライプの下 */
+            right: 15px;
+            font-size: 2rem;
+            color: #666;
+            cursor: pointer;
+            z-index: 10;
+            background: #eee;
+            width: 40px;
+            height: 40px;
+            line-height: 36px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+        .close-btn:hover {
+            background: #ddd;
+            color: #333;
+        }
+
+        /* モーダルの中身 */
+        .modal-body {
+            padding: 30px 20px;
+            color: #333;
+        }
+
+        /* モーダルのヘッダー部分（タイトルとアイコン） */
+        .modal-header-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-right: 50px; /* 閉じるボタンのスペース */
+        }
+        .modal-title-wrapper {
+            text-align: left;
+        }
+        .modal-title-upper {
+            font-size: 1.4rem;
+            font-weight: 900;
+            position: relative;
+            display: inline-block;
+        }
+        /* モーダルの点々（赤色） */
+        .modal-dots::before {
+            content: "・・・・";
+            position: absolute;
+            top: -20px;
+            left: 0;
+            width: 100%;
+            color: #e63935;
+            font-size: 1.4rem;
+            font-weight: 900;
+            text-align: center;
+        }
+        .modal-title-main {
+            font-size: 2rem;
+            font-weight: 900;
+            margin: 5px 0 0 0;
+            line-height: 1.2;
+        }
+
+        /* モーダル右上の警告アイコン */
+        .modal-warning-icon {
+            width: 80px;
+            height: auto;
+            flex-shrink: 0;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+
+        /* モーダルのリード文 */
+        .modal-lead {
+            font-weight: bold;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        /* --- 注意点リストのスタイル --- */
+        .caution-list {
+            text-align: left;
+        }
+        .caution-item {
+            margin-bottom: 25px;
+        }
+        /* 赤い見出し */
+        .caution-title {
+            color: #e63935;
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+        /* 本文 */
+        .caution-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* --- スマホ対応（レスポンシブ - 注意喚起部分） --- */
+        @media (max-width: 480px) {
+            /* バナー調整 */
+            .banner-title-upper { font-size: 1.3rem; }
+            .dots-mark::before { font-size: 1.3rem; top: -18px; }
+            .banner-title-main { font-size: 1.6rem; }
+            .btn-trigger { font-size: 1.1rem; padding: 6px 20px; }
+
+            /* モーダル調整 */
+            .modal-title-upper { font-size: 1.2rem; }
+            .modal-dots::before { font-size: 1.2rem; top: -16px; }
+            .modal-title-main { font-size: 1.5rem; }
+            .modal-warning-icon { width: 60px; }
+            .modal-lead { font-size: 1rem; }
+            .caution-title { font-size: 1.1rem; }
+            .caution-text { font-size: 0.95rem; }
+            .close-btn { width: 32px; height: 32px; line-height: 28px; font-size: 1.6rem; top: 35px; right: 10px; }
+        }
+
     </style>
 </head>
 <body>
@@ -1545,6 +1797,88 @@
         </div>
     </section>
 
+    <section class="warning-section-wrapper">
+        <div class="warning-banner">
+            <div class="stripe"></div>
+            <div class="banner-content">
+                <svg class="bg-icon-banner" viewBox="0 0 100 100">
+                    <path d="M50 10 L90 85 H10 Z" fill="#fff8c4" stroke="#bfbfbf" stroke-width="6" stroke-linejoin="round"/>
+                    <circle cx="50" cy="72" r="4" fill="#999" />
+                    <path d="M47 35 L53 35 L52 60 L48 60 Z" fill="#999" />
+                </svg>
+                <div style="position: relative; z-index: 1;">
+                    <div class="banner-title-upper">
+                        <span class="dots-mark">悪徳業者</span>による
+                    </div>
+                    <div class="banner-title-main">
+                        トラブル発生中！
+                    </div>
+                    <div class="banner-description">
+                        3つの注意点をしっかり確認して、安心できる業者を選びましょう。
+                    </div>
+                </div>
+                <button id="openModalBtn" class="btn-trigger">Click ></button>
+            </div>
+            <div class="stripe"></div>
+        </div>
+    </section>
+
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <span id="closeModalBtn" class="close-btn">&times;</span>
+            
+            <div class="stripe"></div>
+
+            <div class="modal-body">
+                <div class="modal-header-area">
+                    <div class="modal-title-wrapper">
+                        <div class="modal-title-upper">
+                            <span class="modal-dots">悪徳業者</span>による
+                        </div>
+                        <div class="modal-title-main">
+                            トラブル発生中！
+                        </div>
+                    </div>
+                    <svg class="modal-warning-icon" viewBox="0 0 100 100">
+                        <path d="M50 5 L95 90 H5 Z" fill="#ffe600" stroke="#333" stroke-width="4" stroke-linejoin="round"/>
+                        <path d="M46 35 L54 35 L52 65 L48 65 Z" fill="#333" />
+                        <circle cx="50" cy="78" r="5" fill="#333" />
+                    </svg>
+                </div>
+
+                <p class="modal-lead">
+                    3つの注意点をしっかり確認して、安心できる業者を選びましょう。
+                </p>
+
+                <div class="caution-list">
+                    <div class="caution-item">
+                        <div class="caution-title">1.料金説明が不適切</div>
+                        <div class="caution-text">
+                            費用に対する明確な説明をせずに、話を進める業者には注意が必要です。<br>
+                            作業前に必ず料金設定に基づいた見積りを提示し、承諾の確認をしっかり取る業者を選びましょう。
+                        </div>
+                    </div>
+                    <div class="caution-item">
+                        <div class="caution-title">2.現地調査を丁寧に行わない</div>
+                        <div class="caution-text">
+                            現地調査を丁寧に行わずに電話や写真だけで金額や作業内容を決める悪質業者が存在します。<br>
+                            作業前に必ず現地での調査を行い、状況に応じた説明をしてくれる業者を選ぶのがおすすめです。
+                        </div>
+                    </div>
+                    <div class="caution-item">
+                        <div class="caution-title">3.調査結果が不明瞭</div>
+                        <div class="caution-text">
+                            調査内容や結果をはっきり伝えない業者によるトラブルが発生しています。<br>
+                            事前に重要なポイントを確認し、安心して任せられる業者を選びましょう。
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stripe"></div>
+        </div>
+    </div>
+
     <script>
         /* =========================================
            1. ステータスバー日時更新ロジック
@@ -1695,6 +2029,29 @@
 
             document.getElementById('panel-result').classList.add('active-panel');
         }
+
+        /* =========================================
+           3. 悪徳業者注意喚起 モーダル制御
+           ========================================= */
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modalOverlay = document.getElementById('modalOverlay');
+
+        function openModal() {
+            modalOverlay.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modalOverlay.style.display = 'none';
+        }
+
+        openModalBtn.addEventListener('click', openModal);
+        closeModalBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
     </script>
 
 </body>
