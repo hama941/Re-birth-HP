@@ -1,120 +1,272 @@
-<style>
-    /* ステータスバー全体の枠 */
-    .status-bar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 35px;
-        background-color: #000;
-        color: #fff;
-        font-family: sans-serif;
-        font-weight: bold;
-        font-size: 0.85rem;
-        z-index: 10000;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-    }
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>害獣トラブル119</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           ベーススタイル
+           ========================================= */
+        body { 
+            margin: 0; 
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            /* ★重要★ ステータスバー(35px)が固定表示されるため、
+               その分だけコンテンツ全体を下にずらします */
+            padding-top: 35px; 
+        }
 
-    /* スクロールコンテナ */
-    .scroll-container {
-        display: flex;
-        width: 100%;
-        overflow: hidden; /* コンテナからはみ出した部分は隠す */
-    }
+        /* =========================================
+           ステータスバーのスタイル
+           ========================================= */
+        .status-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 35px;
+            background-color: #000;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: bold;
+            z-index: 10000; /* 最前面に表示 */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
 
-    /* アニメーション部分 */
-    .scroll-content {
-        display: flex;
-        white-space: nowrap; /* 文字を折り返さない */
-        width: max-content;  /* コンテンツの幅を文字量に合わせる（重要） */
-        will-change: transform; /* アニメーション描画の最適化 */
-        /* 4セットあるうちの1セット分(25%)を移動させる。
-           時間は文字量に合わせて調整してください（現在は40秒）
-        */
-        animation: scroll-left 40s linear infinite;
-    }
+        .scroll-container {
+            display: flex;
+            width: 100%;
+            overflow: hidden;
+        }
 
-    @keyframes scroll-left {
-        0% { transform: translateX(0); }
-        /* 4つの要素のうち1つ分が過ぎたらリセットするため -25% */
-        100% { transform: translateX(-25%); }
-    }
+        .scroll-content {
+            display: flex;
+            white-space: nowrap;
+            width: max-content;
+            will-change: transform;
+            /* アニメーション設定：速度はここで調整 (現在は40s) */
+            animation: scroll-left 40s linear infinite;
+        }
 
-    /* テキストアイテム */
-    .text-item {
-        padding-right: 50px; /* 文章間の余白 */
-        display: flex;
-        align-items: center;
-    }
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-25%); } /* 4セット中1セット分移動したらループ */
+        }
 
-    /* 強調文字（黄色） */
-    .bar-highlight {
-        color: #ffcc00;
-        margin: 0 5px;
-    }
-</style>
+        .text-item {
+            padding-right: 50px;
+            display: flex;
+            align-items: center;
+        }
 
-<div class="status-bar">
-    <div class="scroll-container">
-        <div class="scroll-content">
-            <div class="text-item">
-                【稼働状況】<span class="current-date"></span> <span class="current-time bar-highlight"></span> 現在 
-                <span style="margin-left: 30px;" class="status-text bar-highlight">受付可能！</span> 
-                <span class="arrival-msg">（最短15分で到着可能です！）</span>
-            </div>
-            <div class="text-item">
-                【稼働状況】<span class="current-date"></span> <span class="current-time bar-highlight"></span> 現在 
-                <span style="margin-left: 30px;" class="status-text bar-highlight">受付可能！</span> 
-                <span class="arrival-msg">（最短15分で到着可能です！）</span>
-            </div>
-            <div class="text-item">
-                【稼働状況】<span class="current-date"></span> <span class="current-time bar-highlight"></span> 現在 
-                <span style="margin-left: 30px;" class="status-text bar-highlight">受付可能！</span> 
-                <span class="arrival-msg">（最短15分で到着可能です！）</span>
-            </div>
-            <div class="text-item">
-                【稼働状況】<span class="current-date"></span> <span class="current-time bar-highlight"></span> 現在 
-                <span style="margin-left: 30px;" class="status-text bar-highlight">受付可能！</span> 
-                <span class="arrival-msg">（最短15分で到着可能です！）</span>
+        .bar-highlight {
+            color: #ffcc00;
+            margin: 0 5px;
+        }
+
+        /* =========================================
+           ヘッダーのスタイル
+           ========================================= */
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: #fff;
+            border-bottom: 2px solid #f0f0f0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .catch-copy {
+            background: #FFD700;
+            color: #000;
+            font-weight: bold;
+            font-size: 13px;
+            padding: 2px 12px;
+            border-radius: 4px;
+            display: inline-block;
+            width: fit-content;
+            margin-bottom: 4px;
+            position: relative;
+        }
+        .catch-copy::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 15px;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #FFD700;
+        }
+
+        .main-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: #d70000;
+            margin: 0;
+            font-style: italic;
+            letter-spacing: -1px;
+            text-shadow: 
+                1px 1px 0 #fff, 
+                2px 2px 0 #fff, 
+                3px 3px 0 #ccc; 
+            line-height: 1.1;
+            display: flex;
+            align-items: baseline;
+        }
+        
+        .main-title span {
+            font-size: 38px;
+            color: #000;
+            margin-left: 4px;
+            -webkit-text-stroke: 1px #000;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 75px;
+            height: 75px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .btn-tel { background-color: #FF8C00; }
+        .btn-mail { background-color: #228b22; }
+        .btn i { font-size: 28px; margin-bottom: 2px; }
+
+        @media (max-width: 600px) {
+            .main-title { font-size: 22px; }
+            .main-title span { font-size: 26px; }
+            .btn { width: 65px; height: 65px; font-size: 11px; }
+        }
+
+        /* =========================================
+           メインビジュアル（画像）のスタイル
+           ========================================= */
+        .hero-section {
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            line-height: 0; /* 画像の下に隙間ができないように */
+        }
+        .hero-section img {
+            width: 100%;
+            height: auto;
+            vertical-align: bottom;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="status-bar">
+        <div class="scroll-container">
+            <div class="scroll-content">
+                <div class="text-item">
+                    【稼働状況】<span class="current-date"></span> <span class="current-time bar-highlight"></span> 現在 
+                    <span style="margin-left: 30px;" class="status-text bar-highlight">受付可能！</span> 
+                    <span class="arrival-msg">（最短15分で到着可能です！）</span>
+                </div>
+                <div class="text-item">
+                    【稼働状況】<span class="current-date"></span> <span class="current-time bar-highlight"></span> 現在 
+                    <span style="margin-left: 30px;" class="status-text bar-highlight">受付可能！</span> 
+                    <span class="arrival-msg">（最短15分で到着可能です！）</span>
+                </div>
+                <div class="text-item">
+                    【稼働状況】<span class="current-date"></span> <span class="current-time bar-highlight"></span> 現在 
+                    <span style="margin-left: 30px;" class="status-text bar-highlight">受付可能！</span> 
+                    <span class="arrival-msg">（最短15分で到着可能です！）</span>
+                </div>
+                <div class="text-item">
+                    【稼働状況】<span class="current-date"></span> <span class="current-time bar-highlight"></span> 現在 
+                    <span style="margin-left: 30px;" class="status-text bar-highlight">受付可能！</span> 
+                    <span class="arrival-msg">（最短15分で到着可能です！）</span>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <header class="header-container">
+        <div class="logo-section">
+            <div class="catch-copy">関西全域対応！！</div>
+            <h1 class="main-title">
+                害獣トラブル<span>119</span>
+            </h1>
+        </div>
 
-<script>
-    function updateStatusBarDateTime() {
-        const now = new Date();
-        const y = now.getFullYear();
-        const m = now.getMonth() + 1;
-        const d = now.getDate();
-        const hh = String(now.getHours()).padStart(2, '0');
-        const mm = String(now.getMinutes()).padStart(2, '0');
+        <div class="contact-buttons">
+            <a href="tel:0120-000-000" class="btn btn-tel">
+                <i class="fas fa-phone-alt"></i>
+                <span>電話</span>
+            </a>
+            <a href="#contact" class="btn btn-mail">
+                <i class="fas fa-envelope"></i>
+                <span>メール</span>
+            </a>
+        </div>
+    </header>
+    <div class="hero-section">
+        <picture>
+            <source srcset="lptate.jpg" media="(max-width: 767px)">
+            <img src="lpyoko.png" 
+                 alt="しつこい害虫を即日徹底駆除！" 
+                 width="1200" 
+                 height="750" 
+                 fetchpriority="high">
+        </picture>
+    </div>
+    <script>
+        function updateStatusBarDateTime() {
+            const now = new Date();
+            const y = now.getFullYear();
+            const m = now.getMonth() + 1;
+            const d = now.getDate();
+            const hh = String(now.getHours()).padStart(2, '0');
+            const mm = String(now.getMinutes()).padStart(2, '0');
+            
+            const dateStr = `${y}年${m}月${d}日`;
+            const timeStr = `${hh}:${mm}`;
+            
+            // 1. 日付と時刻の更新
+            document.querySelectorAll('.current-date').forEach(el => el.textContent = dateStr);
+            document.querySelectorAll('.current-time').forEach(el => el.textContent = timeStr);
+
+            // 2. 時間帯による表示切り替えロジック
+            const currentHour = now.getHours();
+            // 10:00〜19:59 を営業時間とする場合の設定
+            const isBusinessTime = (currentHour >= 10 && currentHour < 20);
+
+            // 表示テキストの切り替え
+            document.querySelectorAll('.status-text').forEach(el => {
+                el.textContent = isBusinessTime ? "受付可能！" : "メールでの受付中";
+            });
+
+            // 到着時間の表示/非表示切り替え
+            document.querySelectorAll('.arrival-msg').forEach(el => {
+                el.style.display = isBusinessTime ? "inline" : "none";
+            });
+        }
         
-        const dateStr = `${y}年${m}月${d}日`;
-        const timeStr = `${hh}:${mm}`;
-        
-        // 1. 日付と時刻の更新
-        document.querySelectorAll('.current-date').forEach(el => el.textContent = dateStr);
-        document.querySelectorAll('.current-time').forEach(el => el.textContent = timeStr);
+        updateStatusBarDateTime();
+        setInterval(updateStatusBarDateTime, 60000);
+    </script>
 
-        // 2. 時間帯による表示切り替えロジック
-        const currentHour = now.getHours();
-        const isBusinessTime = (currentHour >= 10 && currentHour < 20); // 10:00〜19:59
-
-        // 表示テキストの切り替え
-        document.querySelectorAll('.status-text').forEach(el => {
-            el.textContent = isBusinessTime ? "受付可能！" : "メールでの受付中";
-        });
-
-        // 到着時間の表示/非表示切り替え
-        document.querySelectorAll('.arrival-msg').forEach(el => {
-            el.style.display = isBusinessTime ? "inline" : "none";
-        });
-    }
-    
-    updateStatusBarDateTime();
-    setInterval(updateStatusBarDateTime, 60000);
-</script>
-
+</body>
+</html>
