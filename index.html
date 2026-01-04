@@ -719,7 +719,131 @@
         }
 
         /* =========================================
-           6.5. 料金比較チャート
+           6.5 (NEW) 選ばれる4つの理由
+           ========================================= */
+        .four-reasons-section {
+            padding: 40px 10px;
+            text-align: center;
+            background-color: #f4f8fd; /* 追加セクション背景色 */
+        }
+        
+        .four-reasons-header {
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .four-reasons-sub {
+            display: inline-block;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #0078d7;
+            margin-bottom: 10px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        .four-reasons-sub::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 2px;
+            background: #0078d7;
+        }
+        .four-reasons-sub::before {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 50%;
+            transform: translateX(-50%);
+            border-top: 5px solid #0078d7;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+        }
+        
+        .four-reasons-title {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #0056b3;
+            margin: 0 0 20px;
+        }
+        
+        .four-reasons-lead {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-weight: bold;
+            color: #444;
+        }
+        
+        .four-reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px; 
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .four-reasons-item {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #4fa3f7 0%, #0064c2 100%);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+            box-sizing: border-box;
+            box-shadow: 0 5px 15px rgba(0, 86, 179, 0.3);
+        }
+        
+        .four-reasons-item::after {
+            content: '';
+            position: absolute;
+            top: 6%; left: 6%; right: 6%; bottom: 6%;
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .four-reasons-num {
+            font-family: 'Arial Black', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            line-height: 1;
+            margin-bottom: 2px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .four-reasons-item-title {
+            font-size: clamp(0.85rem, 3.5vw, 1.3rem);
+            font-weight: 900;
+            margin-bottom: 5px;
+            line-height: 1.25;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .four-reasons-desc {
+            font-size: clamp(0.6rem, 2.5vw, 0.85rem);
+            line-height: 1.3;
+            font-weight: 500;
+            width: 90%;
+        }
+        
+        @media (min-width: 768px) {
+            .four-reasons-grid {
+                gap: 30px;
+            }
+            .four-reasons-desc {
+                line-height: 1.5;
+            }
+        }
+
+
+        /* =========================================
+           7. 料金比較チャート
            ========================================= */
         .chart-section-wrapper {
             background-color: #f4f8fb;
@@ -888,7 +1012,7 @@
 
 
         /* =========================================
-           7. サービス案内（安心ポイント・決済）
+           8. サービス案内（安心ポイント・決済）
            ========================================= */
         .service-guide-wrapper {
             position: relative;
@@ -1160,7 +1284,7 @@
         }
 
         /* =========================================
-           8. 悪徳業者注意喚起 (追加セクション)
+           9. 悪徳業者注意喚起 (追加セクション)
            ========================================= */
         /* 背景を黒にするためのラッパー */
         .warning-section-wrapper {
@@ -1411,7 +1535,7 @@
         }
 
         /* =========================================
-           9. サービス一覧 (最後に配置)
+           10. サービス一覧 (最後に配置)
            ========================================= */
         .service-list-section {
             background-color: #ffffff;
@@ -1598,8 +1722,8 @@
             .card-img-area { height: 130px; }
             .card-content { padding: 15px; }
             .service-title { font-size: 16px; margin-bottom: 8px; }
-            .service-price {
-                font-size: 24px;
+            .service-price { 
+                font-size: 24px; 
                 margin-bottom: 12px;
                 padding-bottom: 12px;
             }
@@ -1903,6 +2027,59 @@
         </div>
     </section>
 
+    <section class="four-reasons-section">
+      <div class="four-reasons-header">
+        <div class="four-reasons-sub">安心してお任せください！</div>
+        <h1 class="four-reasons-title">選ばれる4つの理由</h1>
+        <p class="four-reasons-lead">
+          選ばれるには理由があります。<br>
+          安心・迅速・確実なサービスを<br>
+          お約束します。
+        </p>
+      </div>
+
+      <div class="four-reasons-grid">
+        <div class="four-reasons-item">
+          <div class="four-reasons-num">01</div>
+          <div class="four-reasons-item-title">エリア密着の<br>迅速な対応</div>
+          <div class="four-reasons-desc">
+            最短10分で駆けつけ、<br>
+            「早く・正確に」<br>
+            解決いたします。
+          </div>
+        </div>
+
+        <div class="four-reasons-item">
+          <div class="four-reasons-num">02</div>
+          <div class="four-reasons-item-title">安心の<br>明朗会計</div>
+          <div class="four-reasons-desc">
+            明朗会計をモットーに<br>
+            わかりやすい料金体系にて<br>
+            ご案内しております。
+          </div>
+        </div>
+
+        <div class="four-reasons-item">
+          <div class="four-reasons-num">03</div>
+          <div class="four-reasons-item-title">充実の<br>アフターサービス</div>
+          <div class="four-reasons-desc">
+            施工後の万が一の<br>
+            トラブルにも責任を持って<br>
+            対応いたします。
+          </div>
+        </div>
+
+        <div class="four-reasons-item">
+          <div class="four-reasons-num">04</div>
+          <div class="four-reasons-item-title">経験豊富な<br>スタッフ</div>
+          <div class="four-reasons-desc">
+            熟練の技術を持つプロが<br>
+            豊富な実績とノウハウで<br>
+            解決します。
+          </div>
+        </div>
+      </div>
+    </section>
     <section class="service-guide-wrapper">
         <div class="info-container">
             <div class="info-card">
