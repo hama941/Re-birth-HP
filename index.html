@@ -8,18 +8,20 @@
     
     <style>
         /* =========================================
-           ベーススタイル
+           基本設定 (Global)
            ========================================= */
+        * {
+            box-sizing: border-box; /* 枠線の計算を直感的にする */
+        }
         body { 
             margin: 0; 
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            /* ★重要★ ステータスバー(35px)が固定表示されるため、
-               その分だけコンテンツ全体を下にずらします */
+            /* ステータスバー(35px)の分だけ下げる */
             padding-top: 35px; 
         }
 
         /* =========================================
-           ステータスバーのスタイル
+           1. ステータスバー
            ========================================= */
         .status-bar {
             position: fixed;
@@ -31,45 +33,39 @@
             color: #fff;
             font-size: 0.85rem;
             font-weight: bold;
-            z-index: 10000; /* 最前面に表示 */
+            z-index: 10000;
             overflow: hidden;
             display: flex;
             align-items: center;
         }
-
         .scroll-container {
             display: flex;
             width: 100%;
             overflow: hidden;
         }
-
         .scroll-content {
             display: flex;
             white-space: nowrap;
             width: max-content;
             will-change: transform;
-            /* アニメーション設定：速度はここで調整 (現在は40s) */
             animation: scroll-left 40s linear infinite;
         }
-
         @keyframes scroll-left {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-25%); } /* 4セット中1セット分移動したらループ */
+            100% { transform: translateX(-25%); }
         }
-
         .text-item {
             padding-right: 50px;
             display: flex;
             align-items: center;
         }
-
         .bar-highlight {
             color: #ffcc00;
             margin: 0 5px;
         }
 
         /* =========================================
-           ヘッダーのスタイル
+           2. ヘッダーエリア
            ========================================= */
         .header-container {
             display: flex;
@@ -81,13 +77,12 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-
         .logo-section {
             display: flex;
             flex-direction: column;
         }
-
-        .catch-copy {
+        /* ヘッダー用のキャッチコピー */
+        .header-catch-copy {
             background: #FFD700;
             color: #000;
             font-weight: bold;
@@ -99,7 +94,7 @@
             margin-bottom: 4px;
             position: relative;
         }
-        .catch-copy::after {
+        .header-catch-copy::after {
             content: "";
             position: absolute;
             bottom: -5px;
@@ -108,7 +103,6 @@
             border-right: 5px solid transparent;
             border-top: 5px solid #FFD700;
         }
-
         .main-title {
             font-size: 32px;
             font-weight: 900;
@@ -116,22 +110,17 @@
             margin: 0;
             font-style: italic;
             letter-spacing: -1px;
-            text-shadow: 
-                1px 1px 0 #fff, 
-                2px 2px 0 #fff, 
-                3px 3px 0 #ccc; 
+            text-shadow: 1px 1px 0 #fff, 2px 2px 0 #fff, 3px 3px 0 #ccc; 
             line-height: 1.1;
             display: flex;
             align-items: baseline;
         }
-        
         .main-title span {
             font-size: 38px;
             color: #000;
             margin-left: 4px;
             -webkit-text-stroke: 1px #000;
         }
-
         .contact-buttons {
             display: flex;
             gap: 10px;
@@ -160,18 +149,154 @@
         }
 
         /* =========================================
-           メインビジュアル（画像）のスタイル
+           3. メインビジュアル
            ========================================= */
         .hero-section {
             width: 100%;
             max-width: 100%;
             overflow: hidden;
-            line-height: 0; /* 画像の下に隙間ができないように */
+            line-height: 0;
         }
         .hero-section img {
             width: 100%;
             height: auto;
             vertical-align: bottom;
+        }
+
+        /* =========================================
+           4. エリア対応セクション (新規追加)
+           ========================================= */
+        /* 背景色をつけるためのラッパー */
+        .area-section-wrapper {
+            background-color: #f0f0f0; /* 背景グレー */
+            padding: 40px 20px;       /* 上下の余白 */
+            display: flex;
+            justify-content: center;  /* 中央寄せ */
+        }
+
+        .area-card {
+            max-width: 500px;
+            width: 100%;
+            background-color: #fff;
+            border: 3px solid #009ae0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .area-header {
+            background-color: #009ae0;
+            padding: 15px 10px;
+            text-align: center;
+        }
+
+        .header-prefectures {
+            color: #fff100;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .header-title {
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+        }
+
+        .area-body {
+            padding: 20px;
+            text-align: center;
+            background-image: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 154, 224, 0.05) 3px,
+                rgba(0, 154, 224, 0.05) 4px
+            );
+        }
+
+        /* エリア部分専用のキャッチコピー（クラス名を変更しました） */
+        .area-catch-copy {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .emphasis-text {
+            position: relative;
+            color: #0056b3;
+            margin-right: 5px;
+        }
+        .emphasis-text::before {
+            content: '● ●';
+            position: absolute;
+            top: -15px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #ff6f00;
+            font-size: 0.6em;
+            letter-spacing: 0.2em;
+        }
+
+        .highlight-number {
+            font-size: 3.5rem;
+            font-style: italic;
+            font-weight: 900;
+            color: #004ea2;
+            line-height: 1;
+            margin: 0 5px;
+            font-family: sans-serif;
+        }
+
+        .suffix {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .sub-text {
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            font-size: 1rem;
+            color: #222;
+        }
+
+        .description {
+            font-size: 0.95rem;
+            margin: 0 0 20px 0;
+            line-height: 1.5;
+            color: #444;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .map-container {
+            width: 100%;
+            position: relative;
+        }
+
+        .map-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            min-height: 250px;
+            background-color: #eee;
+            object-fit: contain;
+        }
+
+        /* エリアセクション用のスマホ調整 */
+        @media (max-width: 480px) {
+            .header-prefectures { font-size: 1rem; }
+            .header-title { font-size: 1.3rem; }
+            .area-catch-copy { font-size: 1.2rem; }
+            .highlight-number { font-size: 2.8rem; }
         }
     </style>
 </head>
@@ -203,9 +328,10 @@
             </div>
         </div>
     </div>
+
     <header class="header-container">
         <div class="logo-section">
-            <div class="catch-copy">関西全域対応！！</div>
+            <div class="header-catch-copy">関西全域対応！！</div>
             <h1 class="main-title">
                 害獣トラブル<span>119</span>
             </h1>
@@ -222,6 +348,7 @@
             </a>
         </div>
     </header>
+
     <div class="hero-section">
         <picture>
             <source srcset="lptate.jpg" media="(max-width: 767px)">
@@ -232,6 +359,31 @@
                  fetchpriority="high">
         </picture>
     </div>
+
+    <div class="area-section-wrapper">
+        <div class="area-card">
+            <div class="area-header">
+                <div class="header-prefectures">大阪府・京都府・兵庫県・奈良県</div>
+                <div class="header-title">近郊エリア 対応</div>
+            </div>
+
+            <div class="area-body">
+                <div class="area-catch-copy">
+                    <span class="emphasis-text">最短</span>
+                    <span class="highlight-number">10分</span>
+                    <span class="suffix">で駆けつけ！</span>
+                </div>
+
+                <p class="sub-text">多くの拠点でスタッフが待機しています。</p>
+                <p class="description">お客様のお住まいエリアの近くの拠点から緊急出動いたします！</p>
+
+                <div class="map-container">
+                    <img src="map_placeholder.png" alt="対応エリアマップ：大阪・京都・兵庫・奈良">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         function updateStatusBarDateTime() {
             const now = new Date();
@@ -250,7 +402,6 @@
 
             // 2. 時間帯による表示切り替えロジック
             const currentHour = now.getHours();
-            // 10:00〜19:59 を営業時間とする場合の設定
             const isBusinessTime = (currentHour >= 10 && currentHour < 20);
 
             // 表示テキストの切り替え
