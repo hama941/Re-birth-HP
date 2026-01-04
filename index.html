@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>害獣トラブル119 - 関西全域対応 | 安心・低価格の害虫駆除サービス</title>
+    <title>害獣トラブル119 - 関西全域対応</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
     <style>
         /* =========================================
-           基本・共通設定 (Global)
+            基本設定 (Global)
            ========================================= */
         :root {
             --primary-blue: #0056b3;
@@ -25,34 +25,16 @@
         * {
             box-sizing: border-box;
         }
-
         body { 
             margin: 0; 
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             padding-top: 35px; /* ステータスバー分 */
             color: #333;
             background-color: #fff;
-            line-height: 1.6;
-        }
-
-        .lp-container-sub {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* 共通：セクションカード */
-        .section-card {
-            background: var(--white);
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            margin-bottom: 40px;
-            overflow: hidden;
-            box-sizing: border-box;
         }
 
         /* =========================================
-           1. ステータスバー
+            1. ステータスバー
            ========================================= */
         .status-bar {
             position: fixed;
@@ -96,7 +78,7 @@
         }
 
         /* =========================================
-           2. ヘッダー
+            2. ヘッダーエリア
            ========================================= */
         .header-container {
             display: flex;
@@ -133,7 +115,7 @@
             border-right: 5px solid transparent;
             border-top: 5px solid #FFD700;
         }
-        .main-title-header {
+        .main-title {
             font-size: 32px;
             font-weight: 900;
             color: #d70000;
@@ -145,7 +127,7 @@
             display: flex;
             align-items: baseline;
         }
-        .main-title-header span {
+        .main-title span {
             font-size: 38px;
             color: #000;
             margin-left: 4px;
@@ -173,13 +155,13 @@
         .btn i { font-size: 28px; margin-bottom: 2px; }
 
         @media (max-width: 600px) {
-            .main-title-header { font-size: 22px; }
-            .main-title-header span { font-size: 26px; }
+            .main-title { font-size: 22px; }
+            .main-title span { font-size: 26px; }
             .btn { width: 65px; height: 65px; font-size: 11px; }
         }
 
         /* =========================================
-           3. メインビジュアル
+            3. メインビジュアル
            ========================================= */
         .hero-section {
             width: 100%;
@@ -194,7 +176,7 @@
         }
 
         /* =========================================
-           4. 対応エリア
+            4. エリア対応セクション
            ========================================= */
         .area-section-wrapper {
             background-color: #f0f0f0;
@@ -223,7 +205,7 @@
             margin-bottom: 5px;
             letter-spacing: 1px;
         }
-        .header-title-area {
+        .header-title {
             color: #fff;
             font-weight: bold;
             font-size: 1.6rem;
@@ -275,21 +257,46 @@
             margin: 0 5px;
             font-family: sans-serif;
         }
-        .suffix { font-size: 1.2rem; color: #333; }
-        .sub-text-area { font-weight: bold; margin: 0 0 10px 0; font-size: 1rem; color: #222; }
-        .description-area { font-size: 0.95rem; margin: 0 0 20px 0; line-height: 1.5; color: #444; text-align: left; display: inline-block; }
-        .map-container { width: 100%; position: relative; }
-        .map-container img { width: 100%; height: auto; display: block; min-height: 250px; background-color: #eee; object-fit: contain; }
+        .suffix {
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .sub-text {
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            font-size: 1rem;
+            color: #222;
+        }
+        .description {
+            font-size: 0.95rem;
+            margin: 0 0 20px 0;
+            line-height: 1.5;
+            color: #444;
+            text-align: left;
+            display: inline-block;
+        }
+        .map-container {
+            width: 100%;
+            position: relative;
+        }
+        .map-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            min-height: 250px;
+            background-color: #eee;
+            object-fit: contain;
+        }
 
         @media (max-width: 480px) {
             .header-prefectures { font-size: 1rem; }
-            .header-title-area { font-size: 1.3rem; }
+            .header-title { font-size: 1.3rem; }
             .area-catch-copy { font-size: 1.2rem; }
             .highlight-number { font-size: 2.8rem; }
         }
 
         /* =========================================
-           5. 料金シミュレーション
+            5. 料金シミュレーション
            ========================================= */
         .simulation-wrapper {
             background: linear-gradient(to bottom, #f0faff, #dcefff);
@@ -298,26 +305,95 @@
             justify-content: center;
             align-items: flex-start;
         }
-        .simulation-container { width: 100%; max-width: 900px; position: relative; }
-        .sim-header { text-align: center; margin-bottom: 25px; position: relative; }
-        .sim-sub-title { display: inline-block; font-size: 16px; color: #0088ea; font-weight: bold; border-bottom: 2px solid #8bd1ff; margin-bottom: 10px; }
-        .sim-main-title { font-size: 32px; font-weight: bold; color: #005691; margin: 0; letter-spacing: 1px; text-shadow: 2px 2px 0px #fff; }
-
-        .step-tabs { display: flex; width: 100%; border-radius: 5px 5px 0 0; overflow: hidden; box-shadow: 0 -2px 5px rgba(0,0,0,0.05); position: relative; z-index: 2; }
-        .tab-item { flex: 1; padding: 15px 5px; text-align: center; font-weight: bold; font-size: 15px; color: #666; background-color: #aebdce; border-right: 1px solid #999; position: relative; cursor: default; transition: background-color 0.3s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .simulation-container {
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+        }
+        .sim-header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .sim-sub-title {
+            display: inline-block;
+            font-size: 16px;
+            color: #0088ea;
+            font-weight: bold;
+            border-bottom: 2px solid #8bd1ff;
+            margin-bottom: 10px;
+        }
+        .sim-main-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #005691;
+            margin: 0;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 0px #fff;
+        }
+        .step-tabs {
+            display: flex;
+            width: 100%;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 2;
+        }
+        .tab-item {
+            flex: 1;
+            padding: 15px 5px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            color: #666;
+            background-color: #aebdce;
+            border-right: 1px solid #999;
+            position: relative;
+            cursor: default;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
         .tab-item.completed, .tab-item.active { cursor: pointer; }
-        .tab-item.active { background-color: #0088ea; color: #fff; border-right: 1px solid #006ebc; }
-        .tab-item.completed { background-color: #9ac6e8; color: #00406b; border-right: 1px solid #8ab6d6; }
+        .tab-item.active {
+            background-color: #0088ea;
+            color: #fff;
+            border-right: 1px solid #006ebc;
+        }
+        .tab-item.completed {
+            background-color: #9ac6e8; 
+            color: #00406b;
+            border-right: 1px solid #8ab6d6;
+        }
         .tab-arrow { font-size: 10px; margin-left: 5px; display: inline-block; }
-        .tab-item.result-btn { background-color: #fef29e; color: #e85a5a; border-right: none; font-weight: 900; }
+        .tab-item.result-btn {
+            background-color: #fef29e;
+            color: #e85a5a;
+            border-right: none;
+            font-weight: 900;
+            cursor: default;
+        }
         .tab-item.result-btn.ready { background-color: #ffeb3b; }
 
-        .content-box { background-color: #fff; border: 3px solid #0088ea; border-radius: 0 0 8px 8px; min-height: 280px; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 1; transition: all 0.3s ease; }
+        .content-box {
+            background-color: #fff;
+            border: 3px solid #0088ea;
+            border-radius: 0 0 8px 8px;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
         .content-box.mode-result { border-color: #fff9c4; background-color: #fff9c4; padding: 0; }
         .content-box.mode-form { border: 8px solid #fff9c4; background-color: #fff; padding: 0; }
         
         .selection-panel { padding: 30px 20px; text-align: center; width: 100%; }
-        .box-title-sim { color: #005691; font-size: 20px; font-weight: bold; margin-bottom: 30px; }
+        .box-title { color: #005691; font-size: 20px; font-weight: bold; margin-bottom: 30px; }
         .options-grid { display: grid; gap: 20px; max-width: 800px; margin: 0 auto; width: 100%; }
         .col-4 { grid-template-columns: repeat(4, 1fr); }
         .col-3 { grid-template-columns: repeat(3, 1fr); }
@@ -325,9 +401,8 @@
         .option-btn:hover { background-color: #eaf6ff; transform: translateY(-2px); box-shadow: 0 3px 6px rgba(0,0,0,0.1); }
         .back-area { margin-top: 30px; text-align: center; }
         .back-btn { background-color: #eee; color: #666; border: none; padding: 10px 30px; border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 14px; }
-        .back-btn:hover { background-color: #ddd; }
 
-        .result-panel-design { background-color: transparent; padding: 40px 20px; text-align: center; width: 100%; }
+        .result-panel-design { padding: 40px 20px; text-align: center; width: 100%; }
         .result-lead { font-size: 18px; font-weight: bold; margin-bottom: 15px; }
         .result-price { font-size: 24px; font-weight: bold; color: #333; margin-bottom: 20px; }
         .price-number { font-size: 56px; color: #ff5722; font-weight: 900; line-height: 1; }
@@ -336,7 +411,7 @@
         .discount-info { font-size: 16px; font-weight: bold; margin-bottom: 10px; }
         .red-highlight { color: #ff0000; font-size: 20px; }
         .price-disclaimer { font-size: 12px; color: #666; margin-bottom: 30px; }
-        .call-area-sim { margin-bottom: 30px; }
+        .call-area { margin-bottom: 30px; }
         .call-lead { color: #0088ea; font-weight: bold; margin-bottom: 5px; font-size: 16px; }
         .call-number { display: block; font-size: 50px; font-weight: 900; color: #005691; text-decoration: none; line-height: 1.1; }
         .call-time { font-size: 18px; font-weight: bold; color: #005691; }
@@ -354,7 +429,10 @@
         .badge { display: inline-block; font-size: 11px; padding: 2px 6px; border-radius: 4px; margin-left: 8px; vertical-align: middle; }
         .badge-required { background-color: #f36e21; color: #fff; }
         .form-input, .form-textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; background-color: #f9f9f9; }
-        .submit-btn { background: linear-gradient(to bottom, #5cb1f7, #2d7cd1); color: #fff; font-size: 20px; font-weight: bold; border: none; padding: 15px 60px; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.15); display: inline-flex; align-items: center; }
+        .form-textarea { height: 120px; resize: vertical; }
+        .submit-area { text-align: center; margin-top: 30px; }
+        .submit-btn { background: linear-gradient(to bottom, #5cb1f7, #2d7cd1); color: #fff; font-size: 20px; font-weight: bold; border: none; padding: 15px 60px; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.15); transition: transform 0.1s; display: inline-flex; align-items: center; }
+        .submit-btn::after { content: "▶"; font-size: 14px; margin-left: 15px; }
 
         .step-panel { display: none; animation: fadeIn 0.4s ease; width: 100%; }
         .step-panel.active-panel { display: block; }
@@ -369,25 +447,63 @@
         }
 
         /* =========================================
-           6. サービス・安さの理由・比較
+            6. サービス案内セクション
            ========================================= */
-        .reason-section { padding: 50px 20px; background: linear-gradient(to bottom, #eef9ff 0%, #fff 100%); text-align: center; }
-        .main-title-reason { font-size: 1.8rem; font-weight: 900; color: var(--primary-blue); margin-bottom: 30px; }
-        .comparison-wrapper { display: flex; gap: 20px; justify-content: center; align-items: stretch; margin-top: 40px; }
+        .service-guide-wrapper { position: relative; padding: 50px 20px; overflow: hidden; font-family: 'Noto Sans JP', sans-serif; }
+        .service-guide-wrapper::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: linear-gradient(to bottom, rgba(224, 247, 250, 0.8) 0%, rgba(255, 255, 255, 0.9) 60%), repeating-linear-gradient(45deg, transparent 0, transparent 10px, rgba(0, 136, 234, 0.05) 10px, rgba(0, 136, 234, 0.05) 20px), repeating-linear-gradient(-45deg, transparent 0, transparent 10px, rgba(0, 136, 234, 0.05) 10px, rgba(0, 136, 234, 0.05) 20px), radial-gradient(#e1f5fe 20%, transparent 20%) 0 0, radial-gradient(#e1f5fe 20%, transparent 20%) 10px 10px; background-size: auto, auto, auto, 40px 40px, 40px 40px; background-color: #f0faff; opacity: 0.6; }
+        .service-guide-wrapper::after { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; max-width: 600px; height: 80%; background-image: url('cockroach-insecticide.png'); background-repeat: no-repeat; background-position: center; background-size: contain; z-index: 0; opacity: 0.15; pointer-events: none; }
+        
+        .info-container { width: 100%; max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
+        .info-card { background-color: rgba(255, 255, 255, 0.92); border-radius: 20px; box-shadow: 0 15px 35px rgba(0, 86, 145, 0.15); overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.8); }
+        .info-header { text-align: center; padding: 40px 20px 20px; background-image: radial-gradient(#cfd8dc 1px, transparent 1px); background-size: 20px 20px; background-color: #f8fafa; }
+        .guide-catch-copy { font-size: 20px; font-weight: bold; color: #555; margin-bottom: 10px; display: block; }
+        .guide-main-copy { font-size: 32px; font-weight: 900; color: #005691; line-height: 1.3; margin: 0; letter-spacing: 0.05em; }
+        .highlight-text { color: #0088ea; position: relative; display: inline-block; }
+        .highlight-text::after { content: ''; position: absolute; bottom: 5px; left: 0; width: 100%; height: 10px; background-color: rgba(255, 235, 59, 0.4); z-index: -1; transform: rotate(-2deg); }
+        .features-area { padding: 20px 30px; }
+        .features-box { background-color: #f0faff; border-radius: 15px; padding: 25px; border: 2px solid #b3e5fc; }
+        .features-title-wrap { text-align: center; margin-bottom: 20px; display: flex; justify-content: center; align-items: center; }
+        .features-title { font-weight: 700; color: #0088ea; font-size: 20px; margin: 0 15px; }
+        .title-icon { color: #0088ea; font-size: 24px; }
+        .features-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .features-list li { font-size: 15px; font-weight: 700; color: #444; display: flex; align-items: center; }
+        .check-mark { color: #fff; background-color: #0088ea; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-size: 12px; flex-shrink: 0; }
+        .support-msg { text-align: center; font-size: 20px; font-weight: 700; color: #005691; margin: 10px 0 30px; }
+        .action-btns { padding: 0 30px 40px; display: flex; flex-direction: column; gap: 20px; }
+        .action-link { display: flex; justify-content: center; align-items: center; width: 100%; padding: 18px; border-radius: 50px; text-decoration: none; color: #fff; font-size: 20px; font-weight: 700; box-shadow: 0 8px 20px rgba(0,0,0,0.15); transition: all 0.3s ease; position: relative; overflow: hidden; cursor: pointer; }
+        .btn-tel-large { background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%); }
+        .btn-tel-large::after { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: rgba(255,255,255,0.2); transform: rotate(45deg); animation: shine 3s infinite; }
+        @keyframes shine { 0% { transform: translateX(-100%) rotate(45deg); } 20% { transform: translateX(100%) rotate(45deg); } 100% { transform: translateX(100%) rotate(45deg); } }
+        .btn-mail-large { background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%); }
+        .payment-area { border-top: 1px solid #eee; background-color: #fafafa; }
+        .payment-head { background-color: #005691; color: #fff; text-align: center; padding: 12px; margin: 0; font-size: 16px; font-weight: 700; }
+        .payment-methods { display: flex; padding: 20px; justify-content: center; gap: 40px; }
+        .pay-item { text-align: center; display: flex; flex-direction: column; align-items: center; color: #555; font-weight: 700; font-size: 14px; }
+        .pay-icon { font-size: 28px; color: #005691; margin-top: 8px; background: #fff; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
+
+        /* =========================================
+            7. 追加パーツ（安さの理由・チャート・バナー）
+           ========================================= */
+        .lp-container-sub { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .section-card-sub { background: var(--white); border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 40px; overflow: hidden; box-sizing: border-box; }
+        .reason-section { padding: 50px 20px; background: linear-gradient(to bottom, #eef9ff 0%, #fff 100%); }
+        .header-area { text-align: center; margin-bottom: 30px; }
+        .sub-title-reason { display: inline-block; font-size: 1rem; font-weight: bold; color: var(--primary-blue); border-bottom: 2px solid var(--accent-cyan); margin-bottom: 8px; }
+        .main-title-reason { font-size: 1.8rem; font-weight: 900; color: var(--primary-blue); margin: 0; }
+        .comparison-wrapper { display: flex; gap: 20px; justify-content: center; align-items: stretch; }
         .comp-box { background-color: var(--white); flex: 1; padding: 25px 15px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; border: 1px solid var(--border-gray); }
         .box-ours { border: 3px solid var(--primary-blue); box-shadow: 0 5px 15px rgba(0,86,179,0.15); transform: scale(1.03); z-index: 2; }
-        .box-title-comp { font-size: 1rem; font-weight: 900; margin-bottom: 20px; }
+        .box-title-comp { font-size: 1rem; font-weight: 900; margin-bottom: 20px; text-align: center; }
         .flow-diagram { display: flex; align-items: center; justify-content: center; width: 100%; margin-bottom: 20px; gap: 5px; }
         .flow-item { display: flex; flex-direction: column; align-items: center; width: 50px; }
         .icon-svg { width: 36px; height: 36px; fill: #555; }
         .flow-label { font-size: 0.75rem; font-weight: bold; writing-mode: vertical-rl; }
-        .middle-agent { background-color: #333; padding: 8px 4px; border-radius: 6px; color: #fff; display: flex; flex-direction: column; align-items: center; }
+        .middle-agent { background-color: #333; padding: 8px 4px; border-radius: 6px; display: flex; flex-direction: column; align-items: center; color: #fff; }
         .dashed-box { border: 2px dashed #bbb; width: 35px; height: 80px; border-radius: 6px; }
-        .bottom-desc { width: 100%; margin-top: auto; padding: 12px 5px; border-radius: 8px; font-size: 0.85rem; font-weight: bold; }
+        .bottom-desc { width: 100%; margin-top: auto; padding: 12px 5px; border-radius: 8px; font-size: 0.85rem; font-weight: bold; text-align: center; }
         .desc-general { background-color: #f2f2f2; }
         .desc-ours { background-color: var(--primary-blue); color: #fff; }
 
-        /* 料金チャート */
         .price-section { padding: 50px 20px; background: linear-gradient(180deg, #ffffff 0%, #eef6ff 100%); }
         .chart-area { display: flex; justify-content: center; align-items: flex-end; gap: 20px; padding-bottom: 20px; }
         .column { width: 180px; display: flex; flex-direction: column; align-items: center; }
@@ -395,7 +511,6 @@
         .puck-body { position: absolute; bottom: 0; width: 100%; height: 45px; border-radius: 0 0 50% 50% / 0 0 15px 15px; box-shadow: 0 8px 10px -4px rgba(0,0,0,0.2); }
         .puck-lid { position: absolute; top: 0; width: 100%; height: 30px; border-radius: 50%; }
         .puck-text { position: absolute; width: 100%; z-index: 20; font-size: 0.9rem; font-weight: 700; color: #fff; text-align: center; top: 36px; }
-        
         .type-red .puck-body { background: linear-gradient(to right, #d32f2f, #f44336, #d32f2f); }
         .type-red .puck-lid { background: linear-gradient(to bottom, #ffcdd2, #e57373); }
         .type-orange .puck-body { background: linear-gradient(to right, #f57c00, #ff9800, #f57c00); }
@@ -409,49 +524,22 @@
         .type-ghost .puck-body { background: #f0f0f0; border: 1px solid #dcdcdc; border-top: none; }
         .type-ghost .puck-lid { background: #fff; border: 1px solid #dcdcdc; }
         .type-ghost .puck-text { color: #ccc; }
+        .company-name { margin-top: 30px; font-weight: 700; font-size: 1rem; color: #8899a6; }
+        .company-name.ours { color: var(--primary-blue); font-size: 1.2rem; }
 
-        /* =========================================
-           7. サービス案内（安心ポイント）
-           ========================================= */
-        .service-guide-wrapper { position: relative; padding: 50px 20px; overflow: hidden; background-color: #f0faff; }
-        .info-card { background-color: rgba(255, 255, 255, 0.92); border-radius: 20px; box-shadow: 0 15px 35px rgba(0, 86, 145, 0.15); overflow: hidden; max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
-        .info-header { text-align: center; padding: 40px 20px 20px; background-color: #f8fafa; }
-        .guide-main-copy { font-size: 32px; font-weight: 900; color: #005691; }
-        .highlight-text { color: #0088ea; position: relative; display: inline-block; }
-        .features-box { background-color: #f0faff; border-radius: 15px; padding: 25px; border: 2px solid #b3e5fc; margin: 20px 30px; }
-        .features-list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-        .features-list li { font-size: 15px; font-weight: 700; display: flex; align-items: center; }
-        .check-mark { background-color: #0088ea; color: #fff; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-size: 12px; }
-        .action-btns { padding: 0 30px 40px; display: flex; flex-direction: column; gap: 20px; }
-        .action-link { display: flex; justify-content: center; align-items: center; width: 100%; padding: 18px; border-radius: 50px; text-decoration: none; color: #fff; font-size: 20px; font-weight: 700; box-shadow: 0 8px 20px rgba(0,0,0,0.15); transition: all 0.3s ease; }
-        .btn-tel-large { background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%); }
-        .btn-mail-large { background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%); }
-
-        /* =========================================
-           8. 悪徳業者注意喚起
-           ========================================= */
-        .warning-banner { text-align: center; position: relative; margin-top: 40px; }
+        .warning-banner { text-align: center; position: relative; }
         .stripe { width: 100%; height: 25px; background: repeating-linear-gradient(-45deg, var(--warning-yellow), var(--warning-yellow) 20px, #333 20px, #333 40px); }
         .banner-content { padding: 40px 20px 60px; position: relative; }
-        .banner-title-main { font-size: 2.2rem; font-weight: 900; margin: 10px 0 20px; color: #000; }
-        .btn-trigger { background-color: #f54d42; color: #fff; border: none; font-size: 1.4rem; font-weight: bold; padding: 10px 30px; border-radius: 4px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-
-        /* モーダル */
+        .banner-title-main-sub { font-size: 2.2rem; font-weight: 900; margin: 10px 0 20px; color: #000; }
+        .btn-trigger { position: absolute; bottom: -15px; right: 20px; background-color: #f54d42; color: #fff; border: none; font-size: 1.4rem; font-weight: bold; padding: 10px 30px; border-radius: 4px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: transform 0.2s; z-index: 5; }
+        
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 20000; justify-content: center; align-items: flex-start; overflow-y: auto; padding: 20px 0; }
         .modal-content { background-color: #fff; width: 92%; max-width: 600px; border-radius: 8px; overflow: hidden; position: relative; }
         .close-btn { position: absolute; top: 35px; right: 15px; font-size: 2rem; color: #666; cursor: pointer; z-index: 10; background: #eee; width: 35px; height: 35px; line-height: 32px; text-align: center; border-radius: 50%; }
         .modal-body { padding: 30px 20px; color: #333; }
         .caution-item { margin-bottom: 20px; text-align: left; }
-        .caution-title { color: var(--danger-red); font-size: 1.2rem; font-weight: 900; }
-
-        @media (max-width: 600px) {
-            .comparison-wrapper { flex-direction: column; align-items: center; }
-            .comp-box { width: 100%; max-width: 320px; }
-            .chart-area { gap: 8px; }
-            .column { width: 32%; }
-            .puck-text { font-size: 0.6rem; }
-            .banner-title-main { font-size: 1.6rem; }
-        }
+        .caution-title { color: var(--danger-red); font-size: 1.2rem; font-weight: 900; margin-bottom: 5px; }
+        .caution-text { font-size: 0.95rem; line-height: 1.5; }
     </style>
 </head>
 <body>
@@ -469,6 +557,11 @@
                     <span style="margin-left: 30px;" class="status-text bar-highlight">受付可能！</span> 
                     <span class="arrival-msg">（最短15分で到着可能です！）</span>
                 </div>
+                <div class="text-item">
+                    【稼働状況】<span class="current-date"></span> <span class="current-time bar-highlight"></span> 現在 
+                    <span style="margin-left: 30px;" class="status-text bar-highlight">受付可能！</span> 
+                    <span class="arrival-msg">（最短15分で到着可能です！）</span>
+                </div>
             </div>
         </div>
     </div>
@@ -476,7 +569,7 @@
     <header class="header-container">
         <div class="logo-section">
             <div class="header-catch-copy">関西全域対応！！</div>
-            <h1 class="main-title-header">害獣トラブル<span>119</span></h1>
+            <h1 class="main-title">害獣トラブル<span>119</span></h1>
         </div>
         <div class="contact-buttons">
             <a href="tel:05035280140" class="btn btn-tel">
@@ -491,7 +584,7 @@
     <div class="hero-section">
         <picture>
             <source srcset="lptate.jpg" media="(max-width: 767px)">
-            <img src="lpyoko.png" alt="しつこい害虫を即日徹底駆除！" width="1200" height="750">
+            <img src="lpyoko.png" alt="しつこい害虫を即日徹底駆除！" width="1200" height="750" fetchpriority="high">
         </picture>
     </div>
 
@@ -499,14 +592,14 @@
         <div class="area-card">
             <div class="area-header">
                 <div class="header-prefectures">大阪府・京都府・兵庫県・奈良県</div>
-                <div class="header-title-area">近郊エリア 対応</div>
+                <div class="header-title">近郊エリア 対応</div>
             </div>
             <div class="area-body">
                 <div class="area-catch-copy">
                     <span class="emphasis-text">最短</span><span class="highlight-number">10分</span><span class="suffix">で駆けつけ！</span>
                 </div>
-                <p class="sub-text-area">多くの拠点でスタッフが待機しています。</p>
-                <p class="description-area">お客様のお住まいエリアの近くの拠点から緊急出動いたします！</p>
+                <p class="sub-text">多くの拠点でスタッフが待機しています。</p>
+                <p class="description">お客様のお住まいエリアの近くの拠点から緊急出動いたします！</p>
                 <div class="map-container">
                     <img src="map_placeholder.png" alt="対応エリアマップ">
                 </div>
@@ -528,7 +621,7 @@
             </div>
             <div id="main-content-box" class="content-box">
                 <div id="panel-1" class="step-panel active-panel selection-panel">
-                    <div class="box-title-sim">害虫の種類を選択してください。</div>
+                    <div class="box-title">害虫の種類を選択してください。</div>
                     <div class="options-grid col-3">
                         <button class="option-btn" onclick="nextStep(1, 'ゴキブリ')">ゴキブリ</button>
                         <button class="option-btn" onclick="nextStep(1, 'ハチ・ハチの巣')">ハチ・ハチの巣</button>
@@ -539,7 +632,7 @@
                     </div>
                 </div>
                 <div id="panel-2" class="step-panel selection-panel">
-                    <div class="box-title-sim">トラブル箇所はどこですか？</div>
+                    <div class="box-title">トラブル箇所はどこですか？</div>
                     <div class="options-grid col-4">
                         <button class="option-btn" onclick="nextStep(2, '屋根裏')">屋根裏</button>
                         <button class="option-btn" onclick="nextStep(2, '天井裏')">天井裏</button>
@@ -552,7 +645,7 @@
                     <div class="back-area"><button class="back-btn" onclick="jumpToStep(1)">＜ 前に戻る</button></div>
                 </div>
                 <div id="panel-3" class="step-panel selection-panel">
-                    <div class="box-title-sim">物件の種類を選択してください。</div>
+                    <div class="box-title">物件の種類を選択してください。</div>
                     <div class="options-grid col-3">
                         <button class="option-btn" onclick="finishStep('戸建て')">戸建て</button>
                         <button class="option-btn" onclick="finishStep('マンション・アパート')">マンション・アパート</button>
@@ -571,7 +664,8 @@
                         <span style="font-size:18px;">を想定しています</span>
                     </div>
                     <p class="discount-info">さらに<span class="red-highlight">「ホームページ見た！」</span>の一言で20%オフ！</p>
-                    <div class="call-area-sim">
+                    <div class="call-area">
+                        <p class="call-lead">＼ 症状が悪化する前に、お早めにお電話ください！ ／</p>
                         <a href="tel:05035280140" class="call-number">050-3528-0140</a>
                         <p class="call-time">電話無料/24時間受付中</p>
                     </div>
@@ -585,114 +679,152 @@
                             <div id="conf-place" class="confirm-btn">場所</div>
                             <div id="conf-building" class="confirm-btn">物件</div>
                         </div>
+                        <div class="form-intro-end">で承ります。</div>
                     </div>
-                    <form id="contact-form" onsubmit="event.preventDefault(); alert('送信しました（デモ）');">
+                    <form id="contact" onsubmit="event.preventDefault(); alert('送信しました（デモ）');">
                         <div class="form-group">
                             <label class="form-label">お名前<span class="badge badge-required">必須</span></label>
-                            <input type="text" class="form-input" required>
+                            <input type="text" class="form-input" placeholder="例：山田花子" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">電話番号<span class="badge badge-required">必須</span></label>
-                            <input type="tel" class="form-input" required>
+                            <input type="tel" class="form-input" placeholder="000-000-0000" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">住所<span class="badge badge-required">必須</span></label>
+                            <input type="text" class="form-input" placeholder="住所を入力してください" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">メールアドレス<span class="badge badge-required">必須</span></label>
+                            <input type="email" class="form-input" placeholder="abc@abc.com" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">お問い合わせ内容<span class="badge badge-required">必須</span></label>
-                            <textarea class="form-textarea" required></textarea>
+                            <textarea class="form-textarea" placeholder="お問い合わせ内容を入力してください" required></textarea>
                         </div>
-                        <div class="submit-area" style="text-align:center;">
+                        <div class="submit-area">
                             <button type="submit" class="submit-btn">送信する</button>
                         </div>
                     </form>
-                    <div class="back-area"><button class="back-btn" onclick="goBackFromForm()">＜ 見積もり画面に戻る</button></div>
+                    <div class="back-area"><button type="button" class="back-btn" onclick="goBackFromForm()">＜ 見積もり画面に戻る</button></div>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="lp-container-sub">
-        <section class="section-card reason-section">
-            <h2 class="main-title-reason">安く・早く実現できる理由</h2>
+        <section class="section-card-sub reason-section">
+            <div class="header-area">
+                <div class="sub-title-reason">お困りごとを即解決！</div>
+                <h2 class="main-title-reason">安く・早く実現できる理由</h2>
+            </div>
             <div class="comparison-wrapper">
                 <div class="comp-box">
                     <div class="box-title-comp">一般的な<br>害虫駆除業者</div>
                     <div class="flow-diagram">
-                        <div class="flow-item"><i class="fas fa-user icon-svg"></i><span class="flow-label">お客様</span></div>
+                        <div class="flow-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg><span class="flow-label">お客様</span></div>
                         <div class="arrow">→</div>
-                        <div class="middle-agent"><i class="fas fa-handshake"></i><span class="flow-label">仲介業者</span></div>
+                        <div class="middle-agent"><svg viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg><span class="flow-label">仲介業者</span></div>
                         <div class="arrow">→</div>
-                        <div class="flow-item"><i class="fas fa-tools icon-svg"></i><span class="flow-label">駆除業者</span></div>
+                        <div class="flow-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg><span class="flow-label">駆除業者</span></div>
                     </div>
                     <div class="bottom-desc desc-general">仲介料が発生し、割高になる</div>
                 </div>
                 <div class="comp-box box-ours">
-                    <i class="fas fa-crown" style="color:#ffd700; font-size:24px; margin-bottom:10px;"></i>
+                    <svg style="width:28px; height:28px; fill:#ffd700; margin-bottom:5px;" viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11h-14zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>
                     <div class="box-title-comp">弊社</div>
                     <div class="flow-diagram">
-                        <div class="flow-item"><i class="fas fa-user icon-svg"></i><span class="flow-label">お客様</span></div>
+                        <div class="flow-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg><span class="flow-label">お客様</span></div>
                         <div class="arrow">→</div>
                         <div class="dashed-box"></div>
                         <div class="arrow">→</div>
-                        <div class="flow-item"><i class="fas fa-shimmering-tools icon-svg" style="color:var(--primary-blue);"></i><span class="flow-label" style="color:var(--primary-blue);">自社施工</span></div>
+                        <div class="flow-item"><svg class="icon-svg" style="fill:var(--primary-blue);" viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg><span class="flow-label" style="color:var(--primary-blue);">自社施工</span></div>
                     </div>
                     <div class="bottom-desc desc-ours">直接契約だから低価格・迅速</div>
                 </div>
             </div>
         </section>
 
-        <section class="section-card price-section">
+        <section class="section-card-sub price-section">
             <div class="chart-area">
                 <div class="column">
                     <div class="puck type-red"><div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">出張費</div></div>
                     <div class="puck type-orange"><div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">追加料金</div></div>
+                    <div class="puck type-yellow"><div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">基本料金</div></div>
+                    <div class="puck type-cyan"><div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">薬剤費</div></div>
                     <div class="puck type-navy"><div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">作業費</div></div>
                     <div class="company-name">A社</div>
                 </div>
                 <div class="column">
                     <div class="puck type-ghost"><div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">出張費</div></div>
+                    <div class="puck type-orange"><div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">追加料金</div></div>
                     <div class="puck type-yellow"><div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">基本料金</div></div>
+                    <div class="puck type-cyan"><div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">薬剤費</div></div>
                     <div class="puck type-navy"><div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">作業費</div></div>
                     <div class="company-name">B社</div>
                 </div>
                 <div class="column">
                     <div class="puck type-ghost"><div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">出張費</div></div>
                     <div class="puck type-ghost"><div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">追加料金</div></div>
+                    <div class="puck type-ghost"><div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">基本料金</div></div>
+                    <div class="puck type-cyan"><div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">薬剤費</div></div>
                     <div class="puck type-navy"><div class="puck-body"></div><div class="puck-lid"></div><div class="puck-text">作業費</div></div>
-                    <div class="company-nameoursours" style="color:var(--primary-blue); font-weight:bold; margin-top:30px;">弊社</div>
+                    <div class="company-name ours">弊社</div>
                 </div>
             </div>
         </section>
-    </div>
 
-    <section class="service-guide-wrapper">
-        <div class="info-card">
-            <div class="info-header">
-                <h2 class="guide-main-copy">すぐに<span class="highlight-text">駆けつけます！</span></h2>
-            </div>
-            <div class="features-box">
-                <ul class="features-list">
-                    <li><span class="check-mark"><i class="fas fa-check"></i></span>深夜料金なし</li>
-                    <li><span class="check-mark"><i class="fas fa-check"></i></span>見積り後無料</li>
-                    <li><span class="check-mark"><i class="fas fa-check"></i></span>再発保証あり</li>
-                    <li><span class="check-mark"><i class="fas fa-check"></i></span>現地調査無料</li>
-                </ul>
-            </div>
-            <div class="action-btns">
-                <a href="tel:05035280140" class="action-link btn-tel-large"><i class="fas fa-phone-alt"></i>電話でお問合せ</a>
-                <a href="javascript:void(0);" onclick="showForm()" class="action-link btn-mail-large"><i class="far fa-envelope"></i>メール相談</a>
-            </div>
-        </div>
-    </section>
-
-    <div class="lp-container-sub">
-        <div class="section-card warning-banner">
+        <div class="section-card-sub warning-banner">
             <div class="stripe"></div>
             <div class="banner-content">
-                <div class="banner-title-main">悪徳業者によるトラブル発生中！</div>
+                <div class="banner-title-main-sub">悪徳業者によるトラブル発生中！</div>
                 <button id="openModalBtn" class="btn-trigger">click ＞</button>
             </div>
             <div class="stripe"></div>
         </div>
     </div>
+
+    <section class="service-guide-wrapper">
+        <div class="info-container">
+            <div class="info-card">
+                <div class="info-header">
+                    <span class="guide-catch-copy">最短10分で</span>
+                    <h2 class="guide-main-copy">すぐに<span class="highlight-text">駆けつけます！</span></h2>
+                </div>
+                <div class="features-area">
+                    <div class="features-box">
+                        <div class="features-title-wrap">
+                            <i class="fas fa-user-shield title-icon"></i>
+                            <h3 class="features-title">安心してお任せください！</h3>
+                            <i class="fas fa-user-shield title-icon"></i>
+                        </div>
+                        <ul class="features-list">
+                            <li><span class="check-mark"><i class="fas fa-check"></i></span>深夜料金なし</li>
+                            <li><span class="check-mark"><i class="fas fa-check"></i></span>見積り後キャンセル無料</li>
+                            <li><span class="check-mark"><i class="fas fa-check"></i></span>安心の再発保証あり</li>
+                            <li><span class="check-mark"><i class="fas fa-check"></i></span>現地調査無料</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="support-msg">24時間365日対応いたします！</div>
+                <div class="action-btns">
+                    <a href="tel:05035280140" class="action-link btn-tel-large">
+                        <i class="fas fa-phone-alt" style="margin-right:15px;"></i>電話でお問合せ
+                    </a>
+                    <a href="javascript:void(0);" onclick="showForm()" class="action-link btn-mail-large">
+                        <i class="far fa-envelope" style="margin-right:15px;"></i>メール相談
+                    </a>
+                </div>
+                <div class="payment-area">
+                    <h3 class="payment-head">お支払方法</h3>
+                    <div class="payment-methods">
+                        <div class="pay-item"><span>現金払い</span><div class="pay-icon"><i class="fas fa-coins"></i></div></div>
+                        <div class="pay-item"><span>銀行振込</span><div class="pay-icon"><i class="fas fa-university"></i></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <div id="modalOverlay" class="modal-overlay">
         <div class="modal-content">
@@ -706,6 +838,10 @@
                 <div class="caution-item">
                     <div class="caution-title">2.現地調査を行わない</div>
                     <div class="caution-text">電話や写真だけで金額を決める悪質業者が存在します。</div>
+                </div>
+                <div class="caution-item">
+                    <div class="caution-title">3.調査結果が不明瞭</div>
+                    <div class="caution-text">調査内容をはっきり伝えない業者によるトラブルが多発しています。</div>
                 </div>
             </div>
             <div class="stripe"></div>
@@ -727,7 +863,7 @@
         updateStatusBarDateTime();
         setInterval(updateStatusBarDateTime, 60000);
 
-        /* シミュレーションロジック */
+        /* シミュレーション */
         let selectedPestType = '';
         let selectedPlace = '';
         let selectedBuilding = '';
@@ -736,7 +872,7 @@
             if(document.getElementById('panel-1').classList.contains('active-panel')) return 1;
             if(document.getElementById('panel-2').classList.contains('active-panel')) return 2;
             if(document.getElementById('panel-3').classList.contains('active-panel')) return 3;
-            return 1;
+            return 4;
         }
 
         function jumpToStep(targetStep) {
@@ -744,42 +880,44 @@
             document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active-panel'));
             document.getElementById('panel-' + targetStep).classList.add('active-panel');
             document.getElementById('main-content-box').className = 'content-box';
+            document.getElementById('tab-result').classList.remove('ready');
             for (let i = 1; i <= 3; i++) {
                 const tab = document.getElementById('tab-' + i);
-                if (i < targetStep) { tab.className = 'tab-item completed'; }
-                else if (i === targetStep) { tab.className = 'tab-item active'; }
-                else { tab.className = 'tab-item'; }
+                const def = tab.getAttribute('data-default');
+                if (i < targetStep) { tab.classList.add('completed'); tab.classList.remove('active'); }
+                else if (i === targetStep) { tab.classList.remove('completed'); tab.classList.add('active'); tab.innerHTML = def + ' <span class="tab-arrow">^</span>'; }
+                else { tab.classList.remove('completed', 'active'); tab.innerHTML = def + ' <span class="tab-arrow">∨</span>'; }
             }
         }
 
         function nextStep(currentStepNum, selectedText) {
             if(currentStepNum === 1) selectedPestType = selectedText;
             if(currentStepNum === 2) selectedPlace = selectedText;
-            const currentTab = document.getElementById('tab-' + currentStepNum);
-            currentTab.className = 'tab-item completed';
-            currentTab.innerText = selectedText;
+            const tab = document.getElementById('tab-' + currentStepNum);
+            tab.classList.replace('active', 'completed');
+            tab.innerText = selectedText;
             document.getElementById('panel-' + currentStepNum).classList.remove('active-panel');
-            const nextTab = document.getElementById('tab-' + (currentStepNum + 1));
-            if(nextTab) nextTab.className = 'tab-item active';
+            document.getElementById('tab-' + (currentStepNum + 1)).classList.add('active');
             document.getElementById('panel-' + (currentStepNum + 1)).classList.add('active-panel');
         }
 
         function finishStep(selectedText) {
             selectedBuilding = selectedText;
-            document.getElementById('tab-3').className = 'tab-item completed';
+            document.getElementById('tab-3').classList.replace('active', 'completed');
             document.getElementById('tab-3').innerText = selectedText;
             document.getElementById('panel-3').classList.remove('active-panel');
             document.getElementById('tab-result').classList.add('ready');
-            let price = (['ゴキブリ', 'ハチ・ハチの巣', 'ノミ・ダニ'].includes(selectedPestType)) ? '2,980' : '3,980';
+            let price = (['ゴキブリ', 'ハチ・ハチの巣', 'ノミ・ダニ'].includes(selectedPestType)) ? '2,980' : '4,980';
             document.getElementById('price-value').innerText = price;
             document.getElementById('main-content-box').classList.add('mode-result');
             document.getElementById('panel-result').classList.add('active-panel');
         }
 
         function showForm() {
-            document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active-panel'));
+            document.getElementById('panel-result').classList.remove('active-panel');
             const box = document.getElementById('main-content-box');
-            box.className = 'content-box mode-form';
+            box.classList.remove('mode-result');
+            box.classList.add('mode-form');
             document.getElementById('panel-form').classList.add('active-panel');
             document.getElementById('conf-type').innerText = selectedPestType;
             document.getElementById('conf-place').innerText = selectedPlace;
@@ -789,17 +927,18 @@
 
         function goBackFromForm() {
             document.getElementById('panel-form').classList.remove('active-panel');
-            document.getElementById('main-content-box').className = 'content-box mode-result';
+            const box = document.getElementById('main-content-box');
+            box.classList.replace('mode-form', 'mode-result');
             document.getElementById('panel-result').classList.add('active-panel');
         }
 
-        /* モーダルロジック */
-        const openModalBtn = document.getElementById('openModalBtn');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const modalOverlay = document.getElementById('modalOverlay');
-        openModalBtn.addEventListener('click', () => { modalOverlay.style.display = 'flex'; document.body.style.overflow = 'hidden'; });
-        closeModalBtn.addEventListener('click', () => { modalOverlay.style.display = 'none'; document.body.style.overflow = 'auto'; });
-        modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) { modalOverlay.style.display = 'none'; document.body.style.overflow = 'auto'; } });
+        /* モーダル */
+        const openBtn = document.getElementById('openModalBtn');
+        const closeBtn = document.getElementById('closeModalBtn');
+        const overlay = document.getElementById('modalOverlay');
+        openBtn.addEventListener('click', () => { overlay.style.display = 'flex'; document.body.style.overflow = 'hidden'; });
+        closeBtn.addEventListener('click', () => { overlay.style.display = 'none'; document.body.style.overflow = 'auto'; });
+        overlay.addEventListener('click', (e) => { if(e.target === overlay) { overlay.style.display = 'none'; document.body.style.overflow = 'auto'; } });
     </script>
 </body>
 </html>
