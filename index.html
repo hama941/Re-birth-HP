@@ -1416,7 +1416,380 @@
         }
 
         /* =========================================
-           9. サービス一覧 (最後に配置)
+           6.5 (NEW) 選ばれる4つの理由
+           ========================================= */
+        .four-reasons-section {
+            padding: 40px 10px;
+            text-align: center;
+            background-color: #f4f8fd; /* 追加セクション背景色 */
+        }
+        
+        .four-reasons-header {
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .four-reasons-sub {
+            display: inline-block;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #0078d7;
+            margin-bottom: 10px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        .four-reasons-sub::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 2px;
+            background: #0078d7;
+        }
+        .four-reasons-sub::before {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 50%;
+            transform: translateX(-50%);
+            border-top: 5px solid #0078d7;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+        }
+        
+        .four-reasons-title {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #0056b3;
+            margin: 0 0 20px;
+        }
+        
+        .four-reasons-lead {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-weight: bold;
+            color: #444;
+        }
+        
+        .four-reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px; 
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .four-reasons-item {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #4fa3f7 0%, #0064c2 100%);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+            box-sizing: border-box;
+            box-shadow: 0 5px 15px rgba(0, 86, 179, 0.3);
+        }
+        
+        .four-reasons-item::after {
+            content: '';
+            position: absolute;
+            top: 6%; left: 6%; right: 6%; bottom: 6%;
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .four-reasons-num {
+            font-family: 'Arial Black', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            line-height: 1;
+            margin-bottom: 2px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .four-reasons-item-title {
+            font-size: clamp(0.85rem, 3.5vw, 1.3rem);
+            font-weight: 900;
+            margin-bottom: 5px;
+            line-height: 1.25;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .four-reasons-desc {
+            font-size: clamp(0.6rem, 2.5vw, 0.85rem);
+            line-height: 1.3;
+            font-weight: 500;
+            width: 90%;
+        }
+        
+        @media (min-width: 768px) {
+            .four-reasons-grid {
+                gap: 30px;
+            }
+            .four-reasons-desc {
+                line-height: 1.5;
+            }
+        }
+
+        /* =========================================
+           11. 3つの安心セクション (追加分)
+           ========================================= */
+        .promise-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #eef9ff 0%, #ffffff 100%); /* 背景のグラデーション */
+        }
+
+        /* メインタイトル */
+        .section-title-promise {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0056b3; /* 濃い青 */
+            margin-bottom: 50px;
+            line-height: 1.4;
+            position: relative;
+            display: inline-block;
+        }
+        
+        /* タイトルの装飾 */
+        .section-title-promise::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 60px;
+            background-color: #e0f0ff;
+            border-radius: 50%;
+            position: absolute;
+            top: -10px;
+            right: -40px;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        /* カードのグリッドレイアウト */
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        /* 個別カード */
+        .card-promise {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 300px; /* カードの最大幅 */
+            overflow: visible; /* バッジがはみ出るように */
+            position: relative;
+            text-align: left;
+            padding-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        /* 画像エリア */
+        .card-promise-image-area {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            overflow: hidden; /* 画像自体の角丸 */
+        }
+
+        .card-promise-image-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 金色のバッジ */
+        .badge-promise {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fceabb 0%, #fccd4d 50%, #f8b500 100%);
+            border: 3px solid #fff;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #5a4a1b;
+            font-weight: bold;
+            line-height: 1.1;
+            z-index: 10;
+            text-align: center;
+        }
+        
+        .badge-promise .sub-text {
+            font-size: 10px;
+            transform: scale(0.9);
+        }
+
+        .badge-promise .main-text {
+            font-size: 20px;
+            color: #8B4513; /* 茶色っぽい文字色 */
+        }
+
+        .badge-promise .main-text span {
+            font-size: 14px;
+        }
+
+        /* カード本文エリア */
+        .card-promise-body {
+            padding: 20px;
+        }
+
+        /* カード見出し */
+        .card-promise-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0091ea; /* 水色 */
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        /* カード説明文 */
+        .card-promise-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #444;
+            margin: 0;
+        }
+
+        /* レスポンシブ対応（スマホ） */
+        @media (max-width: 768px) {
+            .cards-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .card-promise {
+                max-width: 100%; /* スマホ時は幅いっぱいに */
+            }
+            .section-title-promise {
+                font-size: 22px;
+            }
+        }
+
+        /* =========================================
+           12. FAQ (追加分)
+           ========================================= */
+        .faq-section {
+            max-width: 700px; /* PCでも横に広がりすぎず読みやすい幅 */
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* アコーディオンの外枠 */
+        .faq-container {
+            display: flex;
+            flex-direction: column; /* 常に縦一列に並べる */
+            gap: 12px;
+        }
+
+        /* 各質問のカード */
+        .faq-item {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+
+        /* 質問部分（ボタン） */
+        .faq-question {
+            width: 100%;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text-dark);
+            position: relative;
+            transition: background 0.2s;
+            outline: none;
+        }
+
+        .faq-question:hover {
+            background-color: #fff9f0;
+        }
+
+        /* Qアイコン */
+        .faq-question::before {
+            content: "Q";
+            color: var(--main-color);
+            font-size: 20px;
+            margin-right: 15px;
+            font-family: 'Arial Black', sans-serif;
+        }
+
+        /* 矢印アイコン */
+        .faq-question::after {
+            content: "＋";
+            position: absolute;
+            right: 20px;
+            color: #ccc;
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.open .faq-question::after {
+            transform: rotate(45deg); /* ＋を×に変える演出 */
+            color: var(--main-color);
+        }
+
+        /* 回答部分（隠れている場所） */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: #fff;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 1000px; /* 十分な高さ */
+        }
+
+        .answer-inner {
+            padding: 0 20px 20px 52px; /* Qの文字位置に合わせる */
+            line-height: 1.8;
+            font-size: 15px;
+            color: #555;
+            border-top: 1px solid #fafafa;
+            padding-top: 15px;
+        }
+
+        /* スマホ向け調整 */
+        @media (max-width: 480px) {
+            .faq-question { font-size: 15px; padding: 15px; }
+            .answer-inner { padding-left: 45px; font-size: 14px; }
+        }
+
+        /* =========================================
+           13. サービス一覧 (最後に配置)
            ========================================= */
         .service-list-section {
             background-color: #ffffff;
@@ -1622,7 +1995,7 @@
         }
 
         /* =========================================
-           10. フッターお問い合わせフォーム (追加)
+           14. フッターお問い合わせフォーム (追加)
            ========================================= */
         .footer-form-section {
             background: linear-gradient(to bottom, #f0faff, #dcefff);
@@ -2087,6 +2460,63 @@
         </div>
     </section>
 
+    <section class="service-guide-wrapper">
+        <div class="info-container">
+            <div class="info-card">
+                
+                <div class="info-header">
+                    <span class="guide-catch-copy">最短10分で</span>
+                    <h2 class="guide-main-copy">すぐに<span class="highlight-text">駆けつけます！</span></h2>
+                </div>
+
+                <div class="features-area">
+                    <div class="features-box">
+                        <div class="features-title-wrap">
+                            <i class="fas fa-user-shield title-icon"></i>
+                            <h3 class="features-title">安心してお任せください！</h3>
+                            <i class="fas fa-user-shield title-icon"></i>
+                        </div>
+                        <ul class="features-list">
+                            <li><span class="check-mark"><i class="fas fa-check"></i></span>深夜料金なし</li>
+                            <li><span class="check-mark"><i class="fas fa-check"></i></span>見積り後キャンセル無料</li>
+                            <li><span class="check-mark"><i class="fas fa-check"></i></span>安心の再発保証あり</li>
+                            <li><span class="check-mark"><i class="fas fa-check"></i></span>現地調査無料</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="support-msg">
+                    24時間365日対応いたします！
+                </div>
+
+                <div class="action-btns">
+                    <a href="tel:05035280140" class="action-link btn-tel-large">
+                        <i class="fas fa-phone-alt icon-box"></i>電話でお問合せ
+                    </a>
+                    
+                    <a href="javascript:void(0);" onclick="showForm()" class="action-link btn-mail-large">
+                        <i class="far fa-envelope icon-box"></i>メール相談
+                    </a>
+                </div>
+
+                <div class="payment-area">
+                    <h3 class="payment-head">お支払方法</h3>
+                    <div class="payment-methods">
+                        <div class="pay-item">
+                            <span>現金払い</span>
+                            <div class="pay-icon"><i class="fas fa-coins"></i></div>
+                        </div>
+                        <div class="pay-item">
+                            <span>銀行振込</span>
+                            <div class="pay-icon"><i class="fas fa-university"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <div class="faq-section">
         <div class="faq-header">
             <h2>よくあるご質問</h2>
@@ -2214,63 +2644,6 @@
             </div>
         </div>
     </div>
-
-    <section class="service-guide-wrapper">
-        <div class="info-container">
-            <div class="info-card">
-                
-                <div class="info-header">
-                    <span class="guide-catch-copy">最短10分で</span>
-                    <h2 class="guide-main-copy">すぐに<span class="highlight-text">駆けつけます！</span></h2>
-                </div>
-
-                <div class="features-area">
-                    <div class="features-box">
-                        <div class="features-title-wrap">
-                            <i class="fas fa-user-shield title-icon"></i>
-                            <h3 class="features-title">安心してお任せください！</h3>
-                            <i class="fas fa-user-shield title-icon"></i>
-                        </div>
-                        <ul class="features-list">
-                            <li><span class="check-mark"><i class="fas fa-check"></i></span>深夜料金なし</li>
-                            <li><span class="check-mark"><i class="fas fa-check"></i></span>見積り後キャンセル無料</li>
-                            <li><span class="check-mark"><i class="fas fa-check"></i></span>安心の再発保証あり</li>
-                            <li><span class="check-mark"><i class="fas fa-check"></i></span>現地調査無料</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="support-msg">
-                    24時間365日対応いたします！
-                </div>
-
-                <div class="action-btns">
-                    <a href="tel:05035280140" class="action-link btn-tel-large">
-                        <i class="fas fa-phone-alt icon-box"></i>電話でお問合せ
-                    </a>
-                    
-                    <a href="javascript:void(0);" onclick="showForm()" class="action-link btn-mail-large">
-                        <i class="far fa-envelope icon-box"></i>メール相談
-                    </a>
-                </div>
-
-                <div class="payment-area">
-                    <h3 class="payment-head">お支払方法</h3>
-                    <div class="payment-methods">
-                        <div class="pay-item">
-                            <span>現金払い</span>
-                            <div class="pay-icon"><i class="fas fa-coins"></i></div>
-                        </div>
-                        <div class="pay-item">
-                            <span>銀行振込</span>
-                            <div class="pay-icon"><i class="fas fa-university"></i></div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
 
     <section class="chart-section-wrapper">
         <div class="lp-container">
@@ -2495,6 +2868,62 @@
     <a href="#" id="scrollTopBtn" class="scroll-top-btn">
         <i class="fas fa-chevron-up"></i>
     </a>
+
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <span id="closeModalBtn" class="close-btn">&times;</span>
+            
+            <div class="stripe"></div>
+
+            <div class="modal-body">
+                <div class="modal-header-area">
+                    <div class="modal-title-wrapper">
+                        <div class="modal-title-upper">
+                            <span class="modal-dots">悪徳業者</span>による
+                        </div>
+                        <div class="modal-title-main">
+                            トラブル発生中！
+                        </div>
+                    </div>
+                    <svg class="modal-warning-icon" viewBox="0 0 100 100">
+                        <path d="M50 5 L95 90 H5 Z" fill="#ffe600" stroke="#333" stroke-width="4" stroke-linejoin="round"/>
+                        <path d="M46 35 L54 35 L52 65 L48 65 Z" fill="#333" />
+                        <circle cx="50" cy="78" r="5" fill="#333" />
+                    </svg>
+                </div>
+
+                <p class="modal-lead">
+                    3つの注意点をしっかり確認して、安心できる業者を選びましょう。
+                </p>
+
+                <div class="caution-list">
+                    <div class="caution-item">
+                        <div class="caution-title">1.料金説明が不適切</div>
+                        <div class="caution-text">
+                            費用に対する明確な説明をせずに、話を進める業者には注意が必要です。<br>
+                            作業前に必ず料金設定に基づいた見積りを提示し、承諾の確認をしっかり取る業者を選びましょう。
+                        </div>
+                    </div>
+                    <div class="caution-item">
+                        <div class="caution-title">2.現地調査を丁寧に行わない</div>
+                        <div class="caution-text">
+                            現地調査を丁寧に行わずに電話や写真だけで金額や作業内容を決める悪質業者が存在します。<br>
+                            作業前に必ず現地での調査を行い、状況に応じた説明をしてくれる業者を選ぶのがおすすめです。
+                        </div>
+                    </div>
+                    <div class="caution-item">
+                        <div class="caution-title">3.調査結果が不明瞭</div>
+                        <div class="caution-text">
+                            調査内容や結果をはっきり伝えない業者によるトラブルが発生しています。<br>
+                            事前に重要なポイントを確認し、安心して任せられる業者を選びましょう。
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stripe"></div>
+        </div>
+    </div>
 
     <script>
         /* =========================================
