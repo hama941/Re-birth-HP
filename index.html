@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>害獣トラブル119 - 関西全域対応</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
@@ -21,7 +19,7 @@
             --box-bg: #ffffff;
             --gray-border: #e0e0e0;
             
-            /* FAQ用変数 (追加分) */
+            /* FAQ用変数 */
             --main-color: #ff9800;
             --bg-color: #fcfcfc;
             --text-dark: #333;
@@ -726,131 +724,7 @@
         }
 
         /* =========================================
-           6.5 (NEW) 選ばれる4つの理由
-           ========================================= */
-        .four-reasons-section {
-            padding: 40px 10px;
-            text-align: center;
-            background-color: #f4f8fd; /* 追加セクション背景色 */
-        }
-        
-        .four-reasons-header {
-            margin-bottom: 30px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .four-reasons-sub {
-            display: inline-block;
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #0078d7;
-            margin-bottom: 10px;
-            position: relative;
-            padding-bottom: 5px;
-        }
-        .four-reasons-sub::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 100%; height: 2px;
-            background: #0078d7;
-        }
-        .four-reasons-sub::before {
-            content: '';
-            position: absolute;
-            bottom: -4px; left: 50%;
-            transform: translateX(-50%);
-            border-top: 5px solid #0078d7;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-        }
-        
-        .four-reasons-title {
-            font-size: 2rem;
-            font-weight: 900;
-            color: #0056b3;
-            margin: 0 0 20px;
-        }
-        
-        .four-reasons-lead {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            font-weight: bold;
-            color: #444;
-        }
-        
-        .four-reasons-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px; 
-            max-width: 600px;
-            margin: 0 auto;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        
-        .four-reasons-item {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            border-radius: 50%;
-            background: linear-gradient(145deg, #4fa3f7 0%, #0064c2 100%);
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 5px;
-            box-sizing: border-box;
-            box-shadow: 0 5px 15px rgba(0, 86, 179, 0.3);
-        }
-        
-        .four-reasons-item::after {
-            content: '';
-            position: absolute;
-            top: 6%; left: 6%; right: 6%; bottom: 6%;
-            border: 1px dashed rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        
-        .four-reasons-num {
-            font-family: 'Arial Black', sans-serif;
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            line-height: 1;
-            margin-bottom: 2px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-        }
-        
-        .four-reasons-item-title {
-            font-size: clamp(0.85rem, 3.5vw, 1.3rem);
-            font-weight: 900;
-            margin-bottom: 5px;
-            line-height: 1.25;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-        
-        .four-reasons-desc {
-            font-size: clamp(0.6rem, 2.5vw, 0.85rem);
-            line-height: 1.3;
-            font-weight: 500;
-            width: 90%;
-        }
-        
-        @media (min-width: 768px) {
-            .four-reasons-grid {
-                gap: 30px;
-            }
-            .four-reasons-desc {
-                line-height: 1.5;
-            }
-        }
-
-
-        /* =========================================
-           7. 料金比較チャート
+           6.5. 料金比較チャート
            ========================================= */
         .chart-section-wrapper {
             background-color: #f4f8fb;
@@ -1019,7 +893,7 @@
 
 
         /* =========================================
-           8. サービス案内（安心ポイント・決済）
+           7. サービス案内（安心ポイント・決済）
            ========================================= */
         .service-guide-wrapper {
             position: relative;
@@ -1291,7 +1165,7 @@
         }
 
         /* =========================================
-           9. 悪徳業者注意喚起 (追加セクション)
+           8. 悪徳業者注意喚起 (追加セクション)
            ========================================= */
         /* 背景を黒にするためのラッパー */
         .warning-section-wrapper {
@@ -1542,7 +1416,7 @@
         }
 
         /* =========================================
-           10. サービス一覧 (最後に配置)
+           9. サービス一覧 (最後に配置)
            ========================================= */
         .service-list-section {
             background-color: #ffffff;
@@ -1729,8 +1603,8 @@
             .card-img-area { height: 130px; }
             .card-content { padding: 15px; }
             .service-title { font-size: 16px; margin-bottom: 8px; }
-            .service-price { 
-                font-size: 24px; 
+            .service-price {
+                font-size: 24px;
                 margin-bottom: 12px;
                 padding-bottom: 12px;
             }
@@ -1748,253 +1622,81 @@
         }
 
         /* =========================================
-           11. 3つの安心セクション (追加分)
+           10. フッターお問い合わせフォーム (追加)
            ========================================= */
-        .promise-section {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            text-align: center;
-            background: linear-gradient(135deg, #eef9ff 0%, #ffffff 100%); /* 背景のグラデーション */
-        }
-
-        /* メインタイトル */
-        .section-title-promise {
-            font-size: 28px;
-            font-weight: 700;
-            color: #0056b3; /* 濃い青 */
-            margin-bottom: 50px;
-            line-height: 1.4;
-            position: relative;
-            display: inline-block;
-        }
-        
-        /* タイトルの装飾 */
-        .section-title-promise::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 60px;
-            background-color: #e0f0ff;
-            border-radius: 50%;
-            position: absolute;
-            top: -10px;
-            right: -40px;
-            z-index: -1;
-            opacity: 0.6;
-        }
-
-        /* カードのグリッドレイアウト */
-        .cards-container {
+        .footer-form-section {
+            background: linear-gradient(to bottom, #f0faff, #dcefff);
+            padding: 50px 20px;
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
         }
 
-        /* 個別カード */
-        .card-promise {
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        .footer-form-container {
             width: 100%;
-            max-width: 300px; /* カードの最大幅 */
-            overflow: visible; /* バッジがはみ出るように */
-            position: relative;
-            text-align: left;
-            padding-bottom: 20px;
-            transition: transform 0.3s ease;
+            max-width: 800px;
         }
 
-        /* 画像エリア */
-        .card-promise-image-area {
-            position: relative;
-            width: 100%;
-            height: 180px;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
-            overflow: hidden; /* 画像自体の角丸 */
-        }
-
-        .card-promise-image-area img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* 金色のバッジ */
-        .badge-promise {
-            position: absolute;
-            top: -15px;
-            left: -15px;
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #fceabb 0%, #fccd4d 50%, #f8b500 100%);
-            border: 3px solid #fff;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #5a4a1b;
-            font-weight: bold;
-            line-height: 1.1;
-            z-index: 10;
-            text-align: center;
-        }
-        
-        .badge-promise .sub-text {
-            font-size: 10px;
-            transform: scale(0.9);
-        }
-
-        .badge-promise .main-text {
-            font-size: 20px;
-            color: #8B4513; /* 茶色っぽい文字色 */
-        }
-
-        .badge-promise .main-text span {
-            font-size: 14px;
-        }
-
-        /* カード本文エリア */
-        .card-promise-body {
-            padding: 20px;
-        }
-
-        /* カード見出し */
-        .card-promise-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #0091ea; /* 水色 */
-            margin-bottom: 15px;
-            line-height: 1.4;
-        }
-
-        /* カード説明文 */
-        .card-promise-text {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #444;
-            margin: 0;
-        }
-
-        /* レスポンシブ対応（スマホ） */
-        @media (max-width: 768px) {
-            .cards-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            .card-promise {
-                max-width: 100%; /* スマホ時は幅いっぱいに */
-            }
-            .section-title-promise {
-                font-size: 22px;
-            }
-        }
-
-        /* =========================================
-           12. FAQ (追加分)
-           ========================================= */
-        .faq-section {
-            max-width: 700px; /* PCでも横に広がりすぎず読みやすい幅 */
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        .faq-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        /* アコーディオンの外枠 */
-        .faq-container {
-            display: flex;
-            flex-direction: column; /* 常に縦一列に並べる */
-            gap: 12px;
-        }
-
-        /* 各質問のカード */
-        .faq-item {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            overflow: hidden;
-            border: 1px solid #eee;
-        }
-
-        /* 質問部分（ボタン） */
-        .faq-question {
-            width: 100%;
-            padding: 18px 20px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            background: none;
-            border: none;
-            text-align: left;
-            font-size: 16px;
-            font-weight: bold;
-            color: var(--text-dark);
-            position: relative;
-            transition: background 0.2s;
-            outline: none;
-        }
-
-        .faq-question:hover {
-            background-color: #fff9f0;
-        }
-
-        /* Qアイコン */
-        .faq-question::before {
-            content: "Q";
-            color: var(--main-color);
-            font-size: 20px;
-            margin-right: 15px;
-            font-family: 'Arial Black', sans-serif;
-        }
-
-        /* 矢印アイコン */
-        .faq-question::after {
-            content: "＋";
-            position: absolute;
-            right: 20px;
-            color: #ccc;
-            font-size: 18px;
-            transition: transform 0.3s;
-        }
-
-        .faq-item.open .faq-question::after {
-            transform: rotate(45deg); /* ＋を×に変える演出 */
-            color: var(--main-color);
-        }
-
-        /* 回答部分（隠れている場所） */
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
+        .footer-form-box {
             background-color: #fff;
+            border: 8px solid #fff9c4; /* 黄色い太枠 */
+            border-radius: 10px;
+            padding: 40px 30px;
+            width: 100%;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
-        .faq-item.open .faq-answer {
-            max-height: 1000px; /* 十分な高さ */
+        .footer-form-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 900;
+            color: #005691;
+            margin: 0 0 40px 0;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed #ddd;
         }
 
-        .answer-inner {
-            padding: 0 20px 20px 52px; /* Qの文字位置に合わせる */
-            line-height: 1.8;
-            font-size: 15px;
-            color: #555;
-            border-top: 1px solid #fafafa;
-            padding-top: 15px;
+        /* トップへ戻るボタン */
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background-color: #005691;
+            color: #fff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 45px;
+            text-decoration: none;
+            font-size: 18px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            opacity: 0; /* 最初は隠す */
+            visibility: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .scroll-top-btn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .scroll-top-btn:hover {
+            background-color: #0088ea;
+            transform: translateY(-5px);
         }
 
-        /* スマホ向け調整 */
-        @media (max-width: 480px) {
-            .faq-question { font-size: 15px; padding: 15px; }
-            .answer-inner { padding-left: 45px; font-size: 14px; }
+        @media (max-width: 768px) {
+            .footer-form-box { padding: 30px 15px; }
+            .footer-form-title { font-size: 20px; }
+            .scroll-top-btn {
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                bottom: 15px;
+                right: 15px;
+                font-size: 16px;
+            }
         }
 
     </style>
@@ -2088,7 +1790,6 @@
             </div>
 
             <div id="main-content-box" class="content-box">
-                
                 <div id="panel-1" class="step-panel active-panel selection-panel">
                     <div class="box-title-sim">害虫の種類を選択してください。</div>
                     <div class="options-grid col-3">
@@ -2133,36 +1834,29 @@
                 </div>
                 
                 <div id="panel-result" class="step-panel result-panel-design">
-                    
                     <p class="result-lead">お客様の症状のお見積もりは...</p>
-                    
                     <div class="result-price">
                         <span id="price-value" class="price-number">2,980</span>
                         <span class="price-unit">円～</span>
                         <span class="price-note">(調査見積り無料)</span>
                         <span style="font-size:18px;">を想定しています</span>
                     </div>
-                    
                     <p class="discount-info">さらに<span class="red-highlight">「ホームページ見た！」</span>の一言で20%オフ！</p>
                     <p class="price-disclaimer">※お見積り金額はあくまでも目安です。詳細はご訪問時にお伝えいたします。</p>
-                    
                     <div class="call-area">
                         <p class="call-lead">＼ 症状が悪化する前に、お早めにお電話ください！ ／</p>
                         <a href="tel:05035280140" class="call-number">050-3528-0140</a>
                         <p class="call-time">電話無料/24時間受付中</p>
                     </div>
-
                     <div class="detail-btn-area">
                         <button class="detail-btn" onclick="showForm()">より詳細な見積もりを確認</button>
                     </div>
-                    
                     <div class="back-area" style="margin-top:10px;">
                         <button class="back-btn" onclick="jumpToStep(3)">＜ 修正する</button>
                     </div>
                 </div>
 
                 <div id="panel-form" class="step-panel form-panel-design">
-                    
                     <div class="form-intro">
                         <div class="form-intro-text">お客様のトラブルは・・・</div>
                         <div class="confirm-items">
@@ -2172,43 +1866,35 @@
                         </div>
                         <div class="form-intro-end">で承ります。</div>
                     </div>
-
                     <form id="contact" onsubmit="event.preventDefault(); alert('送信しました（デモ）');">
                         <div class="form-group">
                             <label class="form-label">お名前<span class="badge badge-required">必須</span></label>
                             <input type="text" class="form-input" placeholder="例：山田花子" required>
                         </div>
-
                         <div class="form-group">
                             <label class="form-label">電話番号<span class="badge badge-required">必須</span></label>
                             <input type="tel" class="form-input" placeholder="000-000-0000" required>
                         </div>
-
                         <div class="form-group">
                             <label class="form-label">住所<span class="badge badge-required">必須</span></label>
                             <input type="text" class="form-input" placeholder="住所を入力してください" required>
                         </div>
-
                         <div class="form-group">
                             <label class="form-label">メールアドレス<span class="badge badge-required">必須</span></label>
                             <input type="email" class="form-input" placeholder="abc@abc.com" required>
                         </div>
-
                         <div class="form-group">
                             <label class="form-label">お問い合わせ内容<span class="badge badge-required">必須</span></label>
                             <textarea class="form-textarea" placeholder="お問い合わせ内容を入力してください" required></textarea>
                         </div>
-
                         <div class="submit-area">
                             <button type="submit" class="submit-btn">送信する</button>
                         </div>
                     </form>
-                    
                     <div class="back-area">
                         <button type="button" class="back-btn" onclick="goBackFromForm()">＜ 見積もり画面に戻る</button>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -2283,6 +1969,251 @@
             </div>
         </div>
     </section>
+
+    <section class="four-reasons-section">
+      <div class="four-reasons-header">
+        <div class="four-reasons-sub">安心してお任せください！</div>
+        <h1 class="four-reasons-title">選ばれる4つの理由</h1>
+        <p class="four-reasons-lead">
+          選ばれるには理由があります。<br>
+          安心・迅速・確実なサービスを<br>
+          お約束します。
+        </p>
+      </div>
+
+      <div class="four-reasons-grid">
+        <div class="four-reasons-item">
+          <div class="four-reasons-num">01</div>
+          <div class="four-reasons-item-title">エリア密着の<br>迅速な対応</div>
+          <div class="four-reasons-desc">
+            最短10分で駆けつけ、<br>
+            「早く・正確に」<br>
+            解決いたします。
+          </div>
+        </div>
+
+        <div class="four-reasons-item">
+          <div class="four-reasons-num">02</div>
+          <div class="four-reasons-item-title">安心の<br>明朗会計</div>
+          <div class="four-reasons-desc">
+            明朗会計をモットーに<br>
+            わかりやすい料金体系にて<br>
+            ご案内しております。
+          </div>
+        </div>
+
+        <div class="four-reasons-item">
+          <div class="four-reasons-num">03</div>
+          <div class="four-reasons-item-title">充実の<br>アフターサービス</div>
+          <div class="four-reasons-desc">
+            施工後の万が一の<br>
+            トラブルにも責任を持って<br>
+            対応いたします。
+          </div>
+        </div>
+
+        <div class="four-reasons-item">
+          <div class="four-reasons-num">04</div>
+          <div class="four-reasons-item-title">経験豊富な<br>スタッフ</div>
+          <div class="four-reasons-desc">
+            熟練の技術を持つプロが<br>
+            豊富な実績とノウハウで<br>
+            解決します。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="promise-section">
+        <h2 class="section-title-promise">
+            私たちは<br>
+            3つの安心をお約束します
+        </h2>
+    
+        <div class="cards-container">
+            <div class="card-promise">
+                <div class="image-area">
+                    <div class="card-promise-image-area">
+                        <img src="syodoku.png" alt="作業員の写真">
+                    </div>
+                    <div class="badge-promise">
+                        <div class="sub-text">出張費・見積り</div>
+                        <div class="main-text">0<span>円</span></div>
+                    </div>
+                </div>
+                <div class="card-promise-body">
+                    <h3 class="card-promise-title">見積り後のキャンセル料、<br>出張料はいただきません</h3>
+                    <p class="card-promise-text">
+                        お見積り後のキャンセルもOK！出張費も一切かかりません。費用に納得していただいてから作業を進めるので、安心してご依頼ください。無理な営業も一切なし！
+                    </p>
+                </div>
+            </div>
+    
+            <div class="card-promise">
+                <div class="image-area">
+                    <div class="card-promise-image-area">
+                        <img src="money.png" alt="作業の説明">
+                    </div>
+                    <div class="badge-promise">
+                        <div class="sub-text">追加料金</div>
+                        <div class="main-text">なし</div>
+                    </div>
+                </div>
+                <div class="card-promise-body">
+                    <h3 class="card-promise-title">内容ご納得の上<br>作業だから安心</h3>
+                    <p class="card-promise-text">
+                        修理内容と費用を事前にしっかりご説明しております。ご納得していただいてから作業を行いますので、思わぬ追加料金の心配もありません。安心してご依頼ください！
+                    </p>
+                </div>
+            </div>
+    
+            <div class="card-promise">
+                <div class="image-area">
+                    <div class="card-promise-image-area">
+                        <img src="akusyu.png" alt="保証イメージ">
+                    </div>
+                    <div class="badge-promise">
+                        <div class="sub-text">再発保証</div>
+                        <div class="main-text">あり</div>
+                    </div>
+                </div>
+                <div class="card-promise-body">
+                    <h3 class="card-promise-title">充実の保証内容</h3>
+                    <p class="card-promise-text">
+                        修理後も安心！弊社は保険加入済みで、万が一のトラブルにも迅速に対応致します。さらに、再発時の補償制度もご用意しており、長く安心してお使いいただけます。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="faq-section">
+        <div class="faq-header">
+            <h2>よくあるご質問</h2>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-question">駆除薬剤による小さなお子様への影響はありますか？</button>
+                <div class="faq-answer">
+                    <div class="answer-inner">
+                        人体に無害な薬剤を厳選して使用しております。また、強力な薬剤が必要な場合でも、施工後の適切な後始末と安全確認を最優先に行いますので、小さなお子様やペットがいるご家庭でもご安心ください。
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">市販の薬剤では完全に駆除できないのでしょうか？</button>
+                <div class="faq-answer">
+                    <div class="answer-inner">
+                        市販薬は一時的な効果はありますが、卵には効かないものが多く、時間が経つと再発してしまいます。また、侵入口の封鎖など根本的な原因を解決しない限り、いたちごっこになるのが現状です。プロの技術で原因から断ち切ります。
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">施工後、どれくらいで効果が出ますか？</button>
+                <div class="faq-answer">
+                    <div class="answer-inner">
+                        即効性を重視した施工を行っておりますが、環境や発生状況により異なります。具体的な見通しについては、現地調査の際にお客様の状況に合わせて詳しくご説明させていただきます。
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">作業後に見積もりより高い金額を請求されることはありますか？</button>
+                <div class="faq-answer">
+                    <div class="answer-inner">
+                        いいえ、ございません。作業前に施工内容と料金の詳細を明確にご説明し、ご納得いただいてから作業に入りますので、どうぞご安心ください。
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">クレジットカードでの支払いは可能ですか？</button>
+                <div class="faq-answer">
+                    <div class="answer-inner">
+                        はい、各種クレジットカード決済に対応しております（VISA・MasterCard・American Expressなど）。お気軽にご利用ください。
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">法人の依頼ですが、後日請求書払いは可能ですか？</button>
+                <div class="faq-answer">
+                    <div class="answer-inner">
+                        法人様のご依頼も柔軟に対応しております。後日の請求書払いについても、お電話や現地調査の際にお申し付けいただければ調整可能です。
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">作業にあたって、こちらで準備することはありますか？</button>
+                <div class="faq-answer">
+                    <div class="answer-inner">
+                        お客様にご準備いただくことは一切ございません。事前の準備から作業後の片付けまで、すべて弊社の専門スタッフが責任を持って行います。
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">予約のキャンセルはできますか？</button>
+                <div class="faq-answer">
+                    <div class="answer-inner">
+                        可能です。お見積もり内容をしっかりご確認いただいた上で、ご納得いただけない場合は取り掛かる前にキャンセルいただけます。まずは安心してお見積もりをご依頼ください。
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">どのエリアまで対応していますか？</button>
+                <div class="faq-answer">
+                    <div class="answer-inner">
+                        大阪、兵庫、奈良、和歌山、京都の各府県に対応しております。詳細な訪問時間などは、お電話の際にお伝えいたします。
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">駆除後の清掃や消毒、糞尿の除去もお願いできますか？</button>
+                <div class="faq-answer">
+                    <div class="answer-inner">
+                        はい、お任せください。ゴキブリ等の駆除後の清掃・消毒はプランに含まれております。糞尿の除去など、菌による二次被害対策も徹底して行います。
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">出張料や見積もり料はいくらですか？</button>
+                <div class="faq-answer">
+                    <div class="answer-inner">
+                        弊社では、出張料およびお見積もり料はすべて「0円」です。お客様にご提示するのは作業料金のみですので、ご安心ください。
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">予算が決まっているのですが、その範囲内で駆除できますか？</button>
+                <div class="faq-answer">
+                    <div class="answer-inner">
+                        はい、お客様のご予算に合わせて最適なプランをご提案いたします。現地調査の結果を踏まえ、ご予算内で最大限の効果が出せる方法を一緒に検討させていただきます。
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">他社の見積もりが高額でした。安くできますか？</button>
+                <div class="faq-answer">
+                    <div class="answer-inner">
+                        ぜひご相談ください！地域最安値を目指しておりますので、他社様のお見積もり内容を教えていただければ、それよりも低価格でご案内できるよう最大限努力いたします。
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">今すぐ駆除してほしいのですが、可能ですか？</button>
+                <div class="faq-answer">
+                    <div class="answer-inner">
+                        対応エリアを絞ることで、迅速な訪問を可能にしています。現場の状況によりますが、最短即日でお伺いいたしますので、まずはお電話で現在の状況をお聞かせください。
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">一度駆除しても、また出てくることはありますか？</button>
+                <div class="faq-answer">
+                    <div class="answer-inner">
+                        害虫の巣は屋根裏や床下など見えない場所にあります。弊社では「完全駆除＆徹底対策」を大切にしており、目に見える個体だけでなく侵入口の封鎖までしっかり行い、再発を防止します。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section class="service-guide-wrapper">
         <div class="info-container">
@@ -2437,7 +2368,6 @@
 
     <section class="service-list-section">
         <div class="service-list-container">
-            
             <div class="sl-header-area">
                 <span class="sl-sub-header">様々なトラブルに対応します！</span>
                 <h2 class="sl-main-header">サービス一覧</h2>
@@ -2445,7 +2375,6 @@
             </div>
 
             <div class="service-grid">
-
                 <div class="service-card">
                     <div class="card-img-area">
                         <img src="https://placehold.jp/400x300.png?text=ゴキブリ画像" alt="ゴキブリ駆除" class="card-img">
@@ -2526,329 +2455,46 @@
                     </p>
                     <p class="others-highlight">現地調査・見積もりは完全無料です！</p>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <section class="four-reasons-section">
-      <div class="four-reasons-header">
-        <div class="four-reasons-sub">安心してお任せください！</div>
-        <h1 class="four-reasons-title">選ばれる4つの理由</h1>
-        <p class="four-reasons-lead">
-          選ばれるには理由があります。<br>
-          安心・迅速・確実なサービスを<br>
-          お約束します。
-        </p>
-      </div>
-
-      <div class="four-reasons-grid">
-        <div class="four-reasons-item">
-          <div class="four-reasons-num">01</div>
-          <div class="four-reasons-item-title">エリア密着の<br>迅速な対応</div>
-          <div class="four-reasons-desc">
-            最短10分で駆けつけ、<br>
-            「早く・正確に」<br>
-            解決いたします。
-          </div>
+    <section class="footer-form-section">
+        <div class="footer-form-container">
+            <div class="footer-form-box">
+                <h1 class="footer-form-title">お問い合わせフォーム</h1>
+                <form action="" method="post" onsubmit="event.preventDefault(); alert('送信完了（デモ）');">
+                    <div class="form-group">
+                        <label class="form-label">お名前<span class="badge badge-required">必須</span></label>
+                        <input type="text" class="form-input" placeholder="例：山田花子" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">電話番号<span class="badge badge-required">必須</span></label>
+                        <input type="tel" class="form-input" placeholder="000-000-0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">住所<span class="badge badge-required">必須</span></label>
+                        <input type="text" class="form-input" placeholder="住所を入力してください" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">メールアドレス<span class="badge badge-required">必須</span></label>
+                        <input type="email" class="form-input" placeholder="abc@abc.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">お問い合わせ内容<span class="badge badge-required">必須</span></label>
+                        <textarea class="form-textarea" placeholder="お問い合わせ内容を入力してください" required></textarea>
+                    </div>
+                    <div class="submit-area">
+                        <button type="submit" class="submit-btn">送信する</button>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        <div class="four-reasons-item">
-          <div class="four-reasons-num">02</div>
-          <div class="four-reasons-item-title">安心の<br>明朗会計</div>
-          <div class="four-reasons-desc">
-            明朗会計をモットーに<br>
-            わかりやすい料金体系にて<br>
-            ご案内しております。
-          </div>
-        </div>
-
-        <div class="four-reasons-item">
-          <div class="four-reasons-num">03</div>
-          <div class="four-reasons-item-title">充実の<br>アフターサービス</div>
-          <div class="four-reasons-desc">
-            施工後の万が一の<br>
-            トラブルにも責任を持って<br>
-            対応いたします。
-          </div>
-        </div>
-
-        <div class="four-reasons-item">
-          <div class="four-reasons-num">04</div>
-          <div class="four-reasons-item-title">経験豊富な<br>スタッフ</div>
-          <div class="four-reasons-desc">
-            熟練の技術を持つプロが<br>
-            豊富な実績とノウハウで<br>
-            解決します。
-          </div>
-        </div>
-      </div>
     </section>
 
-    <section class="promise-section">
-        <h2 class="section-title-promise">
-            私たちは<br>
-            3つの安心をお約束します
-        </h2>
-    
-        <div class="cards-container">
-            
-            <div class="card-promise">
-                <div class="image-area">
-                    <div class="card-promise-image-area">
-                        <img src="syodoku.png" alt="作業員の写真">
-                    </div>
-                    <div class="badge-promise">
-                        <div class="sub-text">出張費・見積り</div>
-                        <div class="main-text">0<span>円</span></div>
-                    </div>
-                </div>
-                <div class="card-promise-body">
-                    <h3 class="card-promise-title">見積り後のキャンセル料、<br>出張料はいただきません</h3>
-                    <p class="card-promise-text">
-                        お見積り後のキャンセルもOK！出張費も一切かかりません。費用に納得していただいてから作業を進めるので、安心してご依頼ください。無理な営業も一切なし！
-                    </p>
-                </div>
-            </div>
-    
-            <div class="card-promise">
-                <div class="image-area">
-                    <div class="card-promise-image-area">
-                        <img src="money.png" alt="作業の説明">
-                    </div>
-                    <div class="badge-promise">
-                        <div class="sub-text">追加料金</div>
-                        <div class="main-text">なし</div>
-                    </div>
-                </div>
-                <div class="card-promise-body">
-                    <h3 class="card-promise-title">内容ご納得の上<br>作業だから安心</h3>
-                    <p class="card-promise-text">
-                        修理内容と費用を事前にしっかりご説明しております。ご納得していただいてから作業を行いますので、思わぬ追加料金の心配もありません。安心してご依頼ください！
-                    </p>
-                </div>
-            </div>
-    
-            <div class="card-promise">
-                <div class="image-area">
-                    <div class="card-promise-image-area">
-                        <img src="akusyu.png" alt="保証イメージ">
-                    </div>
-                    <div class="badge-promise">
-                        <div class="sub-text">再発保証</div>
-                        <div class="main-text">あり</div>
-                    </div>
-                </div>
-                <div class="card-promise-body">
-                    <h3 class="card-promise-title">充実の保証内容</h3>
-                    <p class="card-promise-text">
-                        修理後も安心！弊社は保険加入済みで、万が一のトラブルにも迅速に対応致します。さらに、再発時の補償制度もご用意しており、長く安心してお使いいただけます。
-                    </p>
-                </div>
-            </div>
-    
-            </div>
-    </section>
-
-    <div class="faq-section">
-        <div class="faq-header">
-            <h2>よくあるご質問</h2>
-        </div>
-
-        <div class="faq-container">
-            
-            <div class="faq-item">
-                <button class="faq-question">駆除薬剤による小さなお子様への影響はありますか？</button>
-                <div class="faq-answer">
-                    <div class="answer-inner">
-                        人体に無害な薬剤を厳選して使用しております。また、強力な薬剤が必要な場合でも、施工後の適切な後始末と安全確認を最優先に行いますので、小さなお子様やペットがいるご家庭でもご安心ください。
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">市販の薬剤では完全に駆除できないのでしょうか？</button>
-                <div class="faq-answer">
-                    <div class="answer-inner">
-                        市販薬は一時的な効果はありますが、卵には効かないものが多く、時間が経つと再発してしまいます。また、侵入口の封鎖など根本的な原因を解決しない限り、いたちごっこになるのが現状です。プロの技術で原因から断ち切ります。
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">施工後、どれくらいで効果が出ますか？</button>
-                <div class="faq-answer">
-                    <div class="answer-inner">
-                        即効性を重視した施工を行っておりますが、環境や発生状況により異なります。具体的な見通しについては、現地調査の際にお客様の状況に合わせて詳しくご説明させていただきます。
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">作業後に見積もりより高い金額を請求されることはありますか？</button>
-                <div class="faq-answer">
-                    <div class="answer-inner">
-                        いいえ、ございません。作業前に施工内容と料金の詳細を明確にご説明し、ご納得いただいてから作業に入りますので、どうぞご安心ください。
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">クレジットカードでの支払いは可能ですか？</button>
-                <div class="faq-answer">
-                    <div class="answer-inner">
-                        はい、各種クレジットカード決済に対応しております（VISA・MasterCard・American Expressなど）。お気軽にご利用ください。
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">法人の依頼ですが、後日請求書払いは可能ですか？</button>
-                <div class="faq-answer">
-                    <div class="answer-inner">
-                        法人様のご依頼も柔軟に対応しております。後日の請求書払いについても、お電話や現地調査の際にお申し付けいただければ調整可能です。
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">作業にあたって、こちらで準備することはありますか？</button>
-                <div class="faq-answer">
-                    <div class="answer-inner">
-                        お客様にご準備いただくことは一切ございません。事前の準備から作業後の片付けまで、すべて弊社の専門スタッフが責任を持って行います。
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">予約のキャンセルはできますか？</button>
-                <div class="faq-answer">
-                    <div class="answer-inner">
-                        可能です。お見積もり内容をしっかりご確認いただいた上で、ご納得いただけない場合は取り掛かる前にキャンセルいただけます。まずは安心してお見積もりをご依頼ください。
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">どのエリアまで対応していますか？</button>
-                <div class="faq-answer">
-                    <div class="answer-inner">
-                        大阪、兵庫、奈良、和歌山、京都の各府県に対応しております。詳細な訪問時間などは、お電話の際にお伝えいたします。
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">駆除後の清掃や消毒、糞尿の除去もお願いできますか？</button>
-                <div class="faq-answer">
-                    <div class="answer-inner">
-                        はい、お任せください。ゴキブリ等の駆除後の清掃・消毒はプランに含まれております。糞尿の除去など、菌による二次被害対策も徹底して行います。
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">出張料や見積もり料はいくらですか？</button>
-                <div class="faq-answer">
-                    <div class="answer-inner">
-                        弊社では、出張料およびお見積もり料はすべて「0円」です。お客様にご提示するのは作業料金のみですので、ご安心ください。
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">予算が決まっているのですが、その範囲内で駆除できますか？</button>
-                <div class="faq-answer">
-                    <div class="answer-inner">
-                        はい、お客様のご予算に合わせて最適なプランをご提案いたします。現地調査の結果を踏まえ、ご予算内で最大限の効果が出せる方法を一緒に検討させていただきます。
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">他社の見積もりが高額でした。安くできますか？</button>
-                <div class="faq-answer">
-                    <div class="answer-inner">
-                        ぜひご相談ください！地域最安値を目指しておりますので、他社様のお見積もり内容を教えていただければ、それよりも低価格でご案内できるよう最大限努力いたします。
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">今すぐ駆除してほしいのですが、可能ですか？</button>
-                <div class="faq-answer">
-                    <div class="answer-inner">
-                        対応エリアを絞ることで、迅速な訪問を可能にしています。現場の状況によりますが、最短即日でお伺いいたしますので、まずはお電話で現在の状況をお聞かせください。
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">一度駆除しても、また出てくることはありますか？</button>
-                <div class="faq-answer">
-                    <div class="answer-inner">
-                        害虫の巣は屋根裏や床下など見えない場所にあります。弊社では「完全駆除＆徹底対策」を大切にしており、目に見える個体だけでなく侵入口の封鎖までしっかり行い、再発を防止します。
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div id="modalOverlay" class="modal-overlay">
-        <div class="modal-content">
-            <span id="closeModalBtn" class="close-btn">&times;</span>
-            
-            <div class="stripe"></div>
-
-            <div class="modal-body">
-                <div class="modal-header-area">
-                    <div class="modal-title-wrapper">
-                        <div class="modal-title-upper">
-                            <span class="modal-dots">悪徳業者</span>による
-                        </div>
-                        <div class="modal-title-main">
-                            トラブル発生中！
-                        </div>
-                    </div>
-                    <svg class="modal-warning-icon" viewBox="0 0 100 100">
-                        <path d="M50 5 L95 90 H5 Z" fill="#ffe600" stroke="#333" stroke-width="4" stroke-linejoin="round"/>
-                        <path d="M46 35 L54 35 L52 65 L48 65 Z" fill="#333" />
-                        <circle cx="50" cy="78" r="5" fill="#333" />
-                    </svg>
-                </div>
-
-                <p class="modal-lead">
-                    3つの注意点をしっかり確認して、安心できる業者を選びましょう。
-                </p>
-
-                <div class="caution-list">
-                    <div class="caution-item">
-                        <div class="caution-title">1.料金説明が不適切</div>
-                        <div class="caution-text">
-                            費用に対する明確な説明をせずに、話を進める業者には注意が必要です。<br>
-                            作業前に必ず料金設定に基づいた見積りを提示し、承諾の確認をしっかり取る業者を選びましょう。
-                        </div>
-                    </div>
-                    <div class="caution-item">
-                        <div class="caution-title">2.現地調査を丁寧に行わない</div>
-                        <div class="caution-text">
-                            現地調査を丁寧に行わずに電話や写真だけで金額や作業内容を決める悪質業者が存在します。<br>
-                            作業前に必ず現地での調査を行い、状況に応じた説明をしてくれる業者を選ぶのがおすすめです。
-                        </div>
-                    </div>
-                    <div class="caution-item">
-                        <div class="caution-title">3.調査結果が不明瞭</div>
-                        <div class="caution-text">
-                            調査内容や結果をはっきり伝えない業者によるトラブルが発生しています。<br>
-                            事前に重要なポイントを確認し、安心して任せられる業者を選びましょう。
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="stripe"></div>
-        </div>
-    </div>
+    <a href="#" id="scrollTopBtn" class="scroll-top-btn">
+        <i class="fas fa-chevron-up"></i>
+    </a>
 
     <script>
         /* =========================================
@@ -3027,17 +2673,32 @@
         /* =========================================
            4. FAQ アコーディオン制御
            ========================================= */
-        // クリックイベントの登録
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
                 const faqItem = button.parentElement;
-
-                // 他の項目を閉じたい場合は以下の3行を有効化（お好みで）
-                /* document.querySelectorAll('.faq-item').forEach(item => {
-                    if (item !== faqItem) item.classList.remove('open');
-                }); */
-
                 faqItem.classList.toggle('open');
+            });
+        });
+
+        /* =========================================
+           5. トップへ戻るボタン制御 (NEW)
+           ========================================= */
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+        window.addEventListener('scroll', () => {
+            // 200px以上スクロールしたらボタンを表示
+            if (window.scrollY > 200) {
+                scrollTopBtn.classList.add('show');
+            } else {
+                scrollTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
         });
     </script>
