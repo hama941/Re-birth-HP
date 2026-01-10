@@ -23,6 +23,7 @@
             --text-dark: #333;
         }
         * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; } /* スムーズスクロール有効化 */
         body { 
             margin: 0; 
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
@@ -858,6 +859,16 @@
             position: relative; box-shadow: 0 4px 0 #bf360c; transition: transform 0.1s;
         }
         .fixed-cta-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #bf360c; }
+        
+        /* 追加: 夜間メールモード用スタイル */
+        .fixed-cta-btn.mail-mode {
+            background: linear-gradient(180deg, #4caf50 0%, #2e7d32 100%);
+            box-shadow: 0 4px 0 #1b5e20;
+        }
+        .fixed-cta-btn.mail-mode:active {
+            box-shadow: 0 2px 0 #1b5e20;
+        }
+
         /* バッジ */
         .cta-badge {
             background-color: #fff100; color: #333; width: 70px; height: 70px;
@@ -926,7 +937,7 @@
                 <i class="fas fa-phone-alt"></i>
                 <span>電話</span>
             </a>
-            <a href="#contact" class="btn btn-mail">
+            <a href="#contact-form-area" class="btn btn-mail">
                 <i class="fas fa-envelope"></i>
                 <span>メール</span>
             </a>
@@ -1813,7 +1824,7 @@
       </div>
     </section>
 
-    <section class="footer-form-section">
+    <section class="footer-form-section" id="contact-form-area">
         <div class="footer-form-container">
             <div class="footer-form-box">
                 <h1 class="footer-form-title">お問い合わせフォーム</h1>
@@ -1965,7 +1976,7 @@
         });
 
         /* =========================================
-           ステータスバー日時更新ロジック
+           ステータスバー＆フッターボタン日時更新ロジック
            ========================================= */
         function updateStatusBarDateTime() {
             const now = new Date();
@@ -1978,18 +1989,55 @@
             const dateStr = `${y}年${m}月${d}日`;
             const timeStr = `${hh}:${mm}`;
             
+            // 上部ステータスバーの日時更新
             document.querySelectorAll('.current-date').forEach(el => el.textContent = dateStr);
             document.querySelectorAll('.current-time').forEach(el => el.textContent = timeStr);
 
             const currentHour = now.getHours();
+            
+            // 営業時間判定 (10:00 ～ 19:59 は電話、それ以外はメール)
             const isBusinessTime = (currentHour >= 10 && currentHour < 20);
 
+            // --- 1. 上部ステータスバーの更新 ---
             document.querySelectorAll('.status-text').forEach(el => {
                 el.textContent = isBusinessTime ? "受付可能！" : "メールでの受付中";
             });
             document.querySelectorAll('.arrival-msg').forEach(el => {
                 el.style.display = isBusinessTime ? "inline" : "none";
             });
+
+            // --- 2. 下部固定フッターの更新 ---
+            const ctaBtn = document.querySelector('.fixed-cta-btn');
+            const ctaHeader = document.querySelector('.cta-header-text');
+            const ctaMainText = document.querySelector('.cta-main-text');
+            const ctaSubText = document.querySelector('.cta-sub-text');
+
+            if (isBusinessTime) {
+                // === 昼モード（電話） ===
+                // リンクを電話番号に
+                ctaBtn.setAttribute('href', 'tel:05035280140');
+                // 緑色のクラスを外す（オレンジに戻る）
+                ctaBtn.classList.remove('mail-mode');
+                
+                // 文言の変更
+                ctaHeader.textContent = '24時間対応いたします！';
+                ctaMainText.textContent = '電話でお問い合わせ';
+                ctaSubText.innerHTML = 'お電話のみで解決サポートできる場合もございます。<br>まずはお気軽にご相談ください！';
+                ctaSubText.style.display = "block"; // 必要に応じて表示
+                
+            } else {
+                // === 夜モード（メール） ===
+                // リンクをフォームのIDに（ページ内リンク）
+                ctaBtn.setAttribute('href', '#contact-form-area');
+                // 緑色のクラスを追加
+                ctaBtn.classList.add('mail-mode');
+                
+                // 文言の変更
+                ctaHeader.textContent = 'Webからは24時間受付中！';
+                ctaMainText.textContent = 'メールでお問い合わせ';
+                ctaSubText.innerHTML = '現在はお電話での受付時間外です。<br>フォームよりお問い合わせください。';
+                ctaSubText.style.display = "block";
+            }
         }
         
         updateStatusBarDateTime();
@@ -2116,4 +2164,3 @@
     </script>
 </body>
 </html>
-
